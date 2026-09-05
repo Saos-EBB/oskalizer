@@ -111,8 +111,35 @@ links. Solange es offen ist:
 | P | aktuelle Werte als fertigen CONFIG-Block ins Terminal drucken |
 
 Nur diese Tasten sind belegt — alle anderen Tasten und die Maus spawnen weiter,
-damit man die Wirkung live sieht. Änderungen gelten sofort und nur im
-Speicher; übernommen werden sie per **P** und Reinkopieren in den CONFIG-Block.
+damit man die Wirkung live sieht. Änderungen wirken sofort.
+
+### Die Werte bleiben erhalten
+
+Was im Panel gedreht wurde, überlebt den Neustart. Gespeichert wird nach
+`~/.config/oskalizer/settings.json` (bzw. `$XDG_CONFIG_HOME`), und zwar
+
+- beim Zuklappen des Panels und
+- beim Beenden, auch bei offenem Panel und auch über `kill` (SIGTERM).
+
+Geschrieben wird über eine temporäre Datei und `rename`, es kann also keine
+halbe Datei entstehen.
+
+**Vorrang:** existiert die Datei, gewinnt sie gegen den CONFIG-Block oben in
+`oskalizer.py`. Zurück auf die Werte im Code kommt man durch Löschen:
+
+```bash
+rm ~/.config/oskalizer/settings.json
+```
+
+Beim Start steht auf der Konsole, ob und woher Einstellungen geladen wurden.
+Unbrauchbare Einträge in der Datei (kaputtes JSON, unbekannter Stil, Zahlen
+außerhalb der Grenzen) werden einzeln verworfen oder auf den erlaubten Bereich
+gezogen — das Tool startet in jedem Fall. Nur die sechs Panel-Werte stehen in
+der Datei; `MAX_BLOBS`, `KEYBOARD_MATCH` und der Rest bleiben Sache des
+CONFIG-Blocks.
+
+**P** druckt die aktuellen Werte weiterhin als fertigen CONFIG-Block ins
+Terminal — praktisch, wenn man sie fest in den Code übernehmen will.
 
 ## Die drei Stile
 
@@ -168,7 +195,6 @@ rechnet.
 ## Nicht eingebaut (bewusst)
 
 - **Sound**: nur der leere Hook `play_sound(event)`, keine Audio-Bibliothek.
-- **Keine Persistenz**: Panel-Werte gelten nur zur Laufzeit, Übernahme per P.
 - Kleckse erscheinen an zufälligen Bildschirmstellen. Die Mausposition wird
   nicht mitgeführt — es soll ja gerade keinen Bezug zwischen Eingabe und Ort
   geben.

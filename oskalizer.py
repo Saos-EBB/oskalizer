@@ -27,23 +27,35 @@ FPS = 60
 
 # --- Ende CONFIG -----------------------------------------------------------
 
+import json
 import math
 import os
 import select
 import signal
 import sys
+from pathlib import Path
 
 import evdev
 from evdev import ecodes
 
 import pygame
 
+import devpanel
 import visuals
 from devpanel import DevPanel
 
+SETTINGS_PATH = Path(os.environ.get("XDG_CONFIG_HOME") or Path.home() / ".config") \
+    / "oskalizer" / "settings.json"
+
 
 class Config:
-    """Die im Dev-Panel drehbaren Werte, plus die festen Grenzen."""
+    """Die im Dev-Panel drehbaren Werte, plus die festen Grenzen.
+
+    Die im Panel gedrehten Werte ueberleben den Neustart: sie liegen in
+    SETTINGS_PATH und haben Vorrang vor dem CONFIG-Block oben. Datei loeschen
+    heisst zurueck auf die Werte aus dem CONFIG-Block."""
+
+    TUNABLE = ("style", "palette", "count", "size", "life", "drift")
 
     def __init__(self):
         self.style = STYLE
@@ -56,6 +68,37 @@ class Config:
         self.min_spawn_interval = MIN_SPAWN_INTERVAL
         self.motion_spawn_interval = MOTION_SPAWN_INTERVAL
         self.motion_distance = MOTION_DISTANCE
+        self.load()
+
+    def load(self):
+        try:
+            data = json.loads(SETTINGS_PATH.read_text())
+        except FileNotFoundError:
+            return
+        except (OSError, ValueError) as exc:
+            print(f"Gespeicherte Einstellungen unlesbar, nehme den CONFIG-Block: {exc}",
+                  file=sys.stderr)
+            return
+        if not isinstance(data, dict):
+            return
+        for attr in self.TUNABLE:
+            if attr in data:
+                value = devpanel.sanitize(attr, data[attr])
+                if value is not None:                 # Muell einzeln ueberspringen
+                    setattr(self, attr, value)
+        print(f"Einstellungen geladen: {SETTINGS_PATH}")
+
+    def save(self):
+        data = {attr: getattr(self, attr) for attr in self.TUNABLE}
+        try:
+            SETTINGS_PATH.parent.mkdir(parents=True, exist_ok=True)
+            temp = SETTINGS_PATH.with_suffix(".tmp")
+            temp.write_text(json.dumps(data, indent=2) + "\n")
+            temp.replace(SETTINGS_PATH)               # atomar, kein halbes File
+        except OSError as exc:
+            print(f"Einstellungen nicht speicherbar: {exc}", file=sys.stderr)
+            return
+        print(f"Einstellungen gespeichert: {SETTINGS_PATH}", flush=True)
 
 
 def play_sound(event):
@@ -171,6 +214,13 @@ def run(devices, cfg):
     fds = {device.fd: device for device in devices}
     state = {"esc_since": None}
 
+    try:
+        loop(screen, field, panel, fds, state, clock)
+    finally:
+        panel.flush()               # auch bei SIGTERM oder Exception
+
+
+def loop(screen, field, panel, fds, state, clock):
     while True:
         dt = clock.tick(FPS) / 1000.0
         now = pygame.time.get_ticks() / 1000.0

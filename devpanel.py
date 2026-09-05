@@ -22,8 +22,25 @@ FIELDS = [
     ("DRIFT",   "drift",   (0, 200, 5)),
 ]
 CYCLES = {"style": visuals.STYLES, "palette": visuals.PALETTE_NAMES}
+SPANS = {attr: span for _, attr, span in FIELDS}
 
 _ARROWS = (ecodes.KEY_UP, ecodes.KEY_DOWN, ecodes.KEY_LEFT, ecodes.KEY_RIGHT)
+
+
+def sanitize(attr, value):
+    """Wert auf den gueltigen Bereich ziehen. None = unbrauchbar, ignorieren.
+    Wird auch beim Laden der gespeicherten Einstellungen benutzt."""
+    span = SPANS.get(attr)
+    if span is None:
+        return value if value in CYCLES.get(attr, ()) else None
+    low, high, _ = span
+    if isinstance(value, bool):
+        return None
+    try:
+        value = int(value) if isinstance(low, int) else float(value)
+    except (TypeError, ValueError):
+        return None
+    return min(high, max(low, value))
 
 
 class DevPanel:
@@ -31,6 +48,7 @@ class DevPanel:
         self.cfg = cfg
         self.open = False
         self.selected = 0
+        self.dirty = False
         self.ctrl = False
         self.shift = False
         self._font = None
@@ -50,6 +68,8 @@ class DevPanel:
         if code == ecodes.KEY_D and self.ctrl and self.shift:
             if value == 1:                      # nur beim Druck, kein Dauerfeuer
                 self.open = not self.open
+                if not self.open:
+                    self.flush()                # beim Zuklappen wegschreiben
             return True
         if not self.open:
             return False
@@ -70,15 +90,21 @@ class DevPanel:
 
     def _adjust(self, direction):
         _, attr, span = FIELDS[self.selected]
+        self.dirty = True
         if span is None:
             options = CYCLES[attr]
             index = (options.index(getattr(self.cfg, attr)) + direction) % len(options)
             setattr(self.cfg, attr, options[index])
             return
-        low, high, step = span
-        value = getattr(self.cfg, attr) + direction * step
-        value = round(min(high, max(low, value)), 2)
-        setattr(self.cfg, attr, type(low)(value) if isinstance(low, int) else value)
+        step = span[2]
+        value = round(getattr(self.cfg, attr) + direction * step, 2)
+        setattr(self.cfg, attr, sanitize(attr, value))
+
+    def flush(self):
+        """Geaenderte Werte sichern. Beim Zuklappen und beim Beenden aufgerufen."""
+        if self.dirty:
+            self.cfg.save()
+            self.dirty = False
 
     def print_config(self):
         print("\n# --- aktuelle Werte, direkt in den CONFIG-Block ---")
