@@ -4,7 +4,10 @@ Keyboard playground für ein Kleinkind. Eine externe Tastatur (und optional die
 Maus) werden exklusiv gegrabbt — das Kind hämmert, es passiert nur auf dem
 Bildschirm etwas, das System bleibt unangetastet.
 
-Jede Eingabe malt einen weichen, langsam ein- und ausfadenden Farbklecks.
+Jede Eingabe wirft 3–6 Farbkleckse in einer lockeren Wolke auf den Schirm:
+klare, gefüllte Kreise mit sauberer Kante, zufällig aus dem gesamten
+Farbspektrum, satt und hell. Die Ruhe kommt nicht aus verwaschenen Rändern,
+sondern aus dem langsamen Ein- und Ausblenden (1,5–3 s) und sanftem Treiben.
 Kein Zusammenhang zwischen Taste und Bild, kein Blitzen, keine Töne.
 
 ## Setup
@@ -65,19 +68,27 @@ funktioniert die ganze Zeit weiter.
 
 ## Ruhig bleiben, auch beim Hämmern
 
-- höchstens ~11 neue Kleckse pro Sekunde, schnellere Eingaben werden geschluckt
-- 14 gleichzeitig aufblühende Kleckse; ältere werden sanft ausgeblendet, nicht
-  hart gelöscht (kurzzeitig sind bis ~20 auf dem Schirm, inklusive der gehenden)
-- additive Darstellung mit weichem Gesamt-Helligkeitsdeckel: gemessen bleibt
-  der Helligkeitssprung zwischen zwei Bildern unter 0,1 von 255 — es flackert
-  nichts, egal wie schnell getippt wird
-- Mausbewegung spawnt erst nach ~250 px und höchstens alle 0,35 s
+- höchstens ~11 Eingaben pro Sekunde lösen etwas aus, schnellere werden
+  geschluckt statt aufgestaut
+- höchstens 150 Kleckse gleichzeitig; ist es voll, wird der älteste sanft
+  ausgeblendet statt hart gelöscht
+- normales Alpha-Blending, **nicht** additiv — satte Farben bleiben satt und
+  laufen auch beim Übereinanderliegen nie nach Weiß aus
+- der Hintergrund wird jedes Bild neu in konstantem Dunkelgrau gezeichnet und
+  nie geflutet
+
+Gemessen bei 180 simulierten Anschlägen pro Sekunde über 15 Sekunden
+(1920×1080): maximal 118 gleichzeitige Kleckse, mittlere Bildhelligkeit
+17 von 255, größter Helligkeitssprung zwischen zwei aufeinanderfolgenden
+Bildern **0,15 von 255**. Da leuchtet nichts auf und da flackert nichts.
 
 ## Nicht eingebaut (bewusst)
 
 - **Sound**: nur der leere Hook `play_sound(event)`, keine Audio-Bibliothek.
 - Keine Config-GUI, keine Themes, keine Presets, keine Persistenz.
 - Keine Kommandozeilenargumente — Einstellungen stehen im CONFIG-Block.
+- Kein Wachsen der Kleckse: sie treiben langsam, ändern aber ihre Größe nicht
+  (jedes Bild neu zu skalieren wäre bei 150 Stück unnötig teuer).
 - Kein Auto-Reconnect: wird die Tastatur im Betrieb ausgesteckt, bitte beenden
   und neu starten.
 - Geräte, deren Name `KEYBOARD_MATCH` enthält, werden auch dann gegrabbt, wenn

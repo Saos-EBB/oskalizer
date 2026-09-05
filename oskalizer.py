@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Keyboard playground: grabbt eine externe Tastatur (+ Maus) exklusiv und malt
-ruhige, abstrakte Blobs. Beenden: Esc 5 Sekunden halten.
+bunte, ruhig ein- und ausblendende Farbkleckse. Beenden: Esc 5 Sekunden halten.
 
 Braucht: python-evdev, pygame und Lesezugriff auf /dev/input/* (Gruppe `input`).
 """
@@ -11,31 +11,29 @@ KEYBOARD_MATCH = "blackwidow"   # case-insensitive substring im Geraetenamen
 GRAB_MOUSE = True
 
 FPS = 60
-BACKGROUND = (6, 6, 10)
+BACKGROUND = (10, 10, 14)       # bleibt konstant, wird nie geflutet
 EXIT_HOLD_SECONDS = 5.0
 
 # Mash-Schutz
-MAX_BLOBS = 14                  # Cap auf gleichzeitig aktive Elemente
-MIN_SPAWN_INTERVAL = 0.09       # schnellere Eingaben werden zusammengefasst
+MAX_BLOBS = 150                 # Cap auf gleichzeitig aktive Kleckse
+MIN_SPAWN_INTERVAL = 0.09       # schnellere Eingaben werden geschluckt
 MOTION_SPAWN_INTERVAL = 0.35    # Mausbewegung darf noch viel weniger spawnen
-MOTION_DISTANCE = 250           # aufsummierte Pixel bis ein Bewegungs-Blob kommt
-BRIGHTNESS_BUDGET = 2.4         # Summe der Intensitaeten, danach dimmt alles sanft
+MOTION_DISTANCE = 250           # aufsummierte Pixel bis ein Bewegungs-Cluster kommt
 
-# Blobs
-BLOB_LIFETIME = (1.6, 3.0)      # Sekunden, langsames Ein-/Ausfaden
-BLOB_RADIUS = (0.06, 0.15)      # Anteil der kuerzeren Bildschirmseite
-BLOB_PEAK = 0.55                # maximale Helligkeit eines einzelnen Blobs
-BLOB_DRIFT = 14                 # Pixel pro Sekunde, sanftes Treiben
-RETIRE_FADE = 0.6               # so lange braucht ein verdraengter Blob zum Gehen
+# Kleckse
+BLOBS_PER_EVENT = (3, 6)        # pro Eingabe, um eine gemeinsame Mitte gestreut
+CLUSTER_SPREAD = 1.6            # Streuung um die Mitte, in groessten Radien
+BLOB_RADIUS = (0.015, 0.045)    # Anteil der kuerzeren Bildschirmseite
+BLOB_LIFETIME = (1.5, 3.0)      # Sekunden
+BLOB_FADE_IN = 0.45             # sanft rein, den Rest der Zeit langsam raus
+BLOB_PEAK = 0.85                # maximale Deckkraft, Hintergrund bleibt ahnbar
+BLOB_DRIFT = 12                 # Pixel pro Sekunde, sanftes Treiben
+RETIRE_FADE = 0.6               # so lange braucht ein verdraengter Klecks zum Gehen
 
-PALETTE = [
-    (150, 190, 255),   # helles blau
-    (255, 180, 210),   # rosa
-    (180, 240, 210),   # mint
-    (255, 220, 160),   # sand
-    (205, 180, 255),   # flieder
-    (170, 225, 245),   # eisblau
-]
+# Farben: volles Spektrum, satt und hell (kein Pastell)
+HUE_RANGE = (0, 360)
+SATURATION = (0.80, 1.00)
+VALUE = (0.90, 1.00)
 
 # --- Ende CONFIG -----------------------------------------------------------
 
@@ -50,6 +48,8 @@ import evdev
 from evdev import ecodes
 
 import pygame
+
+SUPERSAMPLE = 3                 # nur fuer glatte Kreiskanten, kein Weichzeichner
 
 
 def play_sound(event):
@@ -125,106 +125,123 @@ def release_all(devices):
 # --- Visuals ---------------------------------------------------------------
 
 
-def make_blob_template(size=256):
-    """Weicher radialer Verlauf in Graustufen, schwarz = traegt additiv nichts bei."""
-    surf = pygame.Surface((size, size))
-    surf.fill((0, 0, 0))
-    center = size // 2
-    for radius in range(center, 0, -1):
-        t = radius / center
-        value = int(255 * (1.0 - t) ** 2.2)
-        pygame.draw.circle(surf, (value, value, value), (center, center), radius)
-    return surf
+def random_color():
+    """Zufaellig durchs ganze Spektrum, satt und hell."""
+    color = pygame.Color(0)
+    color.hsva = (
+        random.uniform(*HUE_RANGE) % 360.0,
+        random.uniform(*SATURATION) * 100.0,
+        random.uniform(*VALUE) * 100.0,
+        100.0,
+    )
+    return color
+
+
+def make_disc(radius, color):
+    """Gefuellter Kreis mit sauberer Kante. Gross zeichnen und herunterskalieren
+    glaettet nur die Treppchen am Rand - der Klecks bleibt hart begrenzt."""
+    size = max(2, int(radius * 2))
+    big = pygame.Surface((size * SUPERSAMPLE,) * 2, pygame.SRCALPHA)
+    center = size * SUPERSAMPLE // 2
+    pygame.draw.circle(big, color, (center, center), center)
+    return pygame.transform.smoothscale(big, (size, size))
+
+
+def smoothstep(x):
+    x = min(1.0, max(0.0, x))
+    return x * x * (3.0 - 2.0 * x)
 
 
 class Blob:
-    def __init__(self, template, pos, radius, color, life):
-        diameter = max(8, int(radius * 2))
-        self.base = pygame.transform.smoothscale(template, (diameter, diameter))
-        self.buf = self.base.copy()
-        self.rect = self.base.get_rect(center=pos)
+    def __init__(self, pos, radius, color, life):
+        self.surf = make_disc(radius, color)
+        self.rect = self.surf.get_rect(center=pos)
         self.x, self.y = float(pos[0]), float(pos[1])
         angle = random.uniform(0, math.tau)
         speed = random.uniform(0.3, 1.0) * BLOB_DRIFT
         self.vx, self.vy = math.cos(angle) * speed, math.sin(angle) * speed
-        self.color = color
-        self.life = life
+        self.life = max(life, BLOB_FADE_IN + 0.2)
         self.age = 0.0
-        self.rate = 1.0
         self.retiring = False
+        self.retire_gain = 1.0
 
     @property
     def intensity(self):
-        phase = min(1.0, max(0.0, self.age / self.life))
-        return math.sin(math.pi * phase) ** 1.2 * BLOB_PEAK
+        if self.age < BLOB_FADE_IN:
+            envelope = smoothstep(self.age / BLOB_FADE_IN)
+        else:
+            rest = (self.age - BLOB_FADE_IN) / (self.life - BLOB_FADE_IN)
+            envelope = smoothstep(1.0 - rest)
+        return envelope * self.retire_gain * BLOB_PEAK
 
     @property
     def dead(self):
-        return self.age >= self.life
+        return self.age >= self.life or self.retire_gain <= 0.0
 
     def retire(self):
-        """Sanft rauswerfen: Intensitaet bleibt stetig, nur die Zeit laeuft schneller."""
+        """Verdraengt: eigener Ausblend-Faktor, damit die Helligkeit stetig bleibt."""
         self.retiring = True
-        if self.age < self.life * 0.5:
-            self.age = self.life - self.age      # auf die fallende Flanke spiegeln
-        remaining = self.life - self.age
-        if remaining > RETIRE_FADE:
-            self.rate = max(self.rate, remaining / RETIRE_FADE)
 
     def update(self, dt):
-        self.age += dt * self.rate
+        self.age += dt
+        if self.retiring:
+            self.retire_gain -= dt / RETIRE_FADE
         self.x += self.vx * dt
         self.y += self.vy * dt
         self.rect.center = (int(self.x), int(self.y))
 
-    def draw(self, screen, gain):
-        level = self.intensity * gain
-        if level <= 0.004:
+    def draw(self, screen):
+        alpha = int(self.intensity * 255)
+        if alpha <= 1:
             return
-        tint = (int(self.color[0] * level), int(self.color[1] * level), int(self.color[2] * level))
-        self.buf.blit(self.base, (0, 0))
-        self.buf.fill(tint, special_flags=pygame.BLEND_RGB_MULT)
-        screen.blit(self.buf, self.rect, special_flags=pygame.BLEND_RGB_ADD)
+        self.surf.set_alpha(alpha)
+        screen.blit(self.surf, self.rect)
 
 
 class Playground:
     def __init__(self, screen):
         self.screen = screen
         self.width, self.height = screen.get_size()
-        self.template = make_blob_template()
+        self.short = min(self.width, self.height)
         self.blobs = []
-        self.gain = 1.0
         self.last_spawn = 0.0
         self.last_motion_spawn = 0.0
         self.motion_accum = 0.0
 
     def spawn(self, now):
-        """Rate-limitiert. Zu schnelle Eingaben werden auf den letzten Blob
-        zusammengefasst statt neue zu erzeugen."""
+        """Ein Cluster aus mehreren Klecksen. Rate-limitiert: schnellere
+        Eingaben werden geschluckt statt aufgestaut."""
         if now - self.last_spawn < MIN_SPAWN_INTERVAL:
-            return      # geschluckt: bei ~11 Blobs/s ist ohnehin genug los
+            return
         self.last_spawn = now
 
-        if len(self.blobs) >= MAX_BLOBS:
-            # aeltesten noch "lebenden" Blob sanft rauswinken statt hart loeschen.
-            # Die schon ausfadenden zaehlen kurz obendrauf (gemessen: bis ~20
-            # gleichzeitig bei Dauerhaemmern), sind aber nach RETIRE_FADE weg.
-            victim = next((b for b in self.blobs if not b.retiring), None)
-            if victim is None:
-                return          # alles faded schon aus - Eingabe wird geschluckt
-            victim.retire()
+        spread = CLUSTER_SPREAD * BLOB_RADIUS[1] * self.short
+        margin = spread + BLOB_RADIUS[1] * self.short
+        cx = random.uniform(margin, self.width - margin)
+        cy = random.uniform(margin, self.height - margin)
 
-        short = min(self.width, self.height)
-        radius = random.uniform(*BLOB_RADIUS) * short
-        margin = radius * 0.4
-        pos = (
-            random.uniform(margin, self.width - margin),
-            random.uniform(margin, self.height - margin),
-        )
-        self.blobs.append(
-            Blob(self.template, pos, radius, random.choice(PALETTE),
-                 random.uniform(*BLOB_LIFETIME))
-        )
+        for _ in range(random.randint(*BLOBS_PER_EVENT)):
+            if not self.make_room():
+                break
+            angle = random.uniform(0, math.tau)
+            dist = math.sqrt(random.random()) * spread
+            self.blobs.append(Blob(
+                (cx + math.cos(angle) * dist, cy + math.sin(angle) * dist),
+                random.uniform(*BLOB_RADIUS) * self.short,
+                random_color(),
+                random.uniform(*BLOB_LIFETIME),
+            ))
+
+    def make_room(self):
+        """Aeltesten noch lebenden Klecks sanft rauswinken statt hart loeschen.
+        Sind schon alle am Ausblenden, wird der Spawn geschluckt."""
+        if len(self.blobs) < MAX_BLOBS:
+            return True
+        victim = next((b for b in self.blobs if not b.retiring), None)
+        if victim is None:
+            return False
+        victim.retire()
+        return True
 
     def on_motion(self, distance, now):
         self.motion_accum += distance
@@ -241,15 +258,10 @@ class Playground:
             blob.update(dt)
         self.blobs = [b for b in self.blobs if not b.dead]
 
-        # weicher Gesamt-Helligkeitsdeckel: nichts blitzt auf, alles zieht sanft nach
-        total = sum(b.intensity for b in self.blobs)
-        target = min(1.0, BRIGHTNESS_BUDGET / total) if total > 0 else 1.0
-        self.gain += (target - self.gain) * min(1.0, dt * 3.0)
-
     def draw(self, esc_progress):
         self.screen.fill(BACKGROUND)
         for blob in self.blobs:
-            blob.draw(self.screen, self.gain)
+            blob.draw(self.screen)
         if esc_progress > 0:
             self.draw_exit_hint(esc_progress)
 
