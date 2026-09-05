@@ -53,12 +53,36 @@ Die interne Laptop-Tastatur heißt anders und wird nicht angefasst.
 ## Starten und Beenden
 
 ```bash
-python3 oskalizer.py
+oskalizer            # Kurzbefehl, siehe unten
+python3 oskalizer.py # oder direkt
 ```
 
 Beenden: **Esc 5 Sekunden am Stück halten.** Unten mittig läuft ein kleiner
 Ring voll. Loslassen setzt den Timer zurück. Esc spawnt dabei ganz normal
 Kleckse mit.
+
+## Kurzbefehl `oskalizer`
+
+Liegt als `~/.local/bin/oskalizer` (nicht im Repo, weil der Pfad zum Rechner
+gehört). Er springt für die Gruppe `input` ein, solange die aktuelle
+Anmeldesitzung sie noch nicht kennt — nach `usermod` muss man sich sonst erst
+neu anmelden:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+APP=/home/saosgone/Schreibtisch/challangeMyMind/oskalizer/oskalizer.py
+
+if id -nG | grep -qw input; then
+    exec python3 "$APP"
+elif id -nG "$USER" | grep -qw input; then
+    exec sg input -c "python3 '$APP'"
+else
+    echo "Du bist nicht in der Gruppe 'input' - ohne die geht /dev/input nicht." >&2
+    echo "  sudo usermod -aG input \$USER   (danach neu anmelden)" >&2
+    exit 1
+fi
+```
 
 ## Beim ersten Test bitte ein zweites Terminal offen haben
 
