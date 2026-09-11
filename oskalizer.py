@@ -8,6 +8,7 @@ Braucht: python-evdev, pygame und Lesezugriff auf /dev/input/* (Gruppe `input`).
 # --- CONFIG ----------------------------------------------------------------
 
 KEYBOARD_MATCH = "blackwidow"   # case-insensitive substring im Geraetenamen
+FALLBACK_INTERNAL = True        # keine Razer angesteckt? dann die eingebaute nehmen
 GRAB_MOUSE     = True
 
 STYLE   = "ink"        # "ink" | "orbs" | "goo"
@@ -115,10 +116,20 @@ def is_pointer(device):
     return ecodes.EV_REL in caps and ecodes.BTN_LEFT in caps.get(ecodes.EV_KEY, [])
 
 
+def is_internal_keyboard(device):
+    """Die eingebaute Laptop-Tastatur: haengt am PS/2-Controller statt am USB
+    und kann Buchstaben plus Esc."""
+    if device.info.bustype != ecodes.BUS_I8042:
+        return False
+    keys = device.capabilities().get(ecodes.EV_KEY, [])
+    return ecodes.KEY_A in keys and ecodes.KEY_ESC in keys
+
+
 def find_devices():
     """Liefert (keyboards, pointers). Razer haengt mehrere event-Nodes an den
-    gleichen Namen (Keys + Media/Macro) - wir nehmen bewusst ALLE."""
-    keyboards, pointers = [], []
+    gleichen Namen (Keys + Media/Macro) - wir nehmen bewusst ALLE. Steckt keine
+    Razer, faellt es auf die eingebaute Tastatur zurueck."""
+    matched, internal, pointers, unused = [], [], [], []
     needle = KEYBOARD_MATCH.lower()
     denied = 0
 
@@ -132,11 +143,22 @@ def find_devices():
             continue
 
         if needle in device.name.lower():
-            keyboards.append(device)
+            matched.append(device)
+        elif FALLBACK_INTERNAL and is_internal_keyboard(device):
+            internal.append(device)
         elif GRAB_MOUSE and is_pointer(device):
             pointers.append(device)
         else:
-            device.close()
+            unused.append(device)
+
+    if matched:
+        keyboards, unused = matched, unused + internal
+    else:
+        keyboards = internal
+        if keyboards:
+            print(f"Keine Tastatur mit '{KEYBOARD_MATCH}' im Namen - "
+                  "nehme die eingebaute.")
+    release_all(unused)                           # schliesst die ungenutzten Nodes
 
     if denied and not keyboards:
         raise PermissionError("keine Leserechte auf /dev/input/*")
@@ -262,7 +284,7 @@ def main():
         return 1
 
     if not keyboards:
-        print(f"Keine Tastatur gefunden, die '{KEYBOARD_MATCH}' im Namen hat.\n"
+        print(f"Keine Tastatur gefunden - weder '{KEYBOARD_MATCH}' noch eingebaut.\n"
               "Namen anschauen mit:  python3 -c \"import evdev;"
               " print([evdev.InputDevice(p).name for p in evdev.list_devices()])\"",
               file=sys.stderr)

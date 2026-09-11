@@ -28,6 +28,7 @@ Oben in `oskalizer.py`:
 
 ```python
 KEYBOARD_MATCH = "blackwidow"   # Teilstring im Gerätenamen, Groß-/Kleinschreibung egal
+FALLBACK_INTERNAL = True        # keine passende Tastatur? dann die eingebaute nehmen
 GRAB_MOUSE     = True
 
 STYLE   = "ink"        # "ink" | "orbs" | "goo"
@@ -71,7 +72,7 @@ neu anmelden:
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
-APP=/home/saosgone/Schreibtisch/challangeMyMind/oskalizer/oskalizer.py
+APP=/home/saosgone/Schreibtisch/oskalizer/oskalizer.py
 
 if id -nG | grep -qw input; then
     exec python3 "$APP"
@@ -206,3 +207,8 @@ rechnet.
   und neu starten.
 - Geräte, deren Name `KEYBOARD_MATCH` enthält, werden auch dann gegrabbt, wenn
   es Maus-Nodes sind (`GRAB_MOUSE` steuert nur die *fremden* Zeigegeräte).
+- Steckt keine Tastatur mit `KEYBOARD_MATCH` im Namen, wird die eingebaute
+  Laptop-Tastatur gegrabbt (PS/2-Bus, Buchstaben + Esc). Dann ist die einzige
+  Tastatur des Rechners gesperrt, bis Esc 5 Sekunden gehalten wird —
+  `FALLBACK_INTERNAL = False` schaltet das ab, dann bricht der Start ohne
+  externe Tastatur einfach ab.
