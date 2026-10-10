@@ -7,11 +7,13 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
 
 ## Module
 - `oskalizer.py` — CONFIG-Block, Geräte finden/grabben/freigeben, Hauptschleife
-  (evdev per `select` lesen, Esc-Timer, zeichnen). Pro Key-Down mit Zeichen:
-  `Tafel.show()` und `Ton.play()`.
+  (evdev per `select` lesen, Esc-Timer, zeichnen). Hält den Modus (`state["modus"]`,
+  „tiere“ | „tippen“, Wechsel mit Strg+Umschalt+D). Pro Key-Down mit Zeichen: im
+  Modus Tiere `Tafel.show()` + `Ton.play()`, im Modus Tippen `Schreibtafel.tippe()`.
 - `tiere.py` — Tier-Tabelle `TIERE` (Buchstabe → Name, Emoji), Tastenbelegung
   `ZEICHEN` (evdev-Keycode → Zeichen, QWERTZ) und `Tafel` (zeichnet das aktuelle
-  Zeichen; lädt beim Start `assets/bilder/<buchstabe>.png|jpg` als Ersatz fürs Emoji).
+  Zeichen im Modus Tiere; lädt beim Start `assets/bilder/<buchstabe>.png|jpg` als Ersatz fürs Emoji).
+  `Schreibtafel` zeigt im Modus Tippen den getippten Text, wortweise umgebrochen.
   Kennt keine Geräte. `oskalizer.py` ruft `Tafel.show()` pro Key-Down und
   `Tafel.draw()` pro Frame.
 - `ton.py` — `Ton`: startet `espeak-ng` als Subprozess, lädt `assets/toene/<buchstabe>.ogg|wav`
@@ -19,10 +21,13 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
   die Tondatei, sobald espeak fertig ist.
 
 ## Datenfluss
-evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `Tafel.show` (Bild) + `Ton.play` (espeak,
+Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `Tafel.show` (Bild) + `Ton.play` (espeak,
 danach ggf. Datei). Ein neues Zeichen bricht Bild und Ton des vorigen ab.
 
 ## Entscheidungen
+- 2026-10-10 — Moduswechsel per Strg+Umschalt+D, Modifier-Zustand in `oskalizer.py`.
+  Grund: pygame sieht die gegrabbte Tastatur nicht, also muss der evdev-Strom die
+  Kombination selbst erkennen.
 - 2026-10-10 — Tierlaute ohne Dateien als Lautmalerei über espeak-ng. Grund: es gibt
   noch keine Aufnahmen; Dateien in `assets/toene/` ersetzen den Laut pro Buchstabe.
 - 2026-10-10 — Tondateien nach Buchstabe benannt (`a.ogg`), nicht nach Tiername.

@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-10 — feat(modus): Strg+Umschalt+D wechselt in den Tippen-Modus
+**Was:** Zweiter Modus, in dem getippte Zeichen als Text stehen bleiben statt einzeln mit Tier zu erscheinen.
+**Nicht gebaut:** keine Rücktaste, keine Shift-Ebene, keine Modus-Anzeige, kein Merken des Modus über Neustart, kein Cursor.
+
 ## 2026-10-10 — feat(tiere): eigene Bilder aus assets/bilder/ statt Emoji
 **Was:** Platz für echte Tierbilder später; ein `a.png` ersetzt das Affen-Emoji, ohne Code anzufassen.
 **Nicht gebaut:** keine Einfärbung der Bilder, nur PNG/JPG, kein Nachladen zur Laufzeit.

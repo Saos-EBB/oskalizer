@@ -30,6 +30,8 @@ import tiere
 from ton import Ton
 
 BACKGROUND = (10, 10, 18)
+CTRL_KEYS = (ecodes.KEY_LEFTCTRL, ecodes.KEY_RIGHTCTRL)
+SHIFT_KEYS = (ecodes.KEY_LEFTSHIFT, ecodes.KEY_RIGHTSHIFT)
 
 
 # --- Geraete ---------------------------------------------------------------
@@ -100,20 +102,37 @@ def release_all(devices):
 # --- Loop ------------------------------------------------------------------
 
 
-def handle_input(device, tafel, ton, state, now):
+def handle_input(device, tafel, schreib, ton, state, now):
     """Verarbeitet die anstehenden Events eines Geraets."""
     for event in device.read():
-        if event.type == ecodes.EV_KEY:
-            if event.code == ecodes.KEY_ESC:
-                if event.value == 1:
-                    state["esc_since"] = now
-                elif event.value == 0:
-                    state["esc_since"] = None
-            if event.value == 1:                  # nur Key-Down, keine Repeats
-                zeichen = tiere.ZEICHEN.get(event.code)
-                if zeichen:
-                    tafel.show(zeichen, now)
-                    ton.play(zeichen)
+        if event.type != ecodes.EV_KEY:
+            continue
+        if event.code == ecodes.KEY_ESC:
+            if event.value == 1:
+                state["esc_since"] = now
+            elif event.value == 0:
+                state["esc_since"] = None
+        if event.code in CTRL_KEYS:
+            state["ctrl"] = event.value != 0
+        if event.code in SHIFT_KEYS:
+            state["shift"] = event.value != 0
+        if event.value != 1:                      # nur Key-Down, keine Repeats
+            continue
+
+        if event.code == ecodes.KEY_D and state["ctrl"] and state["shift"]:
+            state["modus"] = "tippen" if state["modus"] == "tiere" else "tiere"
+            ton.stop()
+            continue
+        zeichen = tiere.ZEICHEN.get(event.code)
+        if state["modus"] == "tiere":
+            if zeichen:
+                tafel.show(zeichen, now)
+                ton.play(zeichen)
+        else:
+            if event.code == ecodes.KEY_SPACE:
+                zeichen = " "
+            if zeichen:
+                schreib.tippe(zeichen)
 
 
 def draw_exit_hint(screen, progress):
@@ -132,18 +151,19 @@ def run(devices):
     pygame.mouse.set_visible(False)
 
     tafel = tiere.Tafel(screen)
+    schreib = tiere.Schreibtafel(screen)
     ton = Ton()
     clock = pygame.time.Clock()
     fds = {device.fd: device for device in devices}
-    state = {"esc_since": None}
+    state = {"esc_since": None, "ctrl": False, "shift": False, "modus": "tiere"}
 
     try:
-        loop(screen, tafel, ton, fds, state, clock)
+        loop(screen, tafel, schreib, ton, fds, state, clock)
     finally:
         ton.stop()                  # sonst spricht espeak nach dem Beenden weiter
 
 
-def loop(screen, tafel, ton, fds, state, clock):
+def loop(screen, tafel, schreib, ton, fds, state, clock):
     while True:
         clock.tick(FPS)
         now = pygame.time.get_ticks() / 1000.0
@@ -152,7 +172,7 @@ def loop(screen, tafel, ton, fds, state, clock):
         ready, _, _ = select.select(list(fds), [], [], 0)
         for fd in ready:
             try:
-                handle_input(fds[fd], tafel, ton, state, now)
+                handle_input(fds[fd], tafel, schreib, ton, state, now)
             except (BlockingIOError, OSError):
                 pass
 
@@ -163,7 +183,7 @@ def loop(screen, tafel, ton, fds, state, clock):
 
         screen.fill(BACKGROUND)
         ton.update()
-        tafel.draw(now)
+        (tafel if state["modus"] == "tiere" else schreib).draw(now)
         if esc_since is not None:
             draw_exit_hint(screen, held / EXIT_HOLD_SECONDS)
         pygame.display.flip()
@@ -202,7 +222,7 @@ def main():
         return 1
 
     print(f"Laeuft. Beenden: Esc {EXIT_HOLD_SECONDS:.0f} Sekunden halten. "
-          f"(Notausgang: kill {os.getpid()})")
+          f"Modus wechseln: Strg+Umschalt+D. (Notausgang: kill {os.getpid()})")
     try:
         run(grabbed)
     finally:

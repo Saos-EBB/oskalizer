@@ -1,4 +1,5 @@
-"""Was auf dem Schirm steht: ein Buchstabe mit Tier, eine Ziffer oder ein Zeichen.
+"""Was auf dem Schirm steht. Modus Tiere: ein Buchstabe mit Tier, eine Ziffer oder
+ein Zeichen (Tafel). Modus Tippen: der getippte Text (Schreibtafel).
 Kennt keine Geraete - bekommt nur evdev-Keycodes.
 """
 
@@ -115,3 +116,50 @@ class Tafel:
             size = (int(bild.get_width() * scale), int(bild.get_height() * scale))
             bild = pygame.transform.smoothscale(bild, size)
         self.screen.blit(bild, bild.get_rect(center=self.screen.get_rect().center))
+
+
+class Schreibtafel:
+    """Tippen-Modus: die getippten Zeichen als Text, wortweise umgebrochen.
+    Was oben aus dem Schirm laeuft, faellt auch aus dem Text."""
+
+    def __init__(self, screen):
+        self.screen = screen
+        self.font = pygame.font.Font(None, screen.get_height() // 6)
+        self.text = ""
+        self.zeilen = []
+
+    def tippe(self, zeichen):
+        self.text += zeichen
+        self.zeilen = self._umbrechen()
+        sichtbar = int(self.screen.get_height() * 0.9) // self.font.get_linesize()
+        if len(self.zeilen) > sichtbar:
+            self.zeilen = self.zeilen[-sichtbar:]
+            self.text = " ".join(self.zeilen)
+
+    def _umbrechen(self):
+        breite = self.screen.get_width() * 0.9
+        zeilen, zeile = [], ""
+        for wort in self.text.split(" "):
+            kandidat = f"{zeile} {wort}" if zeile else wort
+            if self.font.size(kandidat)[0] <= breite:
+                zeile = kandidat
+                continue
+            if zeile:
+                zeilen.append(zeile)
+            while self.font.size(wort)[0] > breite:     # Wort laenger als eine Zeile
+                n = len(wort)
+                while n > 1 and self.font.size(wort[:n])[0] > breite:
+                    n -= 1
+                zeilen.append(wort[:n])
+                wort = wort[n:]
+            zeile = wort
+        zeilen.append(zeile)
+        return zeilen
+
+    def draw(self, now):
+        line = self.font.get_linesize()
+        top = (self.screen.get_height() - line * len(self.zeilen)) // 2
+        for i, zeile in enumerate(self.zeilen):
+            bild = self.font.render(zeile, True, (235, 235, 245))
+            self.screen.blit(bild, bild.get_rect(midtop=(self.screen.get_width() // 2,
+                                                        top + i * line)))

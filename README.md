@@ -38,6 +38,15 @@ Leertaste, Enter, F-Tasten, Shift, Esc und die Maus zeigen nichts. Shift wird
 nicht ausgewertet — es gibt nur Großbuchstaben und die ungeshifteten Zeichen.
 Die Tastenbelegung ist auf ein deutsches QWERTZ-Layout festgelegt.
 
+## Modus Tippen
+
+**Strg+Umschalt+D** schaltet zwischen den Modi „Tiere“ (Start) und „Tippen“ um.
+Im Tippen-Modus erscheint jedes getippte Zeichen als Text in der Mitte, die
+Leertaste macht Wortabstände. Keine Tiere, kein Ton pro Taste. Zu langer Text
+wird umgebrochen; was oben aus dem Bildschirm läuft, ist weg. Es gibt keine
+Rücktaste und weiterhin nur Großbuchstaben. Beim Wechsel bleibt der Text des
+Tippen-Modus stehen.
+
 Drei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (Tier-Tabelle,
 Tastenbelegung, Anzeige), `ton.py` (Sprechen und Tondateien).
 
