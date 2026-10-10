@@ -26,6 +26,8 @@ from evdev import ecodes
 
 import pygame
 
+import tiere
+
 BACKGROUND = (10, 10, 18)
 
 
@@ -102,7 +104,7 @@ def release_all(devices):
 # --- Loop ------------------------------------------------------------------
 
 
-def handle_input(device, state, now):
+def handle_input(device, tafel, state, now):
     """Verarbeitet die anstehenden Events eines Geraets."""
     for event in device.read():
         if event.type == ecodes.EV_KEY:
@@ -113,6 +115,9 @@ def handle_input(device, state, now):
                     state["esc_since"] = None
             if event.value == 1:                  # nur Key-Down, keine Repeats
                 play_sound(event)
+                zeichen = tiere.ZEICHEN.get(event.code)
+                if zeichen:
+                    tafel.show(zeichen, now)
 
 
 def draw_exit_hint(screen, progress):
@@ -130,14 +135,15 @@ def run(devices):
     pygame.display.set_caption("keyboard playground")
     pygame.mouse.set_visible(False)
 
+    tafel = tiere.Tafel(screen)
     clock = pygame.time.Clock()
     fds = {device.fd: device for device in devices}
     state = {"esc_since": None}
 
-    loop(screen, fds, state, clock)
+    loop(screen, tafel, fds, state, clock)
 
 
-def loop(screen, fds, state, clock):
+def loop(screen, tafel, fds, state, clock):
     while True:
         clock.tick(FPS)
         now = pygame.time.get_ticks() / 1000.0
@@ -146,7 +152,7 @@ def loop(screen, fds, state, clock):
         ready, _, _ = select.select(list(fds), [], [], 0)
         for fd in ready:
             try:
-                handle_input(fds[fd], state, now)
+                handle_input(fds[fd], tafel, state, now)
             except (BlockingIOError, OSError):
                 pass
 
@@ -156,6 +162,7 @@ def loop(screen, fds, state, clock):
             return
 
         screen.fill(BACKGROUND)
+        tafel.draw(now)
         if esc_since is not None:
             draw_exit_hint(screen, held / EXIT_HOLD_SECONDS)
         pygame.display.flip()

@@ -4,20 +4,32 @@ Keyboard playground für ein Kleinkind. Eine externe Tastatur (und optional die
 Maus) werden exklusiv gegrabbt — das Kind hämmert, es passiert nur auf dem
 Bildschirm etwas, das System bleibt unangetastet.
 
-Im Moment bleibt der Bildschirm dunkel — die Kleckse sind raus, die
-Buchstaben-und-Tiere-Version wird gerade gebaut.
+Jeder Tastendruck zeigt groß ein Zeichen in der Bildschirmmitte, in einer
+zufälligen Farbe, kurz aufpoppend. Die nächste Taste ersetzt es:
 
-Eine Datei: `oskalizer.py` (Geräte, Schleife, Beenden).
+- **A–Z**: Buchstabe plus ein Tier dazu (A Affe, B Bär, … Z Zebra)
+- **Ziffern** (oben und Nummernblock): die Zahl
+- **Zeichen** (`ß ´ Ü + Ö Ä ^ # < , . -` und die Nummernblock-Operatoren): das Zeichen
+
+Leertaste, Enter, F-Tasten, Shift, Esc und die Maus zeigen nichts. Shift wird
+nicht ausgewertet — es gibt nur Großbuchstaben und die ungeshifteten Zeichen.
+Die Tastenbelegung ist auf ein deutsches QWERTZ-Layout festgelegt.
+
+Zwei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (Tier-Tabelle,
+Tastenbelegung, Anzeige).
 
 ## Setup
 
 ```bash
-sudo dnf install python3-evdev python3-pygame     # Fedora
+sudo dnf install python3-evdev python3-pygame google-noto-emoji-fonts   # Fedora
 sudo usermod -aG input $USER                      # danach neu einloggen!
 ```
 
 `/dev/input/*` gehört der Gruppe `input`. Ohne Mitgliedschaft (oder root) gibt
 es eine Meldung statt eines Crashs.
+
+Die Tiere kommen aus der **einfarbigen** Schrift Noto Emoji (Pfad oben in
+`tiere.py`). Die bunte Variante (`Noto-COLRv1.ttf`) zeichnet pygame leer.
 
 ## Konfigurieren
 
