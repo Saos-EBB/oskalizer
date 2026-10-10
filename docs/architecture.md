@@ -11,7 +11,8 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
   `Tafel.show()` und `Ton.play()`.
 - `tiere.py` — Tier-Tabelle `TIERE` (Buchstabe → Name, Emoji), Tastenbelegung
   `ZEICHEN` (evdev-Keycode → Zeichen, QWERTZ) und `Tafel` (zeichnet das aktuelle
-  Zeichen). Kennt keine Geräte. `oskalizer.py` ruft `Tafel.show()` pro Key-Down und
+  Zeichen; lädt beim Start `assets/bilder/<buchstabe>.png|jpg` als Ersatz fürs Emoji).
+  Kennt keine Geräte. `oskalizer.py` ruft `Tafel.show()` pro Key-Down und
   `Tafel.draw()` pro Frame.
 - `ton.py` — `Ton`: startet `espeak-ng` als Subprozess, lädt `assets/toene/<buchstabe>.ogg|wav`
   per `pygame.mixer`. Liest `TIERE` aus `tiere.py`. `Ton.update()` pro Frame startet

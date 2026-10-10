@@ -3,11 +3,13 @@ Kennt keine Geraete - bekommt nur evdev-Keycodes.
 """
 
 import random
+from pathlib import Path
 
 import pygame
 from evdev import ecodes
 
 EMOJI_FONT = "/usr/share/fonts/google-noto-emoji-fonts/NotoEmoji-Regular.ttf"
+BILDER = Path(__file__).parent / "assets" / "bilder"
 POP_SECONDS = 0.25                  # so lange waechst ein neues Zeichen auf volle Groesse
 
 # Buchstabe -> (Tier, Emoji, Laut). Den Laut spricht espeak-ng, solange keine
@@ -73,6 +75,13 @@ class Tafel:
         height = screen.get_height()
         self.font = pygame.font.Font(None, int(height * 0.55))
         self.emoji_font = pygame.font.Font(EMOJI_FONT, int(height * 0.35))
+        self.bilder = {}                    # Buchstabe -> eigenes Bild statt Emoji
+        for path in sorted(BILDER.glob("*")):
+            if path.suffix.lower() in (".png", ".jpg", ".jpeg") and path.stem.upper() in TIERE:
+                bild = pygame.image.load(path).convert_alpha()
+                size = (int(bild.get_width() * height * 0.4 / bild.get_height()),
+                        int(height * 0.4))
+                self.bilder[path.stem.upper()] = pygame.transform.smoothscale(bild, size)
         self.bild = None
         self.since = 0.0
 
@@ -81,7 +90,9 @@ class Tafel:
         color.hsva = (random.uniform(0.0, 360.0), 75.0, 100.0, 100.0)
 
         teile = [self.font.render(zeichen, True, color)]
-        if zeichen in TIERE:
+        if zeichen in self.bilder:
+            teile.append(self.bilder[zeichen])  # bleibt in seinen eigenen Farben
+        elif zeichen in TIERE:
             teile.append(self.emoji_font.render(TIERE[zeichen][1], True, color))
 
         gap = self.screen.get_height() // 12

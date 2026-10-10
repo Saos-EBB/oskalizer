@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-10 — feat(tiere): eigene Bilder aus assets/bilder/ statt Emoji
+**Was:** Platz für echte Tierbilder später; ein `a.png` ersetzt das Affen-Emoji, ohne Code anzufassen.
+**Nicht gebaut:** keine Einfärbung der Bilder, nur PNG/JPG, kein Nachladen zur Laufzeit.
+
 ## 2026-10-10 — feat(ton): espeak-ng spricht, Tondateien aus assets/toene/
 **Was:** Buchstaben sagen „A wie Affe“ plus Tierlaut, Ziffern sagen die Zahl, Zeichen machen einen zufälligen Tierlaut. Ohne Aufnahmen spricht espeak eine Lautmalerei.
 **Nicht gebaut:** keine Lautstärke-Einstellung, keine Warteschlange (neue Taste bricht ab), kein MP3, Dateinamen nur nach Buchstabe.

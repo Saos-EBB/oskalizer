@@ -27,6 +27,13 @@ da, spielt sie statt des gesprochenen Lauts — nach „A wie Affe“ und auch b
 Zeichen. Geladen wird beim Start. Die Laute und Tiernamen selbst stehen in der
 Tabelle `TIERE` oben in `tiere.py`.
 
+### Eigene Tierbilder
+
+Genauso für Bilder: `assets/bilder/a.png` (oder `.jpg`) ersetzt das Emoji beim A.
+Das Bild wird auf 40 % der Bildschirmhöhe skaliert und behält seine eigenen
+Farben, nur der Buchstabe wird bunt eingefärbt. PNG mit transparentem
+Hintergrund sieht auf dem dunklen Schirm am besten aus.
+
 Leertaste, Enter, F-Tasten, Shift, Esc und die Maus zeigen nichts. Shift wird
 nicht ausgewertet — es gibt nur Großbuchstaben und die ungeshifteten Zeichen.
 Die Tastenbelegung ist auf ein deutsches QWERTZ-Layout festgelegt.
