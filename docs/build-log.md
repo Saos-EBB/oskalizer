@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-10 — feat(ton): Piper-Stimme Thorsten statt espeak-ng
+**Was:** Nach Hörproben gewählt — Thorsten high spricht überall (Tiere, Ziffern, Vorlesen); espeak springt nur ein, wenn Piper oder die Stimme fehlt.
+**Nicht gebaut:** keine Stimmenwahl, kein Limit paralleler Synthese-Threads beim Hämmern, kein Vorab-Cache der „A wie …“-Sätze.
+
 ## 2026-10-10 — feat(tippen): Enter liest den getippten Text vor
 **Was:** Im Tippen-Modus spricht espeak-ng mit Enter den Text; die nächste Taste beginnt einen neuen.
 **Nicht gebaut:** keine eigene Robo-Stimme/Effekte, kein Mitmarkieren des gesprochenen Worts, keine Warteschlange.

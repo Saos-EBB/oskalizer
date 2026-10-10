@@ -11,7 +11,8 @@ zufälligen Farbe, kurz aufpoppend. Die nächste Taste ersetzt es:
 - **Ziffern** (oben und Nummernblock): die Zahl
 - **Zeichen** (`ß ´ Ü + Ö Ä ^ # < , . -` und die Nummernblock-Operatoren): das Zeichen
 
-Dazu kommt Ton über `espeak-ng`:
+Dazu kommt Ton. Es spricht **Piper** mit der Stimme *Thorsten (high)*; fehlt
+Piper oder die Stimmdatei, springt `espeak-ng` ein (Roboterstimme):
 
 - **A–Z**: „A wie Affe“, danach der Tierlaut („Uh uh ah ah“)
 - **Ziffern**: die Zahl wird gesagt
@@ -47,7 +48,7 @@ wird umgebrochen; was oben aus dem Bildschirm läuft, ist weg. Es gibt keine
 Rücktaste und weiterhin nur Großbuchstaben. Beim Wechsel bleibt der Text des
 Tippen-Modus stehen.
 
-**Enter** (auch auf dem Nummernblock) lässt espeak-ng den Text vorlesen. Der
+**Enter** (auch auf dem Nummernblock) lässt den Text vorlesen. Der
 Text bleibt danach stehen; die nächste Taste fängt einen neuen an. Enter
 während des Vorlesens fängt von vorn an.
 
@@ -63,6 +64,19 @@ sudo usermod -aG input $USER                      # danach neu einloggen!
 
 `/dev/input/*` gehört der Gruppe `input`. Ohne Mitgliedschaft (oder root) gibt
 es eine Meldung statt eines Crashs.
+
+Die Stimme (114 MB) liegt nicht im Repo:
+
+```bash
+python3 -m pip install --user piper-tts
+mkdir -p ~/.local/share/oskalizer
+python3 -m piper.download_voices --data-dir ~/.local/share/oskalizer de_DE-thorsten-high
+```
+
+Der Pfad steht oben in `ton.py` (`PIPER_STIMME`). Laden dauert beim Start
+~1,6 s; danach kommt ein kurzer Satz nach 0,2–0,3 s, ein langer Vorlese-Satz
+nach ~1 s. Wird gehämmert, rechnen mehrere Sätze parallel und der letzte kommt
+spürbar später (gemessen: dritter von drei schnellen Tasten nach 0,7 s).
 
 Die Tiere kommen aus der **einfarbigen** Schrift Noto Emoji (Pfad oben in
 `tiere.py`). Die bunte Variante (`Noto-COLRv1.ttf`) zeichnet pygame leer.

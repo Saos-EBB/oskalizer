@@ -17,10 +17,13 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
   `Schreibtafel` zeigt im Modus Tippen den getippten Text, wortweise umgebrochen.
   Kennt keine Geräte. `oskalizer.py` ruft `Tafel.show()` pro Key-Down und
   `Tafel.draw()` pro Frame.
-- `ton.py` — `Ton`: startet `espeak-ng` als Subprozess (`play` für ein Zeichen,
-  `sage` für den Tipp-Text), lädt `assets/toene/<buchstabe>.ogg|wav`
+- `ton.py` — `Ton`: spricht mit Piper (Modell einmal beim Start geladen, Synthese
+  pro Text in einem Daemon-Thread, Ergebnis per Queue zurück, abgespielt über
+  `pygame.mixer`); ohne Piper/Stimme per `espeak-ng`-Subprozess. `play` für ein
+  Zeichen, `sage` für den Tipp-Text, lädt `assets/toene/<buchstabe>.ogg|wav`
   per `pygame.mixer`. Liest `TIERE` aus `tiere.py`. `Ton.update()` pro Frame startet
-  die Tondatei, sobald espeak fertig ist.
+  fertige Piper-Sprache und danach die Tondatei. Jeder neue Text bekommt eine
+  Auftragsnummer; Ergebnisse älterer Aufträge werden verworfen.
 
 ## Datenfluss
 Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `Tafel.show` (Bild) + `Ton.play` (espeak,
@@ -29,6 +32,9 @@ Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Ente
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-10-10 — Piper (Thorsten high) statt espeak-ng als Stimme, espeak bleibt Ersatz.
+  Grund: natürlich klingend, offline. Synthese im Thread, weil sie 0,2–1 s blockiert.
+  Stimmdatei außerhalb des Repos (114 MB).
 - 2026-10-10 — Moduswechsel per Strg+Umschalt+D, Modifier-Zustand in `oskalizer.py`.
   Grund: pygame sieht die gegrabbte Tastatur nicht, also muss der evdev-Strom die
   Kombination selbst erkennen.
