@@ -7,14 +7,25 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
 
 ## Module
 - `oskalizer.py` — CONFIG-Block, Geräte finden/grabben/freigeben, Hauptschleife
-  (evdev per `select` lesen, Esc-Timer, zeichnen). `play_sound(event)` ist der Hook
-  pro Tastendruck.
+  (evdev per `select` lesen, Esc-Timer, zeichnen). Pro Key-Down mit Zeichen:
+  `Tafel.show()` und `Ton.play()`.
 - `tiere.py` — Tier-Tabelle `TIERE` (Buchstabe → Name, Emoji), Tastenbelegung
   `ZEICHEN` (evdev-Keycode → Zeichen, QWERTZ) und `Tafel` (zeichnet das aktuelle
   Zeichen). Kennt keine Geräte. `oskalizer.py` ruft `Tafel.show()` pro Key-Down und
   `Tafel.draw()` pro Frame.
+- `ton.py` — `Ton`: startet `espeak-ng` als Subprozess, lädt `assets/toene/<buchstabe>.ogg|wav`
+  per `pygame.mixer`. Liest `TIERE` aus `tiere.py`. `Ton.update()` pro Frame startet
+  die Tondatei, sobald espeak fertig ist.
+
+## Datenfluss
+evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `Tafel.show` (Bild) + `Ton.play` (espeak,
+danach ggf. Datei). Ein neues Zeichen bricht Bild und Ton des vorigen ab.
 
 ## Entscheidungen
+- 2026-10-10 — Tierlaute ohne Dateien als Lautmalerei über espeak-ng. Grund: es gibt
+  noch keine Aufnahmen; Dateien in `assets/toene/` ersetzen den Laut pro Buchstabe.
+- 2026-10-10 — Tondateien nach Buchstabe benannt (`a.ogg`), nicht nach Tiername.
+  Grund: keine Umlaute in Dateinamen, Tier tauschen ohne Umbenennen.
 - 2026-10-10 — Tiere als einfarbige Noto Emoji, pro Tastendruck eingefärbt. Grund:
   die bunte COLRv1-Schrift rendert in pygame/SDL_ttf leer.
 - 2026-10-10 — Tastenbelegung fest auf QWERTZ im Code statt über XKB. evdev liefert

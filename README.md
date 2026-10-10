@@ -11,17 +11,33 @@ zufälligen Farbe, kurz aufpoppend. Die nächste Taste ersetzt es:
 - **Ziffern** (oben und Nummernblock): die Zahl
 - **Zeichen** (`ß ´ Ü + Ö Ä ^ # < , . -` und die Nummernblock-Operatoren): das Zeichen
 
+Dazu kommt Ton über `espeak-ng`:
+
+- **A–Z**: „A wie Affe“, danach der Tierlaut („Uh uh ah ah“)
+- **Ziffern**: die Zahl wird gesagt
+- **Zeichen**: der Laut eines zufälligen Tiers
+
+Jeder neue Tastendruck bricht den laufenden Ton ab.
+
+### Eigene Tierlaute
+
+Echte Aufnahmen kommen nach `assets/toene/`, benannt nach dem **Buchstaben**:
+`a.ogg` oder `a.wav` für den Affen, `b.ogg` für den Bären usw. Liegt eine Datei
+da, spielt sie statt des gesprochenen Lauts — nach „A wie Affe“ und auch bei den
+Zeichen. Geladen wird beim Start. Die Laute und Tiernamen selbst stehen in der
+Tabelle `TIERE` oben in `tiere.py`.
+
 Leertaste, Enter, F-Tasten, Shift, Esc und die Maus zeigen nichts. Shift wird
 nicht ausgewertet — es gibt nur Großbuchstaben und die ungeshifteten Zeichen.
 Die Tastenbelegung ist auf ein deutsches QWERTZ-Layout festgelegt.
 
-Zwei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (Tier-Tabelle,
-Tastenbelegung, Anzeige).
+Drei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (Tier-Tabelle,
+Tastenbelegung, Anzeige), `ton.py` (Sprechen und Tondateien).
 
 ## Setup
 
 ```bash
-sudo dnf install python3-evdev python3-pygame google-noto-emoji-fonts   # Fedora
+sudo dnf install python3-evdev python3-pygame google-noto-emoji-fonts espeak-ng   # Fedora
 sudo usermod -aG input $USER                      # danach neu einloggen!
 ```
 

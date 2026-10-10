@@ -27,13 +27,9 @@ from evdev import ecodes
 import pygame
 
 import tiere
+from ton import Ton
 
 BACKGROUND = (10, 10, 18)
-
-
-def play_sound(event):
-    """Hook fuer spaeter: hier koennte pro Eingabe ein Ton kommen."""
-    pass
 
 
 # --- Geraete ---------------------------------------------------------------
@@ -104,7 +100,7 @@ def release_all(devices):
 # --- Loop ------------------------------------------------------------------
 
 
-def handle_input(device, tafel, state, now):
+def handle_input(device, tafel, ton, state, now):
     """Verarbeitet die anstehenden Events eines Geraets."""
     for event in device.read():
         if event.type == ecodes.EV_KEY:
@@ -114,10 +110,10 @@ def handle_input(device, tafel, state, now):
                 elif event.value == 0:
                     state["esc_since"] = None
             if event.value == 1:                  # nur Key-Down, keine Repeats
-                play_sound(event)
                 zeichen = tiere.ZEICHEN.get(event.code)
                 if zeichen:
                     tafel.show(zeichen, now)
+                    ton.play(zeichen)
 
 
 def draw_exit_hint(screen, progress):
@@ -136,14 +132,18 @@ def run(devices):
     pygame.mouse.set_visible(False)
 
     tafel = tiere.Tafel(screen)
+    ton = Ton()
     clock = pygame.time.Clock()
     fds = {device.fd: device for device in devices}
     state = {"esc_since": None}
 
-    loop(screen, tafel, fds, state, clock)
+    try:
+        loop(screen, tafel, ton, fds, state, clock)
+    finally:
+        ton.stop()                  # sonst spricht espeak nach dem Beenden weiter
 
 
-def loop(screen, tafel, fds, state, clock):
+def loop(screen, tafel, ton, fds, state, clock):
     while True:
         clock.tick(FPS)
         now = pygame.time.get_ticks() / 1000.0
@@ -152,7 +152,7 @@ def loop(screen, tafel, fds, state, clock):
         ready, _, _ = select.select(list(fds), [], [], 0)
         for fd in ready:
             try:
-                handle_input(fds[fd], tafel, state, now)
+                handle_input(fds[fd], tafel, ton, state, now)
             except (BlockingIOError, OSError):
                 pass
 
@@ -162,6 +162,7 @@ def loop(screen, tafel, fds, state, clock):
             return
 
         screen.fill(BACKGROUND)
+        ton.update()
         tafel.draw(now)
         if esc_since is not None:
             draw_exit_hint(screen, held / EXIT_HOLD_SECONDS)

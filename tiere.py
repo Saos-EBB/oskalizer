@@ -10,35 +10,37 @@ from evdev import ecodes
 EMOJI_FONT = "/usr/share/fonts/google-noto-emoji-fonts/NotoEmoji-Regular.ttf"
 POP_SECONDS = 0.25                  # so lange waechst ein neues Zeichen auf volle Groesse
 
-# Buchstabe -> (Tier, Emoji). Die bunte Noto-Variante (COLRv1) zeichnet pygame leer,
-# deshalb die einfarbige Schrift, eingefaerbt pro Tastendruck.
+# Buchstabe -> (Tier, Emoji, Laut). Den Laut spricht espeak-ng, solange keine
+# Tondatei fuer den Buchstaben in assets/toene/ liegt (siehe ton.py).
+# Die bunte Noto-Variante (COLRv1) zeichnet pygame leer, deshalb die einfarbige
+# Schrift, eingefaerbt pro Tastendruck.
 TIERE = {
-    "A": ("Affe", "🐒"),
-    "B": ("Bär", "🐻"),
-    "C": ("Chamäleon", "🦎"),
-    "D": ("Delfin", "🐬"),
-    "E": ("Elefant", "🐘"),
-    "F": ("Frosch", "🐸"),
-    "G": ("Giraffe", "🦒"),
-    "H": ("Hund", "🐶"),
-    "I": ("Igel", "🦔"),
-    "J": ("Jaguar", "🐆"),
-    "K": ("Katze", "🐱"),
-    "L": ("Löwe", "🦁"),
-    "M": ("Maus", "🐭"),
-    "N": ("Nashorn", "🦏"),
-    "O": ("Oktopus", "🐙"),
-    "P": ("Pinguin", "🐧"),
-    "Q": ("Qualle", "🪼"),
-    "R": ("Raupe", "🐛"),
-    "S": ("Schwein", "🐷"),
-    "T": ("Tiger", "🐯"),
-    "U": ("Uhu", "🦉"),
-    "V": ("Vogel", "🐦"),
-    "W": ("Wal", "🐳"),
-    "X": ("Xerus", "🐿"),
-    "Y": ("Yak", "🐃"),
-    "Z": ("Zebra", "🦓"),
+    "A": ("Affe", "🐒", "Uh uh ah ah"),
+    "B": ("Bär", "🐻", "Brummm"),
+    "C": ("Chamäleon", "🦎", "Zisch"),
+    "D": ("Delfin", "🐬", "Ki ki ki"),
+    "E": ("Elefant", "🐘", "Törööö"),
+    "F": ("Frosch", "🐸", "Quak quak"),
+    "G": ("Giraffe", "🦒", "Mmmmh"),
+    "H": ("Hund", "🐶", "Wau wau"),
+    "I": ("Igel", "🦔", "Schnüff schnüff"),
+    "J": ("Jaguar", "🐆", "Grrrr"),
+    "K": ("Katze", "🐱", "Miau"),
+    "L": ("Löwe", "🦁", "Rrroaaar"),
+    "M": ("Maus", "🐭", "Piep piep"),
+    "N": ("Nashorn", "🦏", "Schnaub"),
+    "O": ("Oktopus", "🐙", "Blubb blubb"),
+    "P": ("Pinguin", "🐧", "Quiek quiek"),
+    "Q": ("Qualle", "🪼", "Blubb"),
+    "R": ("Raupe", "🐛", "Mampf mampf"),
+    "S": ("Schwein", "🐷", "Grunz grunz"),
+    "T": ("Tiger", "🐯", "Grrraaa"),
+    "U": ("Uhu", "🦉", "Uhu uhu"),
+    "V": ("Vogel", "🐦", "Tschiep tschiep"),
+    "W": ("Wal", "🐳", "Uuuuuuh"),
+    "X": ("Xerus", "🐿", "Knabber knabber"),
+    "Y": ("Yak", "🐃", "Muuuh"),
+    "Z": ("Zebra", "🦓", "Ihahaha"),
 }
 
 # evdev liefert die Tastenposition einer US-Tastatur. Hier das deutsche QWERTZ-Layout
