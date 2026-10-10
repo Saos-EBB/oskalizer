@@ -127,8 +127,12 @@ class Schreibtafel:
         self.font = pygame.font.Font(None, screen.get_height() // 6)
         self.text = ""
         self.zeilen = []
+        self.vorgelesen = False             # nach Enter beginnt die naechste Taste neu
 
     def tippe(self, zeichen):
+        if self.vorgelesen:
+            self.text = ""
+            self.vorgelesen = False
         self.text += zeichen
         self.zeilen = self._umbrechen()
         sichtbar = int(self.screen.get_height() * 0.9) // self.font.get_linesize()

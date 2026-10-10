@@ -47,6 +47,10 @@ wird umgebrochen; was oben aus dem Bildschirm läuft, ist weg. Es gibt keine
 Rücktaste und weiterhin nur Großbuchstaben. Beim Wechsel bleibt der Text des
 Tippen-Modus stehen.
 
+**Enter** (auch auf dem Nummernblock) lässt espeak-ng den Text vorlesen. Der
+Text bleibt danach stehen; die nächste Taste fängt einen neuen an. Enter
+während des Vorlesens fängt von vorn an.
+
 Drei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (Tier-Tabelle,
 Tastenbelegung, Anzeige), `ton.py` (Sprechen und Tondateien).
 

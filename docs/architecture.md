@@ -9,20 +9,24 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
 - `oskalizer.py` — CONFIG-Block, Geräte finden/grabben/freigeben, Hauptschleife
   (evdev per `select` lesen, Esc-Timer, zeichnen). Hält den Modus (`state["modus"]`,
   „tiere“ | „tippen“, Wechsel mit Strg+Umschalt+D). Pro Key-Down mit Zeichen: im
-  Modus Tiere `Tafel.show()` + `Ton.play()`, im Modus Tippen `Schreibtafel.tippe()`.
+  Modus Tiere `Tafel.show()` + `Ton.play()`, im Modus Tippen `Schreibtafel.tippe()`,
+  bei Enter `Ton.sage(schreib.text)`.
 - `tiere.py` — Tier-Tabelle `TIERE` (Buchstabe → Name, Emoji), Tastenbelegung
   `ZEICHEN` (evdev-Keycode → Zeichen, QWERTZ) und `Tafel` (zeichnet das aktuelle
   Zeichen im Modus Tiere; lädt beim Start `assets/bilder/<buchstabe>.png|jpg` als Ersatz fürs Emoji).
   `Schreibtafel` zeigt im Modus Tippen den getippten Text, wortweise umgebrochen.
   Kennt keine Geräte. `oskalizer.py` ruft `Tafel.show()` pro Key-Down und
   `Tafel.draw()` pro Frame.
-- `ton.py` — `Ton`: startet `espeak-ng` als Subprozess, lädt `assets/toene/<buchstabe>.ogg|wav`
+- `ton.py` — `Ton`: startet `espeak-ng` als Subprozess (`play` für ein Zeichen,
+  `sage` für den Tipp-Text), lädt `assets/toene/<buchstabe>.ogg|wav`
   per `pygame.mixer`. Liest `TIERE` aus `tiere.py`. `Ton.update()` pro Frame startet
   die Tondatei, sobald espeak fertig ist.
 
 ## Datenfluss
 Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `Tafel.show` (Bild) + `Ton.play` (espeak,
 danach ggf. Datei). Ein neues Zeichen bricht Bild und Ton des vorigen ab.
+Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Enter →
+`Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
 - 2026-10-10 — Moduswechsel per Strg+Umschalt+D, Modifier-Zustand in `oskalizer.py`.

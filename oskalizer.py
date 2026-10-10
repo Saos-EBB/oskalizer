@@ -128,6 +128,9 @@ def handle_input(device, tafel, schreib, ton, state, now):
             if zeichen:
                 tafel.show(zeichen, now)
                 ton.play(zeichen)
+        elif event.code in (ecodes.KEY_ENTER, ecodes.KEY_KPENTER):
+            ton.sage(schreib.text)
+            schreib.vorgelesen = True
         else:
             if event.code == ecodes.KEY_SPACE:
                 zeichen = " "

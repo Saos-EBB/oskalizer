@@ -52,6 +52,14 @@ class Ton:
                 [self.espeak, *ESPEAK_ARGS, text],
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+    def sage(self, text):
+        """Tippen-Modus: den ganzen Text vorlesen."""
+        self.stop()
+        if text.strip() and self.espeak:
+            self.sprecher = subprocess.Popen(
+                [self.espeak, *ESPEAK_ARGS, text],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
     def update(self):
         """Pro Frame: Tondatei starten, sobald das Sprechen vorbei ist."""
         if self.danach and (self.sprecher is None or self.sprecher.poll() is not None):

@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-10 — feat(tippen): Enter liest den getippten Text vor
+**Was:** Im Tippen-Modus spricht espeak-ng mit Enter den Text; die nächste Taste beginnt einen neuen.
+**Nicht gebaut:** keine eigene Robo-Stimme/Effekte, kein Mitmarkieren des gesprochenen Worts, keine Warteschlange.
+
 ## 2026-10-10 — feat(modus): Strg+Umschalt+D wechselt in den Tippen-Modus
 **Was:** Zweiter Modus, in dem getippte Zeichen als Text stehen bleiben statt einzeln mit Tier zu erscheinen.
 **Nicht gebaut:** keine Rücktaste, keine Shift-Ebene, keine Modus-Anzeige, kein Merken des Modus über Neustart, kein Cursor.
