@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Keyboard playground: grabbt eine externe Tastatur (+ Maus) exklusiv und malt
-abstrakte Kleckse. Beenden: Esc 5 Sekunden halten.
+"""Keyboard playground: grabbt eine externe Tastatur (+ Maus) exklusiv.
+Beenden: Esc 5 Sekunden halten.
 
 Braucht: python-evdev, pygame und Lesezugriff auf /dev/input/* (Gruppe `input`).
 """
@@ -10,95 +10,23 @@ Braucht: python-evdev, pygame und Lesezugriff auf /dev/input/* (Gruppe `input`).
 KEYBOARD_MATCH = "blackwidow"   # case-insensitive substring im Geraetenamen
 GRAB_MOUSE     = True
 
-STYLE   = "ink"        # "ink" | "orbs" | "goo"
-PALETTE = "full_rgb"   # "full_rgb" | "neon" | "sunset" | "ocean" | "candy"
-COUNT   = 1            # Kleckse pro Eingabe
-SIZE    = 90           # Basisgroesse
-LIFE    = 2.2          # Sekunden
-DRIFT   = 41           # Anfangsgeschwindigkeit-Streuung
-MAX_BLOBS = 180
-
-# Mash-Schutz (das Kind haemmert) und Exit
-MIN_SPAWN_INTERVAL    = 0.09    # Sekunden zwischen zwei Spawns, schnellere entfallen
-MOTION_SPAWN_INTERVAL = 0.35    # Mausbewegung darf noch viel weniger spawnen
-MOTION_DISTANCE       = 250     # aufsummierte Pixel bis ein Bewegungs-Spawn kommt
-EXIT_HOLD_SECONDS     = 5.0
+EXIT_HOLD_SECONDS = 5.0
 FPS = 60
 
 # --- Ende CONFIG -----------------------------------------------------------
 
-import json
 import math
 import os
 import select
 import signal
 import sys
-from pathlib import Path
 
 import evdev
 from evdev import ecodes
 
 import pygame
 
-import devpanel
-import visuals
-from devpanel import DevPanel
-
-SETTINGS_PATH = Path(os.environ.get("XDG_CONFIG_HOME") or Path.home() / ".config") \
-    / "oskalizer" / "settings.json"
-
-
-class Config:
-    """Die im Dev-Panel drehbaren Werte, plus die festen Grenzen.
-
-    Die im Panel gedrehten Werte ueberleben den Neustart: sie liegen in
-    SETTINGS_PATH und haben Vorrang vor dem CONFIG-Block oben. Datei loeschen
-    heisst zurueck auf die Werte aus dem CONFIG-Block."""
-
-    TUNABLE = ("style", "palette", "count", "size", "life", "drift")
-
-    def __init__(self):
-        self.style = STYLE
-        self.palette = PALETTE
-        self.count = COUNT
-        self.size = SIZE
-        self.life = LIFE
-        self.drift = DRIFT
-        self.max_blobs = MAX_BLOBS
-        self.min_spawn_interval = MIN_SPAWN_INTERVAL
-        self.motion_spawn_interval = MOTION_SPAWN_INTERVAL
-        self.motion_distance = MOTION_DISTANCE
-        self.load()
-
-    def load(self):
-        try:
-            data = json.loads(SETTINGS_PATH.read_text())
-        except FileNotFoundError:
-            return
-        except (OSError, ValueError) as exc:
-            print(f"Gespeicherte Einstellungen unlesbar, nehme den CONFIG-Block: {exc}",
-                  file=sys.stderr)
-            return
-        if not isinstance(data, dict):
-            return
-        for attr in self.TUNABLE:
-            if attr in data:
-                value = devpanel.sanitize(attr, data[attr])
-                if value is not None:                 # Muell einzeln ueberspringen
-                    setattr(self, attr, value)
-        print(f"Einstellungen geladen: {SETTINGS_PATH}")
-
-    def save(self):
-        data = {attr: getattr(self, attr) for attr in self.TUNABLE}
-        try:
-            SETTINGS_PATH.parent.mkdir(parents=True, exist_ok=True)
-            temp = SETTINGS_PATH.with_suffix(".tmp")
-            temp.write_text(json.dumps(data, indent=2) + "\n")
-            temp.replace(SETTINGS_PATH)               # atomar, kein halbes File
-        except OSError as exc:
-            print(f"Einstellungen nicht speicherbar: {exc}", file=sys.stderr)
-            return
-        print(f"Einstellungen gespeichert: {SETTINGS_PATH}", flush=True)
+BACKGROUND = (10, 10, 18)
 
 
 def play_sound(event):
@@ -174,7 +102,7 @@ def release_all(devices):
 # --- Loop ------------------------------------------------------------------
 
 
-def handle_input(device, field, panel, state, now):
+def handle_input(device, state, now):
     """Verarbeitet die anstehenden Events eines Geraets."""
     for event in device.read():
         if event.type == ecodes.EV_KEY:
@@ -183,14 +111,8 @@ def handle_input(device, field, panel, state, now):
                     state["esc_since"] = now
                 elif event.value == 0:
                     state["esc_since"] = None
-            if panel.handle_key(event.code, event.value):
-                continue                          # Panel-Bedienung spawnt nichts
             if event.value == 1:                  # nur Key-Down, keine Repeats
                 play_sound(event)
-                field.spawn(now)
-        elif event.type == ecodes.EV_REL:
-            if event.code in (ecodes.REL_X, ecodes.REL_Y):
-                field.on_motion(abs(event.value), now)
 
 
 def draw_exit_hint(screen, progress):
@@ -202,34 +124,29 @@ def draw_exit_hint(screen, progress):
                     math.pi / 2 + math.tau * min(1.0, progress), 2)
 
 
-def run(devices, cfg):
+def run(devices):
     pygame.init()
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pygame.display.set_caption("keyboard playground")
     pygame.mouse.set_visible(False)
 
-    field = visuals.Field(screen, cfg)
-    panel = DevPanel(cfg)
     clock = pygame.time.Clock()
     fds = {device.fd: device for device in devices}
     state = {"esc_since": None}
 
-    try:
-        loop(screen, field, panel, fds, state, clock)
-    finally:
-        panel.flush()               # auch bei SIGTERM oder Exception
+    loop(screen, fds, state, clock)
 
 
-def loop(screen, field, panel, fds, state, clock):
+def loop(screen, fds, state, clock):
     while True:
-        dt = clock.tick(FPS) / 1000.0
+        clock.tick(FPS)
         now = pygame.time.get_ticks() / 1000.0
         pygame.event.pump()
 
         ready, _, _ = select.select(list(fds), [], [], 0)
         for fd in ready:
             try:
-                handle_input(fds[fd], field, panel, state, now)
+                handle_input(fds[fd], state, now)
             except (BlockingIOError, OSError):
                 pass
 
@@ -238,11 +155,9 @@ def loop(screen, field, panel, fds, state, clock):
         if held >= EXIT_HOLD_SECONDS:
             return
 
-        field.update(dt)
-        field.draw()
+        screen.fill(BACKGROUND)
         if esc_since is not None:
             draw_exit_hint(screen, held / EXIT_HOLD_SECONDS)
-        panel.draw(screen)
         pygame.display.flip()
 
 
@@ -279,9 +194,9 @@ def main():
         return 1
 
     print(f"Laeuft. Beenden: Esc {EXIT_HOLD_SECONDS:.0f} Sekunden halten. "
-          f"Dev-Panel: Strg+Umschalt+D. (Notausgang: kill {os.getpid()})")
+          f"(Notausgang: kill {os.getpid()})")
     try:
-        run(grabbed, Config())
+        run(grabbed)
     finally:
         release_all(grabbed)
         pygame.quit()
