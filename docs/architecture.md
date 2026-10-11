@@ -4,6 +4,8 @@
 Keyboard playground für ein Kleinkind. Eine externe Tastatur (per Namens-Teilstring)
 und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden nur
 über 5 s Esc halten oder SIGTERM.
+Dazu die Familien-Webseite (`web/`, Vercel): Familie loggt sich mit eigenem
+Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
 
 ## Module
 - `oskalizer.py` — CONFIG-Block, Geräte finden/grabben/freigeben, Hauptschleife
@@ -35,6 +37,12 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
 
 - Familien-Daten — `~/.local/share/oskalizer/familie/<wort>/name|laut|bild/<person>_<…>`,
   außerhalb des Repos (Repo wird öffentlich).
+- `web/` — Vercel-Projekt (Root Directory = `web`), keine Dependencies.
+  `public/index.html` ist die ganze Seite. `api/_sitzung.js`: `personen()` liest
+  `FAMILY_PASSWORDS`, `gleich()` vergleicht zeitkonstant, `setzeSitzung()`/`person(req)`
+  schreiben/prüfen das HMAC-signierte Cookie `sitzung` (Person + Signatur mit
+  `SESSION_SECRET`). `api/login.js` (POST, falsch → 3 s warten, 401), `api/wer.js`
+  (GET, Person aus dem Cookie). Jeder Endpoint nimmt die Person nur aus `person(req)`.
 
 ## Datenfluss
 Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `tiere.naechstes` → Wort →
@@ -45,6 +53,11 @@ Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Ente
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-10-12 — Login mit einem Passwort pro Person statt Name + Passwort. Grund: das
+  Passwort sagt, wer es ist (für „[von Opa]“), niemand tippt seinen Namen. Cookie
+  prüft zusätzlich, ob die Person noch in `FAMILY_PASSWORDS` steht — Eintrag
+  löschen + neu deployen reicht zum Rauswerfen. Kein Rate-Limit, nur 3 s
+  Verzögerung pro Fehlversuch (ein echtes bräuchte Speicher über Instanzen).
 - 2026-10-12 — Familien-Aufnahmen statt `assets/`: pro Wort und Slot (name, laut,
   bild) beliebig viele Dateien, zufällig eine, Person aus dem Dateinamen. Liegt
   außerhalb des Repos, weil das Repo öffentlich wird. Eine Namens-Aufnahme ersetzt

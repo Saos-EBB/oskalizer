@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>oskalizer</title>
+<style>
+  :root {
+    --hinter: #0a0a12;
+    --feld: #16161f;
+    --rand: #2a2a38;
+    --text: #ebebf5;
+    --leise: #9696af;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--hinter);
+    color: var(--text);
+    font: 18px/1.4 system-ui, sans-serif;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+  }
+  [hidden] { display: none !important; }
+
+  #login input {
+    width: min(320px, 100%);
+    padding: 14px 18px;
+    font-size: 22px;
+    text-align: center;
+    color: var(--text);
+    background: var(--feld);
+    border: 1px solid var(--rand);
+    border-radius: 14px;
+    outline: none;
+  }
+  #login input:focus { border-color: var(--leise); }
+
+  #sperre {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: var(--hinter);
+  }
+  #zahl {
+    font-size: min(40vw, 260px);
+    font-weight: 700;
+    color: var(--leise);
+    animation: pop 1s ease-out;
+  }
+  @keyframes pop {
+    from { transform: scale(0.6); opacity: 0; }
+    30%  { transform: scale(1); opacity: 1; }
+    to   { opacity: 0.2; }
+  }
+</style>
+</head>
+<body>
+  <form id="login" hidden>
+    <input id="passwort" type="password" aria-label="Passwort" autocomplete="current-password">
+  </form>
+
+  <div id="sperre" hidden><span id="zahl"></span></div>
+
+  <main id="drin" hidden>
+    <p>Hallo <span id="person"></span>!</p>
+  </main>
+
+<script>
+  const login = document.getElementById("login");
+  const feld = document.getElementById("passwort");
+
+  function drin(person) {
+    document.getElementById("person").textContent = person;
+    login.hidden = true;
+    document.getElementById("drin").hidden = false;
+  }
+
+  // Falsches Passwort: 3, 2, 1 - so lange geht nichts. Nur Optik, der echte
+  // Bremsklotz sind die 3 s Wartezeit in /api/login.
+  async function sperren() {
+    const sperre = document.getElementById("sperre");
+    const zahl = document.getElementById("zahl");
+    sperre.hidden = false;
+    for (const n of [3, 2, 1]) {
+      zahl.textContent = n;
+      zahl.style.animation = "none";
+      zahl.offsetWidth;                     // Animation neu starten
+      zahl.style.animation = "";
+      await new Promise((weiter) => setTimeout(weiter, 1000));
+    }
+    sperre.hidden = true;
+  }
+
+  login.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const passwort = feld.value;
+    if (!passwort) return;
+    feld.value = "";
+    feld.disabled = true;
+    const antwort = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ passwort }),
+    });
+    if (antwort.ok) return drin((await antwort.json()).person);
+    await sperren();
+    feld.disabled = false;
+    feld.focus();
+  });
+
+  fetch("/api/wer").then(async (antwort) => {
+    if (antwort.ok) return drin((await antwort.json()).person);
+    login.hidden = false;
+    feld.focus();
+  });
+</script>
+</body>
+</html>

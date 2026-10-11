@@ -69,6 +69,20 @@ während des Vorlesens fängt von vorn an.
 Drei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (lädt
 `woerter.json`, Tastenbelegung, Anzeige), `ton.py` (Sprechen und Tondateien).
 
+## Familien-Webseite (`web/`)
+
+Über die Seite spricht die Familie Wörter und Laute ein. Sie zeigt nur ein
+Passwortfeld. Jede Person hat ein eigenes Passwort, daher weiß die Seite, wer
+es ist. Bei einem falschen Passwort zählt sie stumm 3-2-1 herunter.
+
+Hosting auf Vercel: Projekt aus diesem Repo anlegen, **Root Directory `web`**,
+dann unter *Settings → Environment Variables* alle Werte aus `web/.env.example`
+eintragen. Für lokal kopierst du `web/.env.example` nach `web/.env` (steht in der
+`.gitignore`) und startest in `web/` mit `npx vercel dev`.
+
+- Person dazu: `FAMILY_PASSWORDS` ergänzen, neu deployen.
+- Person raus: Eintrag löschen, neu deployen. Ihr Cookie gilt dann auch nicht mehr.
+
 ## Setup
 
 ```bash

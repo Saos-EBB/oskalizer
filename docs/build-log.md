@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-12 — feat(web): Login mit Passwort pro Person und 3-2-1-Sperre
+**Was:** Erster Teil der Familien-Webseite: nur ein Passwortfeld, das Passwort bestimmt die Person (später „[von Opa]“), danach ein signiertes Cookie, das jeder Endpoint prüft. Falsch: Feld leer, 3-2-1, Server hält 3 s zurück.
+**Nicht gebaut:** kein echtes Rate-Limit, kein Logout, kein wachsender Lock, kein Light-Mode; nach dem Login steht nur „Hallo Opa!“ — die Tabelle kommt im nächsten Step.
+
 ## 2026-10-12 — feat(familie): Familien-Aufnahmen pro Wort, zufällig, mit „[von X]“
 **Was:** Der oskalizer spielt Familien-Aufnahmen aus `~/.local/share/oskalizer/familie/` (Name ersetzt „A wie Affe“, Laut den Tierlaut, Foto das Emoji) und zeigt unten rechts, von wem sie sind; `assets/` fliegt raus, weil das Repo öffentlich wird.
 **Nicht gebaut:** kein Vorab-Rechnen von Piper (nach einer Namens-Aufnahme kommt der gesprochene Laut mit ~0,2–1 s Pause), kein Nachladen ohne Neustart, kein „[von X]“ für Fotos, keine Warnung bei Ordnern ohne passendes Wort.
