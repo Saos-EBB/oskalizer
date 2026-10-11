@@ -37,12 +37,16 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
 
 - Familien-Daten — `~/.local/share/oskalizer/familie/<wort>/name|laut|bild/<person>_<…>`,
   außerhalb des Repos (Repo wird öffentlich).
-- `web/` — Vercel-Projekt (Root Directory = `web`), keine Dependencies.
+- `web/` — Vercel-Projekt (Root Directory = `web`), einzige Dependency `nodemailer`.
+  Der Build (`npm run build`) kopiert `../woerter.json` nach `public/` — eine Quelle
+  für oskalizer und Seite.
   `public/index.html` ist die ganze Seite. `api/_sitzung.js`: `personen()` liest
   `FAMILY_PASSWORDS`, `gleich()` vergleicht zeitkonstant, `setzeSitzung()`/`person(req)`
   schreiben/prüfen das HMAC-signierte Cookie `sitzung` (Person + Signatur mit
   `SESSION_SECRET`). `api/login.js` (POST, falsch → 3 s warten, 401), `api/wer.js`
-  (GET, Person aus dem Cookie). Jeder Endpoint nimmt die Person nur aus `person(req)`.
+  (GET, Person aus dem Cookie), `api/senden.js` (POST Wort/Slot/Audio als Base64 →
+  Gmail-Mail an `MAIL_TO`, Betreff/Anhang mit Wort, Slot, Person, im Text der fertige
+  ffmpeg-Befehl zum Einsortieren). Jeder Endpoint nimmt die Person nur aus `person(req)`.
 
 ## Datenfluss
 Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `tiere.naechstes` → Wort →
@@ -53,6 +57,10 @@ Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Ente
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-10-12 — Aufnahmen als JSON mit Base64 statt Multipart. Grund: Vercels Node-
+  Runtime parst JSON selbst, Multipart bräuchte eine Dependency; 15 s Audio sind
+  ein paar hundert KB. Format bleibt, was der Browser kann (WebM/Opus oder m4a),
+  umgewandelt wird beim Einsortieren.
 - 2026-10-12 — Login mit einem Passwort pro Person statt Name + Passwort. Grund: das
   Passwort sagt, wer es ist (für „[von Opa]“), niemand tippt seinen Namen. Cookie
   prüft zusätzlich, ob die Person noch in `FAMILY_PASSWORDS` steht — Eintrag

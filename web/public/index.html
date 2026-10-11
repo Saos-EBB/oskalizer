@@ -11,6 +11,8 @@
     --rand: #2a2a38;
     --text: #ebebf5;
     --leise: #9696af;
+    --gut: #6fd39a;
+    --rot: #ff6b6b;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; }
@@ -50,6 +52,58 @@
     color: var(--leise);
     animation: pop 1s ease-out;
   }
+  #drin { width: min(720px, 100%); align-self: start; padding: 24px 0 48px; }
+  #drin h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+  #drin > p { color: var(--leise); margin: 0 0 20px; }
+  .zeile {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid var(--rand);
+  }
+  .wort { font-size: 20px; }
+  .wort .emoji { margin-right: 8px; }
+  .laut { color: var(--leise); font-size: 15px; grid-column: 1; }
+  .knoepfe { grid-row: 1 / span 2; grid-column: 2; display: flex; gap: 8px; }
+  button {
+    font: inherit;
+    font-size: 15px;
+    padding: 9px 14px;
+    color: var(--text);
+    background: var(--feld);
+    border: 1px solid var(--rand);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  button:hover { border-color: var(--leise); }
+  button:disabled { opacity: 0.4; cursor: default; }
+  button.fertig { color: var(--gut); border-color: var(--gut); }
+  @media (max-width: 520px) {
+    .zeile { grid-template-columns: 1fr; }
+    .knoepfe { grid-row: auto; grid-column: 1; }
+    .knoepfe button { flex: 1; }
+  }
+
+  dialog {
+    width: min(440px, calc(100% - 32px));
+    padding: 24px;
+    color: var(--text);
+    background: var(--feld);
+    border: 1px solid var(--rand);
+    border-radius: 16px;
+  }
+  dialog::backdrop { background: rgb(0 0 0 / 0.7); }
+  #aufgabe { font-size: 22px; margin: 0 0 4px; }
+  #hilfe { color: var(--leise); margin: 0 0 20px; min-height: 1.4em; }
+  #uhr { font-variant-numeric: tabular-nums; color: var(--leise); margin: 0 0 12px; }
+  #rec.laeuft { color: var(--rot); border-color: var(--rot); }
+  dialog audio { width: 100%; margin: 0 0 16px; }
+  .reihe { display: flex; gap: 8px; flex-wrap: wrap; }
+  .reihe .rechts { margin-left: auto; }
+  #meldung { margin: 12px 0 0; color: var(--leise); min-height: 1.4em; }
+
   @keyframes pop {
     from { transform: scale(0.6); opacity: 0; }
     30%  { transform: scale(1); opacity: 1; }
@@ -65,18 +119,173 @@
   <div id="sperre" hidden><span id="zahl"></span></div>
 
   <main id="drin" hidden>
-    <p>Hallo <span id="person"></span>!</p>
+    <h1>Hallo <span id="person"></span>!</h1>
+    <p>Sprich die Wörter und Laute ein. Jede Aufnahme kommt direkt beim oskalizer an.</p>
+    <div id="liste"></div>
   </main>
+
+  <dialog id="dialog">
+    <p id="aufgabe"></p>
+    <p id="hilfe"></p>
+    <p id="uhr">0 / 15 s</p>
+    <audio id="probe" controls hidden></audio>
+    <div class="reihe">
+      <button id="rec">● Aufnehmen</button>
+      <button id="senden" disabled>Senden</button>
+      <button id="zu" class="rechts">Schließen</button>
+    </div>
+    <p id="meldung"></p>
+  </dialog>
 
 <script>
   const login = document.getElementById("login");
   const feld = document.getElementById("passwort");
 
-  function drin(person) {
-    document.getElementById("person").textContent = person;
+  const $ = (id) => document.getElementById(id);
+  const MAX_SEKUNDEN = 15;
+  // Was der Browser aufnehmen kann: Safari mp4, Chrome/Firefox WebM/Opus
+  const TYP = ["audio/webm;codecs=opus", "audio/mp4", "audio/ogg;codecs=opus"]
+    .find((t) => window.MediaRecorder && MediaRecorder.isTypeSupported(t));
+
+  async function drin(person) {
+    $("person").textContent = person;
     login.hidden = true;
-    document.getElementById("drin").hidden = false;
+    $("drin").hidden = false;
+    const woerter = await (await fetch("/woerter.json")).json();
+    for (const [buchstabe, liste] of Object.entries(woerter)) {
+      for (const wort of liste) $("liste").append(zeile(buchstabe, wort));
+    }
   }
+
+  function zeile(buchstabe, wort) {
+    const div = document.createElement("div");
+    div.className = "zeile";
+    div.innerHTML = `
+      <div class="wort"><span class="emoji"></span><span class="name"></span></div>
+      <div class="laut"></div>
+      <div class="knoepfe">
+        <button data-slot="name">🎙 Name</button>
+        <button data-slot="laut">🎙 Laut</button>
+      </div>`;
+    div.querySelector(".emoji").textContent = wort.emoji || "";
+    div.querySelector(".name").textContent = wort.name;
+    div.querySelector(".laut").textContent =
+      wort.lautschrift ? `${wort.laut} – sprich: ${wort.lautschrift}` : wort.laut;
+    for (const knopf of div.querySelectorAll("button")) {
+      knopf.onclick = () => oeffne(buchstabe, wort, knopf.dataset.slot, knopf);
+    }
+    return div;
+  }
+
+  // --- Aufnehmen ----------------------------------------------------------
+
+  let aufnahme = null;      // {wort, slot, knopf, blob}
+  let recorder = null;
+
+  function oeffne(buchstabe, wort, slot, knopf) {
+    aufnahme = { wort: wort.name, slot, knopf, blob: null };
+    if (slot === "name") {
+      $("aufgabe").innerHTML = "Sag: <em></em>";
+      $("aufgabe").querySelector("em").textContent = `${buchstabe} wie ${wort.name}`;
+      $("hilfe").textContent = "";
+    } else {
+      $("aufgabe").innerHTML = "Mach den Laut: <em></em>";
+      $("aufgabe").querySelector("em").textContent = wort.laut;
+      $("hilfe").textContent = wort.lautschrift ? `sprich: ${wort.lautschrift}` : "";
+    }
+    $("probe").hidden = true;
+    $("senden").disabled = true;
+    $("rec").textContent = "● Aufnehmen";
+    $("uhr").textContent = `0 / ${MAX_SEKUNDEN} s`;
+    $("meldung").textContent = TYP ? "" : "Dieser Browser kann leider nicht aufnehmen.";
+    $("rec").disabled = !TYP;
+    $("dialog").showModal();
+  }
+
+  async function starte() {
+    let stream;
+    $("rec").disabled = true;               // Doppelklick, waehrend der Browser fragt
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch {
+      $("meldung").textContent = "Kein Mikrofon – bitte im Browser erlauben.";
+      return;
+    } finally {
+      $("rec").disabled = false;
+    }
+    const teile = [];
+    recorder = new MediaRecorder(stream, { mimeType: TYP });
+    recorder.ondataavailable = (e) => teile.push(e.data);
+    recorder.onstop = () => {
+      stream.getTracks().forEach((t) => t.stop());       // Mikro-Anzeige aus
+      clearInterval(recorder.uhr);
+      aufnahme.blob = new Blob(teile, { type: TYP });
+      $("probe").src = URL.createObjectURL(aufnahme.blob);
+      $("probe").hidden = false;
+      $("rec").textContent = "● Neu aufnehmen";
+      $("rec").classList.remove("laeuft");
+      $("senden").disabled = false;
+      recorder = null;
+    };
+    const start = Date.now();
+    recorder.uhr = setInterval(() => {
+      const s = Math.min(MAX_SEKUNDEN, Math.floor((Date.now() - start) / 1000));
+      $("uhr").textContent = `${s} / ${MAX_SEKUNDEN} s`;
+      if (Date.now() - start >= MAX_SEKUNDEN * 1000) stoppe();
+    }, 200);
+    recorder.start();
+    $("probe").hidden = true;
+    $("senden").disabled = true;
+    $("meldung").textContent = "";
+    $("rec").textContent = "■ Stopp";
+    $("rec").classList.add("laeuft");
+  }
+
+  // Timer und Klick koennen gleichzeitig stoppen wollen - zweimal stop() wirft
+  function stoppe() {
+    if (recorder?.state === "recording") recorder.stop();
+  }
+
+  $("rec").onclick = () => (recorder ? stoppe() : starte());
+
+  // Schliessen mitten in der Aufnahme: verwerfen, Mikro aus
+  $("dialog").addEventListener("close", () => {
+    if (!recorder) return;
+    recorder.onstop = null;
+    stoppe();
+    recorder.stream.getTracks().forEach((t) => t.stop());
+    clearInterval(recorder.uhr);
+    recorder = null;
+    $("rec").classList.remove("laeuft");
+  });
+  $("zu").onclick = () => $("dialog").close();
+
+  $("senden").onclick = async () => {
+    $("senden").disabled = true;
+    $("rec").disabled = true;
+    $("meldung").textContent = "Wird gesendet …";
+    const daten = await new Promise((fertig) => {
+      const leser = new FileReader();
+      leser.onload = () => fertig(leser.result.split(",")[1]);
+      leser.readAsDataURL(aufnahme.blob);
+    });
+    const antwort = await fetch("/api/senden", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ wort: aufnahme.wort, slot: aufnahme.slot, typ: TYP, daten }),
+    }).catch(() => null);
+    $("rec").disabled = false;
+    if (antwort?.status === 401) return location.reload();   // Zugang weg
+    if (!antwort?.ok) {
+      $("meldung").textContent = "Hat nicht geklappt – nochmal senden?";
+      $("senden").disabled = false;
+      return;
+    }
+    aufnahme.knopf.classList.add("fertig");
+    aufnahme.knopf.textContent = "✓ " + aufnahme.knopf.textContent.replace(/^\S+ /, "");
+    $("meldung").textContent = "Danke! Ist angekommen.";
+    $("senden").disabled = true;
+  };
 
   // Falsches Passwort: 3, 2, 1 - so lange geht nichts. Nur Optik, der echte
   // Bremsklotz sind die 3 s Wartezeit in /api/login.

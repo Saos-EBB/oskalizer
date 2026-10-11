@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-12 — feat(web): Wörter-Tabelle, Aufnehmen und Versand per Mail
+**Was:** Kern der Familien-Seite: jedes Wort aus `woerter.json` mit Lautschrift-Hilfe, Name/Laut aufnehmen (max. 15 s, anhören, neu), Senden schickt eine Gmail-Mail mit Anhang und dem fertigen ffmpeg-Einsortier-Befehl.
+**Nicht gebaut:** keine Umwandlung im Browser, keine Pegelanzeige, kein Merken was schon gesendet ist (nur ✓ bis zum Neuladen), keine Prüfung ob das Wort in `woerter.json` steht.
+
 ## 2026-10-12 — feat(web): Login mit Passwort pro Person und 3-2-1-Sperre
 **Was:** Erster Teil der Familien-Webseite: nur ein Passwortfeld, das Passwort bestimmt die Person (später „[von Opa]“), danach ein signiertes Cookie, das jeder Endpoint prüft. Falsch: Feld leer, 3-2-1, Server hält 3 s zurück.
 **Nicht gebaut:** kein echtes Rate-Limit, kein Logout, kein wachsender Lock, kein Light-Mode; nach dem Login steht nur „Hallo Opa!“ — die Tabelle kommt im nächsten Step.

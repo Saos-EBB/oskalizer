@@ -78,7 +78,14 @@ es ist. Bei einem falschen Passwort zählt sie stumm 3-2-1 herunter.
 Hosting auf Vercel: Projekt aus diesem Repo anlegen, **Root Directory `web`**,
 dann unter *Settings → Environment Variables* alle Werte aus `web/.env.example`
 eintragen. Für lokal kopierst du `web/.env.example` nach `web/.env` (steht in der
-`.gitignore`) und startest in `web/` mit `npx vercel dev`.
+`.gitignore`) und startest in `web/` mit `npm install && npm run build && npx vercel dev`.
+`npm run build` kopiert `woerter.json` in die Seite.
+
+Nach dem Login zeigt die Seite alle Wörter. Pro Wort gibt's zwei Knöpfe: **Name**
+(den ganzen Satz „A wie Affe“ einsprechen) und **Laut**. Eine Aufnahme dauert
+höchstens 15 s, man kann sie anhören, neu aufnehmen und dann senden. Jede
+Aufnahme kommt als Mail an `MAIL_TO`. Im Mailtext steht der fertige Befehl, der
+sie umwandelt und in den Familien-Ordner legt.
 
 - Person dazu: `FAMILY_PASSWORDS` ergänzen, neu deployen.
 - Person raus: Eintrag löschen, neu deployen. Ihr Cookie gilt dann auch nicht mehr.
