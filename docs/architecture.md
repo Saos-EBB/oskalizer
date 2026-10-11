@@ -9,9 +9,13 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
 - `oskalizer.py` — CONFIG-Block, Geräte finden/grabben/freigeben, Hauptschleife
   (evdev per `select` lesen, Esc-Timer, zeichnen). Hält den Modus (`state["modus"]`,
   „tiere“ | „tippen“, Wechsel mit Strg+Umschalt+D). Pro Key-Down mit Zeichen: im
-  Modus Tiere `Tafel.show()` + `Ton.play()`, im Modus Tippen `Schreibtafel.tippe()`,
+  Modus Tiere `tiere.naechstes()` → `Tafel.show()` + `Ton.play()` mit demselben Wort, im Modus Tippen `Schreibtafel.tippe()`,
   bei Enter `Ton.sage(schreib.text)`.
-- `tiere.py` — Tier-Tabelle `TIERE` (Buchstabe → Name, Emoji), Tastenbelegung
+- `woerter.json` — Buchstabe (A–Z, auch Ä/Ö/Ü) → Liste von Wörtern (Tier oder
+  Person) mit `name`, `emoji`, `laut`, `lautschrift`. Die Lautschrift ist nur für
+  die Familien-Webseite.
+- `tiere.py` — lädt `woerter.json` als `WOERTER`, `naechstes(zeichen)` rotiert der
+  Reihe nach durch die Wörter eines Buchstabens (None für Ziffern/Zeichen), Tastenbelegung
   `ZEICHEN` (evdev-Keycode → Zeichen, QWERTZ) und `Tafel` (zeichnet das aktuelle
   Zeichen im Modus Tiere; lädt beim Start `assets/bilder/<buchstabe>.png|jpg` als Ersatz fürs Emoji).
   `Schreibtafel` zeigt im Modus Tippen den getippten Text, wortweise umgebrochen.
@@ -21,18 +25,23 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
   pro Text in einem Daemon-Thread, Ergebnis per Queue zurück, abgespielt über
   `pygame.mixer`); ohne Piper/Stimme per `espeak-ng`-Subprozess. `play` für ein
   Zeichen, `sage` für den Tipp-Text, lädt `assets/toene/<buchstabe>.ogg|wav`
-  per `pygame.mixer`. Liest `TIERE` aus `tiere.py`. `Ton.update()` pro Frame startet
+  per `pygame.mixer`. Bekommt das Wort von `oskalizer.py`; liest `WOERTER` nur für
+  den zufälligen Laut bei Sonderzeichen. `Ton.update()` pro Frame startet
   fertige Piper-Sprache und danach die Tondatei. Jeder neue Text bekommt eine
   Auftragsnummer; Ergebnisse älterer Aufträge werden verworfen.
 
 ## Datenfluss
-Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `Tafel.show` (Bild) + `Ton.play` (espeak,
-danach ggf. Datei). Solange `Ton.spricht()` True ist, ignoriert der Modus Tiere
+Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `tiere.naechstes` → Wort →
+`Tafel.show` (Bild) + `Ton.play` (Sprache, danach ggf. Datei). Solange `Ton.spricht()` True ist, ignoriert der Modus Tiere
 weitere Zeichentasten.
 Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Enter →
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-10-11 — Tier-Tabelle als `woerter.json` statt Python-Dict, mehrere Wörter pro
+  Buchstabe, der Reihe nach. Grund: die Familien-Webseite liest dieselbe Liste,
+  und Familie kann eigene Wörter (auch Personen wie „Opa“) dazutun. Reihe statt
+  Zufall: für das Kind berechenbar. Die Rotation fängt bei jedem Start vorn an.
 - 2026-10-11 — Modus Tiere sperrt Zeichentasten, bis der Ton durch ist (statt
   abbrechen). Grund: Hämmern erzeugte Ton-Spam. Tasten während der Sperre
   verfallen, sie werden nicht nachgeholt.

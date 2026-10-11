@@ -3,6 +3,8 @@ ein Zeichen (Tafel). Modus Tippen: der getippte Text (Schreibtafel).
 Kennt keine Geraete - bekommt nur evdev-Keycodes.
 """
 
+import itertools
+import json
 import random
 from pathlib import Path
 
@@ -13,38 +15,19 @@ EMOJI_FONT = "/usr/share/fonts/google-noto-emoji-fonts/NotoEmoji-Regular.ttf"
 BILDER = Path(__file__).parent / "assets" / "bilder"
 POP_SECONDS = 0.25                  # so lange waechst ein neues Zeichen auf volle Groesse
 
-# Buchstabe -> (Tier, Emoji, Laut). Den Laut spricht espeak-ng, solange keine
-# Tondatei fuer den Buchstaben in assets/toene/ liegt (siehe ton.py).
+# Buchstabe -> Liste von Woertern (Tier oder Person) mit Name, Emoji, Laut und
+# Lautschrift. Die Lautschrift ist nur fuer die Familien-Webseite. Hat ein Buchstabe
+# mehrere Woerter, kommen sie der Reihe nach dran. Ä/Ö/Ü duerfen Schluessel sein.
 # Die bunte Noto-Variante (COLRv1) zeichnet pygame leer, deshalb die einfarbige
 # Schrift, eingefaerbt pro Tastendruck.
-TIERE = {
-    "A": ("Affe", "🐒", "Uh uh ah ah"),
-    "B": ("Bär", "🐻", "Brummm"),
-    "C": ("Chamäleon", "🦎", "Zisch"),
-    "D": ("Delfin", "🐬", "Ki ki ki"),
-    "E": ("Elefant", "🐘", "Törööö"),
-    "F": ("Frosch", "🐸", "Quak quak"),
-    "G": ("Giraffe", "🦒", "Mmmmh"),
-    "H": ("Hund", "🐶", "Wau wau"),
-    "I": ("Igel", "🦔", "Schnüff schnüff"),
-    "J": ("Jaguar", "🐆", "Grrrr"),
-    "K": ("Katze", "🐱", "Miau"),
-    "L": ("Löwe", "🦁", "Rrroaaar"),
-    "M": ("Maus", "🐭", "Piep piep"),
-    "N": ("Nashorn", "🦏", "Schnaub"),
-    "O": ("Oktopus", "🐙", "Blubb blubb"),
-    "P": ("Pinguin", "🐧", "Quiek quiek"),
-    "Q": ("Qualle", "🪼", "Blubb"),
-    "R": ("Raupe", "🐛", "Mampf mampf"),
-    "S": ("Schwein", "🐷", "Grunz grunz"),
-    "T": ("Tiger", "🐯", "Grrraaa"),
-    "U": ("Uhu", "🦉", "Uhu uhu"),
-    "V": ("Vogel", "🐦", "Tschiep tschiep"),
-    "W": ("Wal", "🐳", "Uuuuuuh"),
-    "X": ("Xerus", "🐿", "Knabber knabber"),
-    "Y": ("Yak", "🐃", "Muuuh"),
-    "Z": ("Zebra", "🦓", "Ihahaha"),
-}
+WOERTER = json.loads((Path(__file__).parent / "woerter.json").read_text(encoding="utf-8"))
+_REIHE = {b: itertools.cycle(liste) for b, liste in WOERTER.items()}
+
+
+def naechstes(zeichen):
+    """Das naechste Wort fuer diesen Buchstaben, None fuer Ziffern/Zeichen."""
+    return next(_REIHE[zeichen]) if zeichen in _REIHE else None
+
 
 # evdev liefert die Tastenposition einer US-Tastatur. Hier das deutsche QWERTZ-Layout
 # drauf, ohne Shift. Tasten, die hier fehlen, tun nichts.
@@ -78,7 +61,7 @@ class Tafel:
         self.emoji_font = pygame.font.Font(EMOJI_FONT, int(height * 0.35))
         self.bilder = {}                    # Buchstabe -> eigenes Bild statt Emoji
         for path in sorted(BILDER.glob("*")):
-            if path.suffix.lower() in (".png", ".jpg", ".jpeg") and path.stem.upper() in TIERE:
+            if path.suffix.lower() in (".png", ".jpg", ".jpeg") and path.stem.upper() in WOERTER:
                 bild = pygame.image.load(path).convert_alpha()
                 size = (int(bild.get_width() * height * 0.4 / bild.get_height()),
                         int(height * 0.4))
@@ -86,15 +69,15 @@ class Tafel:
         self.bild = None
         self.since = 0.0
 
-    def show(self, zeichen, now):
+    def show(self, zeichen, wort, now):
         color = pygame.Color(0)
         color.hsva = (random.uniform(0.0, 360.0), 75.0, 100.0, 100.0)
 
         teile = [self.font.render(zeichen, True, color)]
         if zeichen in self.bilder:
             teile.append(self.bilder[zeichen])  # bleibt in seinen eigenen Farben
-        elif zeichen in TIERE:
-            teile.append(self.emoji_font.render(TIERE[zeichen][1], True, color))
+        elif wort:
+            teile.append(self.emoji_font.render(wort["emoji"], True, color))
 
         gap = self.screen.get_height() // 12
         width = sum(t.get_width() for t in teile) + gap * (len(teile) - 1)

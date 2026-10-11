@@ -27,8 +27,9 @@ Esc (Beenden) und Strg+Umschalt+D (Modus) gehen weiterhin.
 Echte Aufnahmen kommen nach `assets/toene/`, benannt nach dem **Buchstaben**:
 `a.ogg` oder `a.wav` für den Affen, `b.ogg` für den Bären usw. Liegt eine Datei
 da, spielt sie statt des gesprochenen Lauts — nach „A wie Affe“ und auch bei den
-Zeichen. Geladen wird beim Start. Die Laute und Tiernamen selbst stehen in der
-Tabelle `TIERE` oben in `tiere.py`.
+Zeichen. Geladen wird beim Start. Die Tiere selbst (Name, Emoji, Laut, Lautschrift)
+stehen in `woerter.json`. Ein Buchstabe kann mehrere Einträge haben, die
+kommen dann der Reihe nach dran. Ä, Ö und Ü dürfen auch Einträge bekommen.
 
 ### Eigene Tierbilder
 
@@ -54,8 +55,8 @@ Tippen-Modus stehen.
 Text bleibt danach stehen; die nächste Taste fängt einen neuen an. Enter
 während des Vorlesens fängt von vorn an.
 
-Drei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (Tier-Tabelle,
-Tastenbelegung, Anzeige), `ton.py` (Sprechen und Tondateien).
+Drei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (lädt
+`woerter.json`, Tastenbelegung, Anzeige), `ton.py` (Sprechen und Tondateien).
 
 ## Setup
 

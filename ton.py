@@ -16,7 +16,7 @@ from pathlib import Path
 
 import pygame
 
-from tiere import TIERE
+from tiere import WOERTER
 
 TOENE = Path(__file__).parent / "assets" / "toene"
 PIPER_STIMME = Path.home() / ".local" / "share" / "oskalizer" / "de_DE-thorsten-high.onnx"
@@ -44,7 +44,7 @@ class Ton:
         self.stimme = None
         if pygame.mixer.get_init():
             for path in sorted(TOENE.glob("*")):
-                if path.suffix in (".ogg", ".wav") and path.stem.upper() in TIERE:
+                if path.suffix in (".ogg", ".wav") and path.stem.upper() in WOERTER:
                     self.dateien[path.stem.upper()] = pygame.mixer.Sound(path)
             self.stimme = lade_piper()        # Piper spielt ueber den Mixer
         else:
@@ -59,22 +59,23 @@ class Ton:
         self.ergebnisse = queue.Queue()       # (auftrag, wav-Puffer) aus den Threads
         self.danach = None                    # Tondatei, die nach dem Sprechen kommt
 
-    def play(self, zeichen):
-        """Buchstabe: "A wie Affe", dann Tierlaut. Ziffer: die Zahl.
-        Sonstiges Zeichen: Laut eines zufaelligen Tiers."""
+    def play(self, zeichen, wort):
+        """Buchstabe: "A wie Affe", dann der Laut des Worts. Ziffer: die Zahl.
+        Sonstiges Zeichen: Laut eines zufaelligen Worts."""
         self.stop()
-        tier = None
-        if zeichen in TIERE:
-            text, tier = f"{zeichen} wie {TIERE[zeichen][0]}.", zeichen
+        buchstabe = zeichen if wort else None
+        if wort:
+            text = f"{zeichen} wie {wort['name']}."
         elif zeichen.isdigit():
             text = zeichen
         else:
-            text, tier = "", random.choice(list(TIERE))
+            buchstabe = random.choice(list(WOERTER))
+            text, wort = "", random.choice(WOERTER[buchstabe])
 
-        if tier in self.dateien:
-            self.danach = self.dateien[tier]
-        elif tier:
-            text += " " + TIERE[tier][2]
+        if buchstabe in self.dateien:
+            self.danach = self.dateien[buchstabe]
+        elif wort:
+            text += " " + wort["laut"]
         self._sprich(text)
 
     def sage(self, text):

@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-11 — refactor(tiere): Tier-Tabelle als woerter.json, Wörter rotieren pro Buchstabe
+**Was:** Grundlage für die Familien-Aufnahmen: Webseite und oskalizer lesen dieselbe Liste, ein Buchstabe kann mehrere Wörter haben (z.B. O: Oktopus, Opa), die der Reihe nach drankommen; neue lesbare Lautschrift als Einsprech-Hilfe. Ä/Ö/Ü sind erlaubte Schlüssel.
+**Nicht gebaut:** keine Umbenennung von `tiere.py`, keine Schema-Prüfung der JSON, kein Merken der Rotation über Neustart; Tondateien/Bilder in `assets/` gelten weiter pro Buchstabe.
+
 ## 2026-10-11 — fix(tiere): Tasten gesperrt, solange der Ton läuft
 **Was:** Hämmern im Modus Tiere hat jeden Ton sofort abgebrochen und neu gestartet — Spam. Jetzt zählt erst wieder eine Taste, wenn Sprache und Tondatei durch sind; ein Piper-Fehler im Thread gibt die Sperre frei, sonst bliebe die Tastatur tot.
 **Nicht gebaut:** keine Mindest-Sperrzeit, keine Warteschlange, keine Anzeige der Sperre; Tippen-Modus unverändert.
