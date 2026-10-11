@@ -22,21 +22,32 @@ Solange der Ton läuft (Sprache plus ggf. Tondatei), sind die Zeichentasten
 **gesperrt** — gedrückte Tasten verfallen, damit Hämmern keinen Ton-Spam macht.
 Esc (Beenden) und Strg+Umschalt+D (Modus) gehen weiterhin.
 
-### Eigene Tierlaute
+### Wörter
 
-Echte Aufnahmen kommen nach `assets/toene/`, benannt nach dem **Buchstaben**:
-`a.ogg` oder `a.wav` für den Affen, `b.ogg` für den Bären usw. Liegt eine Datei
-da, spielt sie statt des gesprochenen Lauts — nach „A wie Affe“ und auch bei den
-Zeichen. Geladen wird beim Start. Die Tiere selbst (Name, Emoji, Laut, Lautschrift)
-stehen in `woerter.json`. Ein Buchstabe kann mehrere Einträge haben, die
-kommen dann der Reihe nach dran. Ä, Ö und Ü dürfen auch Einträge bekommen.
+Die Tiere (Name, Emoji, Laut, Lautschrift) stehen in `woerter.json`. Ein
+Buchstabe kann mehrere Einträge haben, z.B. O: Oktopus und Opa. Die kommen dann
+der Reihe nach dran. Ä, Ö und Ü dürfen auch Einträge bekommen. Ein Eintrag ohne
+`emoji` (z.B. eine Person) braucht ein Foto, sonst steht nur der Buchstabe da.
 
-### Eigene Tierbilder
+### Familien-Aufnahmen
 
-Genauso für Bilder: `assets/bilder/a.png` (oder `.jpg`) ersetzt das Emoji beim A.
-Das Bild wird auf 40 % der Bildschirmhöhe skaliert und behält seine eigenen
-Farben, nur der Buchstabe wird bunt eingefärbt. PNG mit transparentem
-Hintergrund sieht auf dem dunklen Schirm am besten aus.
+Eigene Aufnahmen und Fotos liegen **außerhalb des Repos** unter
+`~/.local/share/oskalizer/familie/`, ein Ordner pro Wort (Name klein, Umlaute als
+ae/oe/ue, ß als ss):
+
+```
+familie/
+  affe/name/opa_2026-10-12.ogg    ersetzt den ganzen Satz „A wie Affe“
+  affe/laut/oma_2026-10-12.ogg    ersetzt den Laut
+  opa/bild/papa_2026-10-12.png    Foto statt Emoji
+```
+
+Der Teil vor dem ersten `_` ist die Person: Bei einer Aufnahme steht dann unten
+rechts „[von Opa]“. Liegen in einem Slot mehrere Dateien, wird pro Tastendruck
+zufällig eine gewählt. Ton nur als OGG/WAV. Andere Formate vorher umwandeln:
+`ffmpeg -i in.m4a -af "silenceremove=1:0:-50dB,loudnorm" out.ogg`. Fotos werden
+auf 40 % der Bildschirmhöhe skaliert. PNG mit transparentem Hintergrund sieht
+auf dem dunklen Schirm am besten aus. Geladen wird alles beim Start.
 
 Leertaste, Enter, F-Tasten, Shift, Esc und die Maus zeigen nichts. Shift wird
 nicht ausgewertet — es gibt nur Großbuchstaben und die ungeshifteten Zeichen.

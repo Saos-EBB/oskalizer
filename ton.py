@@ -1,6 +1,6 @@
 """Was zu hoeren ist: Piper (Stimme Thorsten) spricht, espeak-ng springt ein, wenn
-Piper oder die Stimme fehlt. Tondateien aus assets/toene/ ersetzen den gesprochenen
-Tierlaut. Solange etwas klingt, meldet spricht() True - der Modus Tiere sperrt
+Piper oder die Stimme fehlt. Familien-Aufnahmen (FAMILIE/<wort>/name|laut/) ersetzen
+den Satz "A wie Affe" bzw. den Laut, bei mehreren zufaellig eine. Solange etwas klingt, meldet spricht() True - der Modus Tiere sperrt
 dann die Tasten. Ein neuer Ton (Enter im Tippen-Modus) bricht den laufenden ab.
 """
 
@@ -16,9 +16,8 @@ from pathlib import Path
 
 import pygame
 
-from tiere import WOERTER
+from tiere import FAMILIE, WOERTER, ordner, person
 
-TOENE = Path(__file__).parent / "assets" / "toene"
 PIPER_STIMME = Path.home() / ".local" / "share" / "oskalizer" / "de_DE-thorsten-high.onnx"
 ESPEAK_ARGS = ["-v", "de", "-s", "140"]
 
@@ -40,12 +39,14 @@ def lade_piper():
 class Ton:
     def __init__(self):
         self.espeak = shutil.which("espeak-ng")
-        self.dateien = {}                     # Buchstabe -> pygame.mixer.Sound
+        self.aufnahmen = {}                   # (Ordner, "name"|"laut") -> [(Person, Sound)]
         self.stimme = None
         if pygame.mixer.get_init():
-            for path in sorted(TOENE.glob("*")):
-                if path.suffix in (".ogg", ".wav") and path.stem.upper() in WOERTER:
-                    self.dateien[path.stem.upper()] = pygame.mixer.Sound(path)
+            for path in sorted(FAMILIE.glob("*/*/*")):
+                slot = path.parent.name
+                if slot in ("name", "laut") and path.suffix.lower() in (".ogg", ".wav"):
+                    self.aufnahmen.setdefault((path.parent.parent.name, slot), []).append(
+                        (person(path), pygame.mixer.Sound(path)))
             self.stimme = lade_piper()        # Piper spielt ueber den Mixer
         else:
             print("Kein Audiogeraet - Tondateien bleiben stumm.", file=sys.stderr)
@@ -57,31 +58,44 @@ class Ton:
         self.auftrag = 0                      # zaehlt pro Text hoch, Altes verfaellt
         self.rechnet = False                  # Piper-Thread fuer self.auftrag laeuft
         self.ergebnisse = queue.Queue()       # (auftrag, wav-Puffer) aus den Threads
-        self.danach = None                    # Tondatei, die nach dem Sprechen kommt
+        self.reihe = []                       # was noch kommt: Text (str) oder Sound
 
     def play(self, zeichen, wort):
         """Buchstabe: "A wie Affe", dann der Laut des Worts. Ziffer: die Zahl.
-        Sonstiges Zeichen: Laut eines zufaelligen Worts."""
+        Sonstiges Zeichen: Laut eines zufaelligen Worts.
+        Gibt zurueck, von wem die gespielten Familien-Aufnahmen sind."""
         self.stop()
-        buchstabe = zeichen if wort else None
-        if wort:
-            text = f"{zeichen} wie {wort['name']}."
-        elif zeichen.isdigit():
-            text = zeichen
+        if wort is None and zeichen.isdigit():
+            self.reihe = [zeichen]
+            return []
+        teile = []
+        if wort is None:
+            wort = random.choice([w for liste in WOERTER.values() for w in liste])
         else:
-            buchstabe = random.choice(list(WOERTER))
-            text, wort = "", random.choice(WOERTER[buchstabe])
+            teile.append(self._aufnahme(wort, "name") or f"{zeichen} wie {wort['name']}.")
+        teile.append(self._aufnahme(wort, "laut") or wort["laut"])
 
-        if buchstabe in self.dateien:
-            self.danach = self.dateien[buchstabe]
-        elif wort:
-            text += " " + wort["laut"]
-        self._sprich(text)
+        personen = []
+        for teil in teile:
+            if isinstance(teil, str):
+                if self.reihe and isinstance(self.reihe[-1], str):
+                    self.reihe[-1] += " " + teil      # ein Piper-Auftrag, keine Pause
+                else:
+                    self.reihe.append(teil)
+            else:
+                personen.append(teil[0])
+                self.reihe.append(teil[1])
+        return personen
+
+    def _aufnahme(self, wort, slot):
+        """Zufaellige Familien-Aufnahme (Person, Sound) oder None."""
+        liste = self.aufnahmen.get((ordner(wort), slot))
+        return random.choice(liste) if liste else None
 
     def sage(self, text):
         """Tippen-Modus: den ganzen Text vorlesen."""
         self.stop()
-        self._sprich(text)
+        self.reihe = [text]
 
     def _sprich(self, text):
         if not text.strip():
@@ -109,20 +123,23 @@ class Ton:
         self.ergebnisse.put((auftrag, puffer))
 
     def spricht(self):
-        """True bis Sprache und nachfolgende Tondatei ganz durch sind."""
-        return self.rechnet or self.danach is not None or self._klingt()
+        """True bis die ganze Reihe durch ist."""
+        return self.rechnet or bool(self.reihe) or self._klingt()
 
     def update(self):
-        """Pro Frame: fertige Piper-Sprache abspielen, danach die Tondatei."""
+        """Pro Frame: fertige Piper-Sprache abspielen, dann das Naechste der Reihe."""
         while not self.ergebnisse.empty():
             auftrag, puffer = self.ergebnisse.get()
             if self.rechnet and auftrag == self.auftrag:
                 self.rechnet = False
                 if puffer is not None:
                     self.kanal = pygame.mixer.Sound(file=puffer).play()
-        if self.danach and not self.rechnet and not self._klingt():
-            self.kanal = self.danach.play()
-            self.danach = None
+        if self.reihe and not self.rechnet and not self._klingt():
+            teil = self.reihe.pop(0)
+            if isinstance(teil, str):
+                self._sprich(teil)
+            else:
+                self.kanal = teil.play()
 
     def _klingt(self):
         return ((self.kanal is not None and self.kanal.get_busy())
@@ -134,6 +151,6 @@ class Ton:
         self.sprecher = None
         self.kanal = None
         self.rechnet = False                  # laufender Thread liefert ins Leere
-        self.danach = None
+        self.reihe = []
         if pygame.mixer.get_init():
             pygame.mixer.stop()

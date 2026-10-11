@@ -12,7 +12,7 @@ import pygame
 from evdev import ecodes
 
 EMOJI_FONT = "/usr/share/fonts/google-noto-emoji-fonts/NotoEmoji-Regular.ttf"
-BILDER = Path(__file__).parent / "assets" / "bilder"
+FAMILIE = Path.home() / ".local" / "share" / "oskalizer" / "familie"
 POP_SECONDS = 0.25                  # so lange waechst ein neues Zeichen auf volle Groesse
 
 # Buchstabe -> Liste von Woertern (Tier oder Person) mit Name, Emoji, Laut und
@@ -27,6 +27,19 @@ _REIHE = {b: itertools.cycle(liste) for b, liste in WOERTER.items()}
 def naechstes(zeichen):
     """Das naechste Wort fuer diesen Buchstaben, None fuer Ziffern/Zeichen."""
     return next(_REIHE[zeichen]) if zeichen in _REIHE else None
+
+
+def ordner(wort):
+    """Ordner eines Worts unter FAMILIE: "Bär" -> "baer"."""
+    name = wort["name"].lower()
+    for umlaut, ersatz in (("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss")):
+        name = name.replace(umlaut, ersatz)
+    return name
+
+
+def person(path):
+    """Wer eine Familien-Datei eingesprochen hat: "opa_2026-10-12.ogg" -> "Opa"."""
+    return path.stem.split("_")[0].capitalize()
 
 
 # evdev liefert die Tastenposition einer US-Tastatur. Hier das deutsche QWERTZ-Layout
@@ -59,24 +72,28 @@ class Tafel:
         height = screen.get_height()
         self.font = pygame.font.Font(None, int(height * 0.55))
         self.emoji_font = pygame.font.Font(EMOJI_FONT, int(height * 0.35))
-        self.bilder = {}                    # Buchstabe -> eigenes Bild statt Emoji
-        for path in sorted(BILDER.glob("*")):
-            if path.suffix.lower() in (".png", ".jpg", ".jpeg") and path.stem.upper() in WOERTER:
+        self.von_font = pygame.font.Font(None, height // 18)
+        self.bilder = {}                    # Ordner -> Familien-Fotos statt Emoji
+        for path in sorted(FAMILIE.glob("*/bild/*")):
+            if path.suffix.lower() in (".png", ".jpg", ".jpeg"):
                 bild = pygame.image.load(path).convert_alpha()
                 size = (int(bild.get_width() * height * 0.4 / bild.get_height()),
                         int(height * 0.4))
-                self.bilder[path.stem.upper()] = pygame.transform.smoothscale(bild, size)
+                self.bilder.setdefault(path.parent.parent.name, []).append(
+                    pygame.transform.smoothscale(bild, size))
         self.bild = None
+        self.von = None                     # "[von Opa]" unten rechts
         self.since = 0.0
 
-    def show(self, zeichen, wort, now):
+    def show(self, zeichen, wort, personen, now):
+        """personen: wer die gerade gespielten Aufnahmen eingesprochen hat."""
         color = pygame.Color(0)
         color.hsva = (random.uniform(0.0, 360.0), 75.0, 100.0, 100.0)
 
         teile = [self.font.render(zeichen, True, color)]
-        if zeichen in self.bilder:
-            teile.append(self.bilder[zeichen])  # bleibt in seinen eigenen Farben
-        elif wort:
+        if wort and ordner(wort) in self.bilder:
+            teile.append(random.choice(self.bilder[ordner(wort)]))  # eigene Farben
+        elif wort and wort.get("emoji"):
             teile.append(self.emoji_font.render(wort["emoji"], True, color))
 
         gap = self.screen.get_height() // 12
@@ -87,6 +104,10 @@ class Tafel:
         for teil in teile:
             self.bild.blit(teil, (x, (height - teil.get_height()) // 2))
             x += teil.get_width() + gap
+        self.von = None
+        if personen:
+            text = f"[von {', '.join(dict.fromkeys(personen))}]"
+            self.von = self.von_font.render(text, True, (150, 150, 175))
         self.since = now
 
     def draw(self, now):
@@ -99,6 +120,10 @@ class Tafel:
             size = (int(bild.get_width() * scale), int(bild.get_height() * scale))
             bild = pygame.transform.smoothscale(bild, size)
         self.screen.blit(bild, bild.get_rect(center=self.screen.get_rect().center))
+        if self.von:
+            rand = self.screen.get_height() // 30
+            self.screen.blit(self.von, self.von.get_rect(
+                bottomright=(self.screen.get_width() - rand, self.screen.get_height() - rand)))
 
 
 class Schreibtafel:

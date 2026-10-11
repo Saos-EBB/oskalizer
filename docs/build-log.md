@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-12 — feat(familie): Familien-Aufnahmen pro Wort, zufällig, mit „[von X]“
+**Was:** Der oskalizer spielt Familien-Aufnahmen aus `~/.local/share/oskalizer/familie/` (Name ersetzt „A wie Affe“, Laut den Tierlaut, Foto das Emoji) und zeigt unten rechts, von wem sie sind; `assets/` fliegt raus, weil das Repo öffentlich wird.
+**Nicht gebaut:** kein Vorab-Rechnen von Piper (nach einer Namens-Aufnahme kommt der gesprochene Laut mit ~0,2–1 s Pause), kein Nachladen ohne Neustart, kein „[von X]“ für Fotos, keine Warnung bei Ordnern ohne passendes Wort.
+
 ## 2026-10-11 — refactor(tiere): Tier-Tabelle als woerter.json, Wörter rotieren pro Buchstabe
 **Was:** Grundlage für die Familien-Aufnahmen: Webseite und oskalizer lesen dieselbe Liste, ein Buchstabe kann mehrere Wörter haben (z.B. O: Oktopus, Opa), die der Reihe nach drankommen; neue lesbare Lautschrift als Einsprech-Hilfe. Ä/Ö/Ü sind erlaubte Schlüssel.
 **Nicht gebaut:** keine Umbenennung von `tiere.py`, keine Schema-Prüfung der JSON, kein Merken der Rotation über Neustart; Tondateien/Bilder in `assets/` gelten weiter pro Buchstabe.

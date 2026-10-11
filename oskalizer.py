@@ -127,8 +127,8 @@ def handle_input(device, tafel, schreib, ton, state, now):
         if state["modus"] == "tiere":
             if zeichen and not ton.spricht():     # Sperre bis der Ton durch ist
                 wort = tiere.naechstes(zeichen)
-                tafel.show(zeichen, wort, now)
-                ton.play(zeichen, wort)
+                personen = ton.play(zeichen, wort)
+                tafel.show(zeichen, wort, personen, now)
         elif event.code in (ecodes.KEY_ENTER, ecodes.KEY_KPENTER):
             ton.sage(schreib.text)
             schreib.vorgelesen = True
