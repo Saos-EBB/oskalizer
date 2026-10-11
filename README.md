@@ -18,7 +18,9 @@ Piper oder die Stimmdatei, springt `espeak-ng` ein (Roboterstimme):
 - **Ziffern**: die Zahl wird gesagt
 - **Zeichen**: der Laut eines zufälligen Tiers
 
-Jeder neue Tastendruck bricht den laufenden Ton ab.
+Solange der Ton läuft (Sprache plus ggf. Tondatei), sind die Zeichentasten
+**gesperrt** — gedrückte Tasten verfallen, damit Hämmern keinen Ton-Spam macht.
+Esc (Beenden) und Strg+Umschalt+D (Modus) gehen weiterhin.
 
 ### Eigene Tierlaute
 

@@ -1,6 +1,7 @@
 """Was zu hoeren ist: Piper (Stimme Thorsten) spricht, espeak-ng springt ein, wenn
 Piper oder die Stimme fehlt. Tondateien aus assets/toene/ ersetzen den gesprochenen
-Tierlaut. Jeder neue Tastendruck bricht den laufenden Ton ab.
+Tierlaut. Solange etwas klingt, meldet spricht() True - der Modus Tiere sperrt
+dann die Tasten. Ein neuer Ton (Enter im Tippen-Modus) bricht den laufenden ab.
 """
 
 import io
@@ -96,16 +97,19 @@ class Ton:
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     def _rechne(self, auftrag, text):
-        puffer = io.BytesIO()
-        with wave.open(puffer, "wb") as wav:
-            self.stimme.synthesize_wav(text, wav)
-        puffer.seek(0)
+        try:
+            puffer = io.BytesIO()
+            with wave.open(puffer, "wb") as wav:
+                self.stimme.synthesize_wav(text, wav)
+            puffer.seek(0)
+        except Exception as exc:              # sonst bleibt die Tastensperre ewig
+            print(f"Piper-Fehler: {exc}", file=sys.stderr)
+            puffer = None
         self.ergebnisse.put((auftrag, puffer))
 
     def spricht(self):
-        return (self.rechnet
-                or (self.kanal is not None and self.kanal.get_busy())
-                or (self.sprecher is not None and self.sprecher.poll() is None))
+        """True bis Sprache und nachfolgende Tondatei ganz durch sind."""
+        return self.rechnet or self.danach is not None or self._klingt()
 
     def update(self):
         """Pro Frame: fertige Piper-Sprache abspielen, danach die Tondatei."""
@@ -113,10 +117,15 @@ class Ton:
             auftrag, puffer = self.ergebnisse.get()
             if self.rechnet and auftrag == self.auftrag:
                 self.rechnet = False
-                self.kanal = pygame.mixer.Sound(file=puffer).play()
-        if self.danach and not self.spricht():
-            self.danach.play()
+                if puffer is not None:
+                    self.kanal = pygame.mixer.Sound(file=puffer).play()
+        if self.danach and not self.rechnet and not self._klingt():
+            self.kanal = self.danach.play()
             self.danach = None
+
+    def _klingt(self):
+        return ((self.kanal is not None and self.kanal.get_busy())
+                or (self.sprecher is not None and self.sprecher.poll() is None))
 
     def stop(self):
         if self.sprecher and self.sprecher.poll() is None:

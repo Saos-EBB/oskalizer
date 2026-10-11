@@ -125,7 +125,7 @@ def handle_input(device, tafel, schreib, ton, state, now):
             continue
         zeichen = tiere.ZEICHEN.get(event.code)
         if state["modus"] == "tiere":
-            if zeichen:
+            if zeichen and not ton.spricht():     # Sperre bis der Ton durch ist
                 tafel.show(zeichen, now)
                 ton.play(zeichen)
         elif event.code in (ecodes.KEY_ENTER, ecodes.KEY_KPENTER):

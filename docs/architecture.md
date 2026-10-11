@@ -27,11 +27,15 @@ und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden 
 
 ## Datenfluss
 Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `Tafel.show` (Bild) + `Ton.play` (espeak,
-danach ggf. Datei). Ein neues Zeichen bricht Bild und Ton des vorigen ab.
+danach ggf. Datei). Solange `Ton.spricht()` True ist, ignoriert der Modus Tiere
+weitere Zeichentasten.
 Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Enter →
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-10-11 — Modus Tiere sperrt Zeichentasten, bis der Ton durch ist (statt
+  abbrechen). Grund: Hämmern erzeugte Ton-Spam. Tasten während der Sperre
+  verfallen, sie werden nicht nachgeholt.
 - 2026-10-10 — Piper (Thorsten high) statt espeak-ng als Stimme, espeak bleibt Ersatz.
   Grund: natürlich klingend, offline. Synthese im Thread, weil sie 0,2–1 s blockiert.
   Stimmdatei außerhalb des Repos (114 MB).
