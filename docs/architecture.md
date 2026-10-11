@@ -37,6 +37,9 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
 
 - Familien-Daten — `~/.local/share/oskalizer/familie/<wort>/name|laut|bild/<person>_<…>`,
   außerhalb des Repos (Repo wird öffentlich).
+- `freistellen.py` — `python3 freistellen.py foto.jpg ziel.png`: schneidet mit rembg
+  (Modell u2net) das Motiv aus, für Fotos neuer Wörter. Läuft nur von Hand beim
+  Einsortieren, nicht im oskalizer und nicht auf Vercel.
 - `web/` — Vercel-Projekt (Root Directory = `web`), einzige Dependency `nodemailer`.
   Der Build (`npm run build`) kopiert `../woerter.json` nach `public/` — eine Quelle
   für oskalizer und Seite.
@@ -60,6 +63,9 @@ Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Ente
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-10-12 — Freistellen lokal mit rembg, Modell fest auf u2net. Grund: rembg
+  2.0.85 nimmt sonst bria-rmbg (>1 GB, Lizenz nur nicht-kommerziell). `rembg` ohne
+  `[cli]`-Extra, weil das gradio/fastapi/pandas mitzieht — dafür ein 3-Zeilen-Skript.
 - 2026-10-12 — Aufnahmen als JSON mit Base64 statt Multipart. Grund: Vercels Node-
   Runtime parst JSON selbst, Multipart bräuchte eine Dependency; 15 s Audio sind
   ein paar hundert KB. Format bleibt, was der Browser kann (WebM/Opus oder m4a),

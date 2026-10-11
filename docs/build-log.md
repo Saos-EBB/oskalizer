@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-12 — feat(familie): Fotos neuer Wörter mit rembg freistellen
+**Was:** Familie kann irgendein Foto schicken; `freistellen.py` schneidet das Motiv beim Einsortieren aus (PNG, transparent), die Mail zu einem neuen Wort enthält den fertigen Befehl.
+**Nicht gebaut:** kein Einsortier-Skript für die ganze Mail, keine Modellwahl, kein Freistellen im Browser.
+
 ## 2026-10-12 — feat(web): „+ Neues Wort“ mit Name, Foto und Laut
 **Was:** Familie kann eigene Wörter vorschlagen — Tiere, aber auch sich selbst („Opa“); alle drei Felder Pflicht, Foto im Browser auf 1024 px JPEG. Mail-Code nach `api/_mail.js`, weil jetzt zwei Endpoints mailen; Leerzeichen im Wort werden im Ordnernamen zu `-` (sonst bräche der Befehl in der Mail).
 **Nicht gebaut:** kein Zuschneiden im Browser, kein geschriebener Laut (Eintrag kommt mit `"laut": ""`), kein automatisches Eintragen in `woerter.json`.

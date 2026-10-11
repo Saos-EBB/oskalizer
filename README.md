@@ -90,7 +90,10 @@ sie umwandelt und in den Familien-Ordner legt.
 **+ Neues Wort**: Name, Foto und ein Laut sind Pflicht. Das kann ein Tier sein,
 aber auch „Opa“ mit dem, was Opa so sagt. Das Foto wird im Browser auf 1024 px
 verkleinert. Das Wort kommt auf die Taste seines ersten Buchstabens, auch Ä/Ö/Ü.
-Die Mail enthält die Zeile für `woerter.json` und die Befehle zum Ablegen.
+Die Mail enthält die Zeile für `woerter.json` und die Befehle zum Ablegen. Das
+Foto stellt `freistellen.py` frei, als PNG mit transparentem Hintergrund. Das
+braucht einmalig `python3 -m pip install --user rembg`. Beim ersten Lauf lädt es
+das Modell u2net (~170 MB) nach `~/.rembg/models/`.
 
 - Person dazu: `FAMILY_PASSWORDS` ergänzen, neu deployen.
 - Person raus: Eintrag löschen, neu deployen. Ihr Cookie gilt dann auch nicht mehr.

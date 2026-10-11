@@ -29,8 +29,8 @@ export default async function handler(req, res) {
       + `1. In woerter.json bei "${buchstabe}" anhängen (gibt's den Buchstaben `
       + `noch nicht, neu anlegen):\n${eintrag}\n\n`
       + `2. Laut umwandeln und ablegen:\n${umwandeln(laut, wort, "laut", von)}\n\n`
-      + `3. Foto ablegen:\nmkdir -p ${FAMILIE}/${ordner(wort)}/bild && cp ${bild} `
-      + `${FAMILIE}/${ordner(wort)}/bild/${ordner(von)}_${heute()}.jpg\n`,
+      + `3. Foto freistellen und ablegen:\npython3 ~/oskalizer/freistellen.py ${bild} `
+      + `${FAMILIE}/${ordner(wort)}/bild/${ordner(von)}_${heute()}.png\n`,
     attachments: [
       { filename: laut, content: Buffer.from(daten, "base64") },
       { filename: bild, content: Buffer.from(foto, "base64") },
