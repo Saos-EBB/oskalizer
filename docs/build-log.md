@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-12 — chore(repo): Git-Historie vor dem Öffentlich-Schalten geprüft
+**Was:** Alle 21 Commits, alle je eingecheckten Dateien und Diffs durchsucht: keine Passwörter, Keys, `.env`, Home-Pfade oder Dateien >200 KB. Sichtbar wird nur die Autor-Mail in den Commits; die Tastatur heißt im Code „blackwidow“.
+**Nicht gebaut:** kein Umschreiben der Historie (nichts zu entfernen), kein Secret-Scanner als Hook; öffentlich schaltet der User selbst.
+
 ## 2026-10-12 — feat(familie): Fotos neuer Wörter mit rembg freistellen
 **Was:** Familie kann irgendein Foto schicken; `freistellen.py` schneidet das Motiv beim Einsortieren aus (PNG, transparent), die Mail zu einem neuen Wort enthält den fertigen Befehl.
 **Nicht gebaut:** kein Einsortier-Skript für die ganze Mail, keine Modellwahl, kein Freistellen im Browser.
