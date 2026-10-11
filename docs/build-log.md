@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-12 — feat(web): „+ Neues Wort“ mit Name, Foto und Laut
+**Was:** Familie kann eigene Wörter vorschlagen — Tiere, aber auch sich selbst („Opa“); alle drei Felder Pflicht, Foto im Browser auf 1024 px JPEG. Mail-Code nach `api/_mail.js`, weil jetzt zwei Endpoints mailen; Leerzeichen im Wort werden im Ordnernamen zu `-` (sonst bräche der Befehl in der Mail).
+**Nicht gebaut:** kein Zuschneiden im Browser, kein geschriebener Laut (Eintrag kommt mit `"laut": ""`), kein automatisches Eintragen in `woerter.json`.
+
 ## 2026-10-12 — feat(web): Wörter-Tabelle, Aufnehmen und Versand per Mail
 **Was:** Kern der Familien-Seite: jedes Wort aus `woerter.json` mit Lautschrift-Hilfe, Name/Laut aufnehmen (max. 15 s, anhören, neu), Senden schickt eine Gmail-Mail mit Anhang und dem fertigen ffmpeg-Einsortier-Befehl.
 **Nicht gebaut:** keine Umwandlung im Browser, keine Pegelanzeige, kein Merken was schon gesendet ist (nur ✓ bis zum Neuladen), keine Prüfung ob das Wort in `woerter.json` steht.

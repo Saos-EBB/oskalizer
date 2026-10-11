@@ -33,7 +33,7 @@ der Reihe nach dran. Ä, Ö und Ü dürfen auch Einträge bekommen. Ein Eintrag 
 
 Eigene Aufnahmen und Fotos liegen **außerhalb des Repos** unter
 `~/.local/share/oskalizer/familie/`, ein Ordner pro Wort (Name klein, Umlaute als
-ae/oe/ue, ß als ss):
+ae/oe/ue, ß als ss, Leerzeichen als `-`):
 
 ```
 familie/
@@ -86,6 +86,11 @@ Nach dem Login zeigt die Seite alle Wörter. Pro Wort gibt's zwei Knöpfe: **Nam
 höchstens 15 s, man kann sie anhören, neu aufnehmen und dann senden. Jede
 Aufnahme kommt als Mail an `MAIL_TO`. Im Mailtext steht der fertige Befehl, der
 sie umwandelt und in den Familien-Ordner legt.
+
+**+ Neues Wort**: Name, Foto und ein Laut sind Pflicht. Das kann ein Tier sein,
+aber auch „Opa“ mit dem, was Opa so sagt. Das Foto wird im Browser auf 1024 px
+verkleinert. Das Wort kommt auf die Taste seines ersten Buchstabens, auch Ä/Ö/Ü.
+Die Mail enthält die Zeile für `woerter.json` und die Befehle zum Ablegen.
 
 - Person dazu: `FAMILY_PASSWORDS` ergänzen, neu deployen.
 - Person raus: Eintrag löschen, neu deployen. Ihr Cookie gilt dann auch nicht mehr.

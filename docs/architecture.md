@@ -21,7 +21,7 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
   `ZEICHEN` (evdev-Keycode → Zeichen, QWERTZ) und `Tafel` (zeichnet das aktuelle
   Zeichen im Modus Tiere; lädt beim Start `FAMILIE/<wort>/bild/*` als Ersatz fürs Emoji,
   zeigt „[von X]“ unten rechts). `ordner(wort)` und `person(path)` übersetzen
-  zwischen Wort/Datei und Familien-Ordner.
+  zwischen Wort/Datei und Familien-Ordner (Leerzeichen → `-`, Umlaute → ae/oe/ue).
   `Schreibtafel` zeigt im Modus Tippen den getippten Text, wortweise umgebrochen.
   Kennt keine Geräte. `oskalizer.py` ruft `Tafel.show(zeichen, wort, personen)` pro Key-Down und
   `Tafel.draw()` pro Frame.
@@ -46,7 +46,10 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
   `SESSION_SECRET`). `api/login.js` (POST, falsch → 3 s warten, 401), `api/wer.js`
   (GET, Person aus dem Cookie), `api/senden.js` (POST Wort/Slot/Audio als Base64 →
   Gmail-Mail an `MAIL_TO`, Betreff/Anhang mit Wort, Slot, Person, im Text der fertige
-  ffmpeg-Befehl zum Einsortieren). Jeder Endpoint nimmt die Person nur aus `person(req)`.
+  ffmpeg-Befehl zum Einsortieren), `api/neu.js` (POST neues Wort mit Laut + Foto →
+  Mail mit dem `woerter.json`-Eintrag und den Ablage-Befehlen). `api/_mail.js`: Prüfen,
+  `ordner()` (gleiche Regel wie in `tiere.py`), ffmpeg-Befehl, Gmail-Versand.
+  Jeder Endpoint nimmt die Person nur aus `person(req)`.
 
 ## Datenfluss
 Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `tiere.naechstes` → Wort →

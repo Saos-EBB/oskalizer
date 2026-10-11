@@ -103,6 +103,18 @@
   .reihe { display: flex; gap: 8px; flex-wrap: wrap; }
   .reihe .rechts { margin-left: auto; }
   #meldung { margin: 12px 0 0; color: var(--leise); min-height: 1.4em; }
+  #plus { margin: 0 0 16px; }
+  #neufelder { display: grid; gap: 10px; margin: 0 0 16px; }
+  #neufelder input[type=text] {
+    font: inherit;
+    padding: 10px 12px;
+    color: var(--text);
+    background: var(--hinter);
+    border: 1px solid var(--rand);
+    border-radius: 10px;
+  }
+  #neufelder label { color: var(--leise); font-size: 15px; }
+  #vorschau { max-width: 100%; max-height: 180px; border-radius: 10px; justify-self: start; }
 
   @keyframes pop {
     from { transform: scale(0.6); opacity: 0; }
@@ -121,12 +133,18 @@
   <main id="drin" hidden>
     <h1>Hallo <span id="person"></span>!</h1>
     <p>Sprich die Wörter und Laute ein. Jede Aufnahme kommt direkt beim oskalizer an.</p>
+    <button id="plus">+ Neues Wort</button>
     <div id="liste"></div>
   </main>
 
   <dialog id="dialog">
     <p id="aufgabe"></p>
     <p id="hilfe"></p>
+    <div id="neufelder" hidden>
+      <input id="neuname" type="text" placeholder="Name, z.B. Igel oder Opa" maxlength="40">
+      <label>Foto <input id="neufoto" type="file" accept="image/*"></label>
+      <img id="vorschau" alt="" hidden>
+    </div>
     <p id="uhr">0 / 15 s</p>
     <audio id="probe" controls hidden></audio>
     <div class="reihe">
@@ -184,6 +202,7 @@
 
   function oeffne(buchstabe, wort, slot, knopf) {
     aufnahme = { wort: wort.name, slot, knopf, blob: null };
+    $("neufelder").hidden = true;
     if (slot === "name") {
       $("aufgabe").innerHTML = "Sag: <em></em>";
       $("aufgabe").querySelector("em").textContent = `${buchstabe} wie ${wort.name}`;
@@ -193,6 +212,23 @@
       $("aufgabe").querySelector("em").textContent = wort.laut;
       $("hilfe").textContent = wort.lautschrift ? `sprich: ${wort.lautschrift}` : "";
     }
+    zeigeDialog();
+  }
+
+  // Neues Wort: Name + Foto + Laut, alle drei Pflicht
+  $("plus").onclick = () => {
+    aufnahme = { neu: true, blob: null, foto: null };
+    $("aufgabe").textContent = "Neues Wort";
+    $("hilfe").textContent = "Name, Foto, und dann mach den Laut dazu – "
+      + "ein Tiergeräusch oder was Opa so sagt.";
+    $("neuname").value = "";
+    $("neufoto").value = "";
+    $("vorschau").hidden = true;
+    $("neufelder").hidden = false;
+    zeigeDialog();
+  };
+
+  function zeigeDialog() {
     $("probe").hidden = true;
     $("senden").disabled = true;
     $("rec").textContent = "● Aufnehmen";
@@ -224,7 +260,7 @@
       $("probe").hidden = false;
       $("rec").textContent = "● Neu aufnehmen";
       $("rec").classList.remove("laeuft");
-      $("senden").disabled = false;
+      pruefe();
       recorder = null;
     };
     const start = Date.now();
@@ -260,19 +296,59 @@
   });
   $("zu").onclick = () => $("dialog").close();
 
+  // Gleiche Regel wie gutesWort() in api/_mail.js
+  const GUTES_WORT = /^\p{L}[\p{L} -]{0,39}$/u;
+
+  function pruefe() {
+    $("senden").disabled = !aufnahme.blob
+      || (aufnahme.neu && !(aufnahme.foto && GUTES_WORT.test($("neuname").value.trim())));
+  }
+  $("neuname").oninput = pruefe;
+
+  // Handyfotos sind mehrere MB - auf max. 1024 px verkleinern, als JPEG
+  $("neufoto").onchange = async () => {
+    aufnahme.foto = null;
+    $("vorschau").hidden = true;
+    const datei = $("neufoto").files[0];
+    if (datei) {
+      try {
+        const bild = await createImageBitmap(datei);
+        const faktor = Math.min(1, 1024 / Math.max(bild.width, bild.height));
+        const leinwand = document.createElement("canvas");
+        leinwand.width = Math.round(bild.width * faktor);
+        leinwand.height = Math.round(bild.height * faktor);
+        leinwand.getContext("2d").drawImage(bild, 0, 0, leinwand.width, leinwand.height);
+        aufnahme.foto = await new Promise((fertig) => leinwand.toBlob(fertig, "image/jpeg", 0.85));
+        $("vorschau").src = URL.createObjectURL(aufnahme.foto);
+        $("vorschau").hidden = false;
+      } catch {
+        $("meldung").textContent = "Das Foto kann ich nicht lesen – ein anderes?";
+      }
+    }
+    pruefe();
+  };
+
+  function base64(blob) {
+    return new Promise((fertig) => {
+      const leser = new FileReader();
+      leser.onload = () => fertig(leser.result.split(",")[1]);
+      leser.readAsDataURL(blob);
+    });
+  }
+
   $("senden").onclick = async () => {
     $("senden").disabled = true;
     $("rec").disabled = true;
     $("meldung").textContent = "Wird gesendet …";
-    const daten = await new Promise((fertig) => {
-      const leser = new FileReader();
-      leser.onload = () => fertig(leser.result.split(",")[1]);
-      leser.readAsDataURL(aufnahme.blob);
-    });
-    const antwort = await fetch("/api/senden", {
+    const daten = await base64(aufnahme.blob);
+    const [ziel, inhalt] = aufnahme.neu
+      ? ["/api/neu", { wort: $("neuname").value.trim(), typ: TYP, daten,
+                       foto: await base64(aufnahme.foto) }]
+      : ["/api/senden", { wort: aufnahme.wort, slot: aufnahme.slot, typ: TYP, daten }];
+    const antwort = await fetch(ziel, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ wort: aufnahme.wort, slot: aufnahme.slot, typ: TYP, daten }),
+      body: JSON.stringify(inhalt),
     }).catch(() => null);
     $("rec").disabled = false;
     if (antwort?.status === 401) return location.reload();   // Zugang weg
@@ -281,9 +357,13 @@
       $("senden").disabled = false;
       return;
     }
-    aufnahme.knopf.classList.add("fertig");
-    aufnahme.knopf.textContent = "✓ " + aufnahme.knopf.textContent.replace(/^\S+ /, "");
-    $("meldung").textContent = "Danke! Ist angekommen.";
+    if (aufnahme.knopf) {
+      aufnahme.knopf.classList.add("fertig");
+      aufnahme.knopf.textContent = "✓ " + aufnahme.knopf.textContent.replace(/^\S+ /, "");
+    }
+    $("meldung").textContent = aufnahme.neu
+      ? "Danke! Das neue Wort ist unterwegs." : "Danke! Ist angekommen.";
+    aufnahme.blob = null;                   // sonst schickt Tippen im Namen es nochmal
     $("senden").disabled = true;
   };
 

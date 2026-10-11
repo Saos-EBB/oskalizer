@@ -30,9 +30,9 @@ def naechstes(zeichen):
 
 
 def ordner(wort):
-    """Ordner eines Worts unter FAMILIE: "Bär" -> "baer"."""
+    """Ordner eines Worts unter FAMILIE: "Tante Bär" -> "tante-baer"."""
     name = wort["name"].lower()
-    for umlaut, ersatz in (("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss")):
+    for umlaut, ersatz in (("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss"), (" ", "-")):
         name = name.replace(umlaut, ersatz)
     return name
 
