@@ -1,8 +1,8 @@
 # Architektur
 
 ## Überblick
-Keyboard playground für ein Kleinkind. Eine externe Tastatur (per Namens-Teilstring)
-und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden nur
+Keyboard playground für ein Kleinkind. Eine externe Tastatur (per Namens-Teilstring,
+sonst die interne am i8042-Bus) und die Maus werden per evdev exklusiv gegrabbt, pygame zeigt Vollbild. Beenden nur
 über 5 s Esc halten oder SIGTERM.
 Dazu die Familien-Webseite (`web/`, Vercel): Familie loggt sich mit eigenem
 Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
@@ -63,6 +63,9 @@ Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Ente
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-10-13 — Ohne externe Tastatur die interne grabben, erkannt am Bus i8042
+  (+ Taste A und Esc) statt am Namen. Grund: der Name der Laptop-Tastatur ist je
+  nach Gerät anders, der Bus nicht. Nur beim Start, kein Hotplug.
 - 2026-10-12 — Freistellen lokal mit rembg, Modell fest auf u2net. Grund: rembg
   2.0.85 nimmt sonst bria-rmbg (>1 GB, Lizenz nur nicht-kommerziell). `rembg` ohne
   `[cli]`-Extra, weil das gradio/fastapi/pandas mitzieht — dafür ein 3-Zeilen-Skript.

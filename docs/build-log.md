@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-10-13 — feat(geraete): interne Tastatur, wenn die externe fehlt
+**Was:** Ist die BlackWidow nicht angesteckt, startet der oskalizer trotzdem und grabbt die Laptop-Tastatur (i8042-Bus) statt mit Fehler abzubrechen. Nebenbei: Geräte werden direkt aus `/dev/input/event*` gelesen, weil `evdev.list_devices()` nicht lesbare stumm weglässt — fehlende `input`-Gruppe kam sonst als „keine Tastatur gefunden“ statt „keine Rechte“.
+**Nicht gebaut:** kein Hotplug (anstecken während des Laufs wechselt nicht), keine Erkennung von I2C-/USB-internen Laptop-Tastaturen, kein eigener CONFIG-Schalter.
+
 ## 2026-10-12 — chore(repo): Git-Historie vor dem Öffentlich-Schalten geprüft
 **Was:** Alle 21 Commits, alle je eingecheckten Dateien und Diffs durchsucht: keine Passwörter, Keys, `.env`, Home-Pfade oder Dateien >200 KB. Sichtbar wird nur die Autor-Mail in den Commits; die Tastatur heißt im Code „blackwidow“.
 **Nicht gebaut:** kein Umschreiben der Historie (nichts zu entfernen), kein Secret-Scanner als Hook; öffentlich schaltet der User selbst.

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Keyboard playground: grabbt eine externe Tastatur (+ Maus) exklusiv.
+Ist sie nicht angesteckt, wird die interne Laptop-Tastatur genommen.
 Beenden: Esc 5 Sekunden halten.
 
 Braucht: python-evdev, pygame und Lesezugriff auf /dev/input/* (Gruppe `input`).
@@ -15,6 +16,7 @@ FPS = 60
 
 # --- Ende CONFIG -----------------------------------------------------------
 
+import glob
 import math
 import os
 import select
@@ -43,14 +45,23 @@ def is_pointer(device):
     return ecodes.EV_REL in caps and ecodes.BTN_LEFT in caps.get(ecodes.EV_KEY, [])
 
 
+def is_internal_keyboard(device):
+    """Laptop-Tastatur haengt am i8042-Controller und hat Buchstaben + Esc."""
+    keys = device.capabilities().get(ecodes.EV_KEY, [])
+    return (device.info.bustype == ecodes.BUS_I8042
+            and ecodes.KEY_A in keys and ecodes.KEY_ESC in keys)
+
+
 def find_devices():
     """Liefert (keyboards, pointers). Razer haengt mehrere event-Nodes an den
-    gleichen Namen (Keys + Media/Macro) - wir nehmen bewusst ALLE."""
-    keyboards, pointers = [], []
+    gleichen Namen (Keys + Media/Macro) - wir nehmen bewusst ALLE.
+    Ohne externe Tastatur kommt die interne in die Liste."""
+    keyboards, internal, pointers = [], [], []
     needle = KEYBOARD_MATCH.lower()
     denied = 0
 
-    for path in sorted(evdev.list_devices()):
+    # nicht evdev.list_devices(): das laesst Geraete ohne Leserecht stumm weg
+    for path in sorted(glob.glob("/dev/input/event*")):
         try:
             device = evdev.InputDevice(path)
         except PermissionError:
@@ -61,10 +72,19 @@ def find_devices():
 
         if needle in device.name.lower():
             keyboards.append(device)
+        elif is_internal_keyboard(device):
+            internal.append(device)
         elif GRAB_MOUSE and is_pointer(device):
             pointers.append(device)
         else:
             device.close()
+
+    if keyboards:
+        release_all(internal)
+    else:
+        if internal:
+            print(f"'{KEYBOARD_MATCH}' nicht angesteckt - nehme die interne Tastatur.")
+        keyboards = internal
 
     if denied and not keyboards:
         raise PermissionError("keine Leserechte auf /dev/input/*")
@@ -209,7 +229,7 @@ def main():
         return 1
 
     if not keyboards:
-        print(f"Keine Tastatur gefunden, die '{KEYBOARD_MATCH}' im Namen hat.\n"
+        print(f"Keine Tastatur gefunden: weder '{KEYBOARD_MATCH}' im Namen noch intern.\n"
               "Namen anschauen mit:  python3 -c \"import evdev;"
               " print([evdev.InputDevice(p).name for p in evdev.list_devices()])\"",
               file=sys.stderr)

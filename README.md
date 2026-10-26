@@ -142,7 +142,12 @@ python3 -c "import evdev; print([evdev.InputDevice(p).name for p in evdev.list_d
 Razer-Tastaturen hängen **mehrere** `event*`-Nodes an denselben Namen (normale
 Tasten + Media/Macro). Das Tool grabbt bewusst alle, die passen — sonst
 rutschen Lautstärke- und Makrotasten am Grab vorbei auf den Desktop durch.
-Die interne Laptop-Tastatur heißt anders und wird nicht angefasst.
+Die interne Laptop-Tastatur heißt anders und wird nicht angefasst — solange
+die externe angesteckt ist.
+
+**Ohne externe Tastatur** nimmt das Tool beim Start die interne
+(Laptop-Tastatur am i8042-Controller, z.B. „AT Translated Set 2 keyboard“) und
+grabbt sie. Erkannt wird nur beim Start; anstecken während es läuft ändert nichts.
 
 ## Starten und Beenden
 
@@ -189,5 +194,7 @@ kill <pid>          # SIGTERM: gibt alle Grabs frei und beendet sauber
 
 `SIGTERM` und `SIGINT` sind abgefangen, die Freigabe der Geräte steht in einem
 `finally` — auch bei einem Absturz werden die Grabs gelöst. Die PID steht beim
-Start auf der Konsole. Die **interne** Laptop-Tastatur wird nie gegrabbt und
-funktioniert die ganze Zeit weiter.
+Start auf der Konsole. Die **interne** Laptop-Tastatur wird nicht gegrabbt und
+funktioniert die ganze Zeit weiter — außer die externe ist nicht angesteckt,
+dann ist die interne gegrabbt und nur Esc-Halten, SSH oder ein anderes TTY
+kommen raus.
