@@ -154,6 +154,7 @@ grabbt sie. Erkannt wird nur beim Start; anstecken während es läuft ändert ni
 ```bash
 oskalizer            # Kurzbefehl, siehe unten
 python3 oskalizer.py # oder direkt
+oskalizer --kachel   # im Fenster statt im Vollbild (Tastatur und Maus bleiben gegrabbt)
 ```
 
 Beenden: **Esc 5 Sekunden am Stück halten.** Unten mittig läuft ein kleiner

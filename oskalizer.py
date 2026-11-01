@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Keyboard playground: grabbt eine externe Tastatur (+ Maus) exklusiv.
 Ist sie nicht angesteckt, wird die interne Laptop-Tastatur genommen.
-Beenden: Esc 5 Sekunden halten.
+Beenden: Esc 5 Sekunden halten. Mit --kachel laeuft es im Fenster statt im Vollbild.
 
 Braucht: python-evdev, pygame und Lesezugriff auf /dev/input/* (Gruppe `input`).
 """
@@ -170,7 +170,8 @@ def draw_exit_hint(screen, progress):
 
 def run(devices):
     pygame.init()
-    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    flags = pygame.RESIZABLE if "--kachel" in sys.argv else pygame.FULLSCREEN
+    screen = pygame.display.set_mode((0, 0), flags)
     pygame.display.set_caption("keyboard playground")
     pygame.mouse.set_visible(False)
 
