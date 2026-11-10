@@ -37,6 +37,13 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
 
 - Familien-Daten — `~/.local/share/oskalizer/familie/<wort>/name|laut|bild/<person>_<…>`,
   außerhalb des Repos (Repo wird öffentlich).
+- CC0-Tierdateien — `~/.local/share/oskalizer/tiere/<wort>/bild|laut/`, ohne Person.
+  `Tafel` nimmt sie, wenn es kein Familien-Foto gibt (Familie > CC0-Foto > Emoji),
+  `Ton.play` für den Laut (Familien-Laut > CC0-Laut > Piper-Lautmalerei).
+- `tierquellen.json` + `tiere_holen.py` — Liste der gewählten CC0-Dateien (URL,
+  Seite, Urheber); das Skript lädt sie in eine Quarantäne (nur https von
+  Wikimedia/Freesound, ≤ 20 MB, Typ an den Magic Bytes), scannt mit ClamAV
+  (Podman), kodiert neu (rembg → PNG, ffmpeg → OGG, lauteste 4 s) und legt sie ab.
 - `freistellen.py` — `python3 freistellen.py foto.jpg ziel.png`: schneidet mit rembg
   (Modell u2net) das Motiv aus, für Fotos neuer Wörter. Läuft nur von Hand beim
   Einsortieren, nicht im oskalizer und nicht auf Vercel.
@@ -63,6 +70,12 @@ Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Ente
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-11-10 — CC0-Tierdateien außerhalb des Repos, im Repo nur die Quellenliste.
+  Grund: Repo bleibt klein, jede Datei ist nachvollziehbar. Fotos von Commons
+  (1280-px-Thumbnails, Originale drosselt Wikimedia mit 429), Laute über Openverse
+  von Freesound. Malware-Schutz doppelt: ClamAV und Neukodieren — nichts vom
+  Original wird 1:1 abgelegt. Keine GIFs: pygame 2.6 spielt sie nicht ab und
+  freigestellte CC0-Animationen gibt es kaum.
 - 2026-10-13 — Ohne externe Tastatur die interne grabben, erkannt am Bus i8042
   (+ Taste A und Esc) statt am Namen. Grund: der Name der Laptop-Tastatur ist je
   nach Gerät anders, der Bus nicht. Nur beim Start, kein Hotplug.

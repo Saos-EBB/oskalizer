@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-11-10 — feat(tiere): echte CC0-Tierfotos und -laute
+**Was:** Es soll mehr passieren: 40 freigestellte Fotos und 46 echte Tierlaute für 26 bzw. 20 Tiere statt Emoji und gesprochener Lautmalerei. `tiere_holen.py` holt sie aus `tierquellen.json`, prüft (Host, Größe, Magic Bytes, ClamAV) und kodiert neu; Familien-Dateien gehen weiter vor.
+**Nicht gebaut:** keine GIFs/Animationen, keine Laute für Chamäleon, Giraffe, Qualle, Raupe, Nashorn, Zebra, kein Auswahl-Werkzeug (Liste von Hand), kein automatisches ClamAV-Update.
+
 ## 2026-10-13 — feat(geraete): interne Tastatur, wenn die externe fehlt
 **Was:** Ist die BlackWidow nicht angesteckt, startet der oskalizer trotzdem und grabbt die Laptop-Tastatur (i8042-Bus) statt mit Fehler abzubrechen. Nebenbei: Geräte werden direkt aus `/dev/input/event*` gelesen, weil `evdev.list_devices()` nicht lesbare stumm weglässt — fehlende `input`-Gruppe kam sonst als „keine Tastatur gefunden“ statt „keine Rechte“.
 **Nicht gebaut:** kein Hotplug (anstecken während des Laufs wechselt nicht), keine Erkennung von I2C-/USB-internen Laptop-Tastaturen, kein eigener CONFIG-Schalter.

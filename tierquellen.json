@@ -1,0 +1,776 @@
+[
+ {
+  "wort": "Affe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Macaca_sylvanus_in_Michlifen_01.jpg/1280px-Macaca_sylvanus_in_Michlifen_01.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Macaca_sylvanus_in_Michlifen_01.jpg",
+  "titel": "Macaca sylvanus in Michlifen 01.jpg",
+  "urheber": "Mounir Neddi",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Affe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Macaca_sinica_in_Sigirya.jpg/1280px-Macaca_sinica_in_Sigirya.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Macaca_sinica_in_Sigirya.jpg",
+  "titel": "Macaca sinica in Sigirya.jpg",
+  "urheber": "Dudva",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Bär",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Ursus_arctos_in_Junsele.jpg/1280px-Ursus_arctos_in_Junsele.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Ursus_arctos_in_Junsele.jpg",
+  "titel": "Ursus arctos in Junsele.jpg",
+  "urheber": "Petey21",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Chamäleon",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Veiled_Chameleon_in_Artis_themepark%2C_South_Korea.jpg/1280px-Veiled_Chameleon_in_Artis_themepark%2C_South_Korea.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Veiled_Chameleon_in_Artis_themepark,_South_Korea.jpg",
+  "titel": "Veiled Chameleon in Artis themepark, South Korea.jpg",
+  "urheber": "Drcbrothephotographer",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Chamäleon",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Indian_Chameleon_purple_colour.jpg/1280px-Indian_Chameleon_purple_colour.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Indian_Chameleon_purple_colour.jpg",
+  "titel": "Indian Chameleon purple colour.jpg",
+  "urheber": "Anirudh Singh Birdwatcher",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Delfin",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Bottlenose_Dolphin.jpg/1280px-Bottlenose_Dolphin.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Bottlenose_Dolphin.jpg",
+  "titel": "Bottlenose Dolphin.jpg",
+  "urheber": "safaritravelplus",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Elefant",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Asian_Elephant_in_the_Forest.jpg/1280px-Asian_Elephant_in_the_Forest.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Asian_Elephant_in_the_Forest.jpg",
+  "titel": "Asian Elephant in the Forest.jpg",
+  "urheber": "Sultan Ahmed 09",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Elefant",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Elephant_In_Mudhumalai_Tiger_reserve_forest.jpg/1280px-Elephant_In_Mudhumalai_Tiger_reserve_forest.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Elephant_In_Mudhumalai_Tiger_reserve_forest.jpg",
+  "titel": "Elephant In Mudhumalai Tiger reserve forest.jpg",
+  "urheber": "Aswini Nagarajan",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Frosch",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Green_and_Golden_Bell_Frog.jpg/1280px-The_Green_and_Golden_Bell_Frog.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:The_Green_and_Golden_Bell_Frog.jpg",
+  "titel": "The Green and Golden Bell Frog.jpg",
+  "urheber": "Bernard Spragg. NZ",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Giraffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Giraffe_posing_in_the_grass.jpg/1280px-Giraffe_posing_in_the_grass.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Giraffe_posing_in_the_grass.jpg",
+  "titel": "Giraffe posing in the grass.jpg",
+  "urheber": "Joselodos",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Hund",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Dog_at_N%C3%B8rre_Vorup%C3%B8r_Strand.jpg/1280px-Dog_at_N%C3%B8rre_Vorup%C3%B8r_Strand.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Dog_at_N%C3%B8rre_Vorup%C3%B8r_Strand.jpg",
+  "titel": "Dog at Nørre Vorupør Strand.jpg",
+  "urheber": "W.carter",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Hund",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Dog_resting_on_the_grass.jpg/1280px-Dog_resting_on_the_grass.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Dog_resting_on_the_grass.jpg",
+  "titel": "Dog resting on the grass.jpg",
+  "urheber": "Joselodos",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Igel",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Hedgehog_on_grass_in_the_morning.jpg/1280px-Hedgehog_on_grass_in_the_morning.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Hedgehog_on_grass_in_the_morning.jpg",
+  "titel": "Hedgehog on grass in the morning.jpg",
+  "urheber": "byapryl",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Igel",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/European_hedgehog_in_Ukraine_07.jpg/1280px-European_hedgehog_in_Ukraine_07.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:European_hedgehog_in_Ukraine_07.jpg",
+  "titel": "European hedgehog in Ukraine 07.jpg",
+  "urheber": "Novoklimov",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Jaguar",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Panthera_onca_in_Jardim_Zool%C3%B3gico_de_Curitiba.jpg/1280px-Panthera_onca_in_Jardim_Zool%C3%B3gico_de_Curitiba.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Panthera_onca_in_Jardim_Zool%C3%B3gico_de_Curitiba.jpg",
+  "titel": "Panthera onca in Jardim Zoológico de Curitiba.jpg",
+  "urheber": "Wilfredor",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Katze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Tabby_cat_with_blue_eyes-3336579.jpg/1280px-Tabby_cat_with_blue_eyes-3336579.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Tabby_cat_with_blue_eyes-3336579.jpg",
+  "titel": "Tabby cat with blue eyes-3336579.jpg",
+  "urheber": "AdinaVoicu",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Löwe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Lion_%2851647683166%29.jpg/1280px-Lion_%2851647683166%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Lion_(51647683166).jpg",
+  "titel": "Lion (51647683166).jpg",
+  "urheber": "Mathias Appel",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Löwe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Lion_Ngorongoro_2.jpg/1280px-Lion_Ngorongoro_2.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Lion_Ngorongoro_2.jpg",
+  "titel": "Lion Ngorongoro 2.jpg",
+  "urheber": "Naturedata",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Maus",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/House_mouse_%28Mus_musculus%29_2745.jpg/1280px-House_mouse_%28Mus_musculus%29_2745.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:House_mouse_(Mus_musculus)_2745.jpg",
+  "titel": "House mouse (Mus musculus) 2745.jpg",
+  "urheber": "Ahunt",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Nashorn",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/20181124_Ueno_Park_zoo_rhinoceros.jpg/1280px-20181124_Ueno_Park_zoo_rhinoceros.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:20181124_Ueno_Park_zoo_rhinoceros.jpg",
+  "titel": "20181124 Ueno Park zoo rhinoceros.jpg",
+  "urheber": "Balon Greyjoy",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Oktopus",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Octopus-vulgaris-4.jpg/1280px-Octopus-vulgaris-4.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Octopus-vulgaris-4.jpg",
+  "titel": "Octopus-vulgaris-4.jpg",
+  "urheber": "MartinThoma",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Pinguin",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Portrait_of_an_African_penguin_walking_fast.jpg/1280px-Portrait_of_an_African_penguin_walking_fast.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Portrait_of_an_African_penguin_walking_fast.jpg",
+  "titel": "Portrait of an African penguin walking fast.jpg",
+  "urheber": "Stanislav Stelmakhovich",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Pinguin",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Portrait_of_an_African_penguin_on_beach.jpg/1280px-Portrait_of_an_African_penguin_on_beach.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Portrait_of_an_African_penguin_on_beach.jpg",
+  "titel": "Portrait of an African penguin on beach.jpg",
+  "urheber": "Stanislav Stelmakhovich",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Qualle",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Jellyfish_from_Corpus_Christi.jpg/1280px-Jellyfish_from_Corpus_Christi.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Jellyfish_from_Corpus_Christi.jpg",
+  "titel": "Jellyfish from Corpus Christi.jpg",
+  "urheber": "Miguel Angel Omaña Rojas",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Raupe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Spicebush_Swallowtail_caterpillar_%28Papilio_troilus%29.jpg/1280px-Spicebush_Swallowtail_caterpillar_%28Papilio_troilus%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Spicebush_Swallowtail_caterpillar_(Papilio_troilus).jpg",
+  "titel": "Spicebush Swallowtail caterpillar (Papilio troilus).jpg",
+  "urheber": "Abigail Staffelbach",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Raupe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Sphinx_perelegans_caterpillar_by_Shane_Johnson.jpg/1280px-Sphinx_perelegans_caterpillar_by_Shane_Johnson.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Sphinx_perelegans_caterpillar_by_Shane_Johnson.jpg",
+  "titel": "Sphinx perelegans caterpillar by Shane Johnson.jpg",
+  "urheber": "Shane Johnson",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Schwein",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Sus_scrofa_domesticus%2C_miniature_pig%2C_juvenile.jpg/1280px-Sus_scrofa_domesticus%2C_miniature_pig%2C_juvenile.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Sus_scrofa_domesticus,_miniature_pig,_juvenile.jpg",
+  "titel": "Sus scrofa domesticus, miniature pig, juvenile.jpg",
+  "urheber": "Johan Spaedtke",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Schwein",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Piggyoinkoink.jpg/1280px-Piggyoinkoink.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Piggyoinkoink.jpg",
+  "titel": "Piggyoinkoink.jpg",
+  "urheber": "Shlumble",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Tiger",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/A_Bengal_tigress_%28Panthera_tigris_tigris%29_in_syphon_area_of_Pilibhit_tiger_reserve.jpg/1280px-A_Bengal_tigress_%28Panthera_tigris_tigris%29_in_syphon_area_of_Pilibhit_tiger_reserve.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:A_Bengal_tigress_(Panthera_tigris_tigris)_in_syphon_area_of_Pilibhit_tiger_reserve.jpg",
+  "titel": "A Bengal tigress (Panthera tigris tigris) in syphon area of Pilibhit tiger reserve.jpg",
+  "urheber": "Pixel009",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Tiger",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/A_Bengal_tiger_%28Panthera_tigris_tigris%29_on_the_kachchi_patri_area_at_Pilibhit_tiger_reserve.jpg/1280px-A_Bengal_tiger_%28Panthera_tigris_tigris%29_on_the_kachchi_patri_area_at_Pilibhit_tiger_reserve.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:A_Bengal_tiger_(Panthera_tigris_tigris)_on_the_kachchi_patri_area_at_Pilibhit_tiger_reserve.jpg",
+  "titel": "A Bengal tiger (Panthera tigris tigris) on the kachchi patri area at Pilibhit tiger reserve.jpg",
+  "urheber": "Pixel009",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Uhu",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Bubo_bubo_domesticated_closeup.png/1280px-Bubo_bubo_domesticated_closeup.png",
+  "seite": "https://commons.wikimedia.org/wiki/File:Bubo_bubo_domesticated_closeup.png",
+  "titel": "Bubo bubo domesticated closeup.png",
+  "urheber": "Johan Spaedtke",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Uhu",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Eurasian_eagle-owl%2C_Almaty_02.jpg/1280px-Eurasian_eagle-owl%2C_Almaty_02.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Eurasian_eagle-owl,_Almaty_02.jpg",
+  "titel": "Eurasian eagle-owl, Almaty 02.jpg",
+  "urheber": "Bgag",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Vogel",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Erithacus_rubecula_108174470.jpg/1280px-Erithacus_rubecula_108174470.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Erithacus_rubecula_108174470.jpg",
+  "titel": "Erithacus rubecula 108174470.jpg",
+  "urheber": "botaflo",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Vogel",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Erithacus_rubecula_on_a_twig.jpg/1280px-Erithacus_rubecula_on_a_twig.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Erithacus_rubecula_on_a_twig.jpg",
+  "titel": "Erithacus rubecula on a twig.jpg",
+  "urheber": "Joselodos",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Wal",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/A_close-up_of_a_humpback_whale_%28cropped%29.jpg/1280px-A_close-up_of_a_humpback_whale_%28cropped%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:A_close-up_of_a_humpback_whale_(cropped).jpg",
+  "titel": "A close-up of a humpback whale (cropped).jpg",
+  "urheber": "Stanislav Stelmakhovich",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Wal",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/A_massive_humpback_whale_glides_directly_beneath_the_camera.jpg/1280px-A_massive_humpback_whale_glides_directly_beneath_the_camera.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:A_massive_humpback_whale_glides_directly_beneath_the_camera.jpg",
+  "titel": "A massive humpback whale glides directly beneath the camera.jpg",
+  "urheber": "Stanislav Stelmakhovich",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Xerus",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Xerus_inauris_Solitaire.jpg/1280px-Xerus_inauris_Solitaire.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Xerus_inauris_Solitaire.jpg",
+  "titel": "Xerus inauris Solitaire.jpg",
+  "urheber": "Benoît Vicart",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Yak",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Yak_in_Kh%C3%B6vsg%C3%B6l_02.jpg/1280px-Yak_in_Kh%C3%B6vsg%C3%B6l_02.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Yak_in_Kh%C3%B6vsg%C3%B6l_02.jpg",
+  "titel": "Yak in Khövsgöl 02.jpg",
+  "urheber": "Bernard Gagnon",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Zebra",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Zebra_%2824694097565%29.jpg/1280px-Zebra_%2824694097565%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Zebra_(24694097565).jpg",
+  "titel": "Zebra (24694097565).jpg",
+  "urheber": "Mussi Katz",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Zebra",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Zebra_squared_%28Unsplash%29.jpg/1280px-Zebra_squared_%28Unsplash%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Zebra_squared_(Unsplash).jpg",
+  "titel": "Zebra squared (Unsplash).jpg",
+  "urheber": "George Brits georgebrits_cableandgrain",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Affe",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/437/437954_2524442-hq.mp3",
+  "seite": "https://freesound.org/people/craigsmith/sounds/437954",
+  "titel": "G12-22-Monkey Squeals.wav",
+  "urheber": "craigsmith",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Affe",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/479/479810_2524442-hq.mp3",
+  "seite": "https://freesound.org/people/craigsmith/sounds/479810",
+  "titel": "R01-07-Monkeys Chirping.wav",
+  "urheber": "craigsmith",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Bär",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/519/519596_7143328-hq.mp3",
+  "seite": "https://freesound.org/people/Nivatius/sounds/519596",
+  "titel": "move and growl grizzly bear",
+  "urheber": "Nivatius",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Bär",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/519/519599_7143328-hq.mp3",
+  "seite": "https://freesound.org/people/Nivatius/sounds/519599",
+  "titel": "Grizzly Bear growl eating",
+  "urheber": "Nivatius",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Delfin",
+  "slot": "laut",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/161691_felixblume_dolphin-screaming-underwater-in-caribbean-sea-mexico.wav",
+  "seite": "https://commons.wikimedia.org/w/index.php?curid=170283903",
+  "titel": "161691 felixblume dolphin-screaming-underwater-in-caribbean-sea-mexico",
+  "urheber": "The user Felix.Blume https://freesound.org/people/felix.blume/",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Delfin",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/437/437947_2524442-hq.mp3",
+  "seite": "https://freesound.org/people/craigsmith/sounds/437947",
+  "titel": "G12-15-Dolphins Underwater.wav",
+  "urheber": "craigsmith",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Elefant",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/527/527845_11431915-hq.mp3",
+  "seite": "https://freesound.org/people/D.jones/sounds/527845",
+  "titel": "Elephant Trumpets Growls.flac",
+  "urheber": "D.jones",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Elefant",
+  "slot": "laut",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Elephant_voice_-_trumpeting.ogg",
+  "seite": "https://commons.wikimedia.org/w/index.php?curid=12880761",
+  "titel": "Elephant voice - trumpeting",
+  "urheber": "தகவலுழவன்",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Elefant",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/479/479814_2524442-hq.mp3",
+  "seite": "https://freesound.org/people/craigsmith/sounds/479814",
+  "titel": "R01-34-Elephant trumpet.wav",
+  "urheber": "craigsmith",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Frosch",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/532/532235_4759831-hq.mp3",
+  "seite": "https://freesound.org/people/shaunhillyard/sounds/532235",
+  "titel": "Frog Croaking (UK Common Frog)",
+  "urheber": "shaunhillyard",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Frosch",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/361/361117_914016-hq.mp3",
+  "seite": "https://freesound.org/people/katzlbt/sounds/361117",
+  "titel": "frog_quak.mp3",
+  "urheber": "katzlbt",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Frosch",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/354/354132_5462031-hq.mp3",
+  "seite": "https://freesound.org/people/betterchinese/sounds/354132",
+  "titel": "Frog croaking sound effect",
+  "urheber": "betterchinese",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Hund",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/199/199261_1661766-hq.mp3",
+  "seite": "https://freesound.org/people/felix.blume/sounds/199261",
+  "titel": "A dog barking (close recording)",
+  "urheber": "felix.blume",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Hund",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/484/484297_1738686-hq.mp3",
+  "seite": "https://freesound.org/people/giddster/sounds/484297",
+  "titel": "Small dog bark",
+  "urheber": "giddster",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Hund",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/118/118964_1990695-hq.mp3",
+  "seite": "https://freesound.org/people/esperri/sounds/118964",
+  "titel": "Dog Bark 4.wav",
+  "urheber": "esperri",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Igel",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/528/528183_3302313-hq.mp3",
+  "seite": "https://freesound.org/people/fthgurdy/sounds/528183",
+  "titel": "Angry hedgehog sniffing 1",
+  "urheber": "fthgurdy",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Igel",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/528/528176_3302313-hq.mp3",
+  "seite": "https://freesound.org/people/fthgurdy/sounds/528176",
+  "titel": "Angry hedgehog huffs and patters 1",
+  "urheber": "fthgurdy",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Jaguar",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/571/571287_11058236-hq.mp3",
+  "seite": "https://freesound.org/people/Bonniefan2004/sounds/571287",
+  "titel": "jaguar_growl_roar.wav",
+  "urheber": "Bonniefan2004",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Katze",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/528/528192_3302313-hq.mp3",
+  "seite": "https://freesound.org/people/fthgurdy/sounds/528192",
+  "titel": "Cat meow 5",
+  "urheber": "fthgurdy",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Katze",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/528/528194_3302313-hq.mp3",
+  "seite": "https://freesound.org/people/fthgurdy/sounds/528194",
+  "titel": "Cat meow 3",
+  "urheber": "fthgurdy",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Katze",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/256/256452_4754386-hq.mp3",
+  "seite": "https://freesound.org/people/philsapphire/sounds/256452",
+  "titel": "Cat meow",
+  "urheber": "philsapphire",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Löwe",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/510/510476_11157736-hq.mp3",
+  "seite": "https://freesound.org/people/bkyte/sounds/510476",
+  "titel": "lion roar",
+  "urheber": "bkyte",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Löwe",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/69/69571_706955-hq.mp3",
+  "seite": "https://freesound.org/people/Bidone/sounds/69571",
+  "titel": "Lions two.mp3",
+  "urheber": "Bidone",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Löwe",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/69/69570_706955-hq.mp3",
+  "seite": "https://freesound.org/people/Bidone/sounds/69570",
+  "titel": "Lion loud.mp3",
+  "urheber": "Bidone",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Maus",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/557/557703_4140658-hq.mp3",
+  "seite": "https://freesound.org/people/adamamazing/sounds/557703",
+  "titel": "Mice Sqeak.wav",
+  "urheber": "adamamazing",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Maus",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/727/727114_15781963-hq.mp3",
+  "seite": "https://freesound.org/people/berboberbo/sounds/727114",
+  "titel": "Mice Squeaks",
+  "urheber": "berboberbo",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Oktopus",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/539/539820_6205597-hq.mp3",
+  "seite": "https://freesound.org/people/ristooooo1/sounds/539820",
+  "titel": "Bubbles 003.wav",
+  "urheber": "ristooooo1",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Oktopus",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/460/460100_1462166-hq.mp3",
+  "seite": "https://freesound.org/people/jeremy123/sounds/460100",
+  "titel": "bubbles",
+  "urheber": "jeremy123",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Pinguin",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/150/150861_1257975-hq.mp3",
+  "seite": "https://freesound.org/people/al.barbosa/sounds/150861",
+  "titel": "Penguin at Brown Bluff",
+  "urheber": "al.barbosa",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Pinguin",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/150/150873_1257975-hq.mp3",
+  "seite": "https://freesound.org/people/al.barbosa/sounds/150873",
+  "titel": "Pinguin Colony at Gourdin Island in the Antarctica Peninsula",
+  "urheber": "al.barbosa",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Schwein",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/233/233177_4056007-hq.mp3",
+  "seite": "https://freesound.org/people/JarredGibb/sounds/233177",
+  "titel": "Pig - Grunt and Squeal 4 - 96kHz.wav",
+  "urheber": "JarredGibb",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Schwein",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/233/233173_4056007-hq.mp3",
+  "seite": "https://freesound.org/people/JarredGibb/sounds/233173",
+  "titel": "Pig - Grunt 5 (deep) - 96kHz.wav",
+  "urheber": "JarredGibb",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Schwein",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/233/233169_4056007-hq.mp3",
+  "seite": "https://freesound.org/people/JarredGibb/sounds/233169",
+  "titel": "Pig - Grunt 1 - 96kHz.wav",
+  "urheber": "JarredGibb",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Tiger",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/437/437961_2524442-hq.mp3",
+  "seite": "https://freesound.org/people/craigsmith/sounds/437961",
+  "titel": "G12-29-Tigers and Lions Growling.wav",
+  "urheber": "craigsmith",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Tiger",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/437/437978_2524442-hq.mp3",
+  "seite": "https://freesound.org/people/craigsmith/sounds/437978",
+  "titel": "G12-45-Tiger Hiss and Growl.wav",
+  "urheber": "craigsmith",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Tiger",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/496/496131_10765102-hq.mp3",
+  "seite": "https://freesound.org/people/peenois/sounds/496131",
+  "titel": "Tiger Growl",
+  "urheber": "peenois",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Uhu",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/115/115607_2005868-hq.mp3",
+  "seite": "https://freesound.org/people/greither/sounds/115607",
+  "titel": "eagle-owl.mp3",
+  "urheber": "greither",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Uhu",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/701/701135_11519060-hq.mp3",
+  "seite": "https://freesound.org/people/bruno.auzet/sounds/701135",
+  "titel": "eagle owl.wav",
+  "urheber": "bruno.auzet",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Vogel",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/98/98447_505301-hq.mp3",
+  "seite": "https://freesound.org/people/williew705/sounds/98447",
+  "titel": "Bird song at Spfd Lake 2.wav",
+  "urheber": "williew705",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Vogel",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/332/332851_5838800-hq.mp3",
+  "seite": "https://freesound.org/people/Travesia_Sonora/sounds/332851",
+  "titel": "Chaffinch Male Bird Song",
+  "urheber": "Travesia_Sonora",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Wal",
+  "slot": "laut",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Humpbackwhale2.ogg",
+  "seite": "https://commons.wikimedia.org/w/index.php?curid=10502979",
+  "titel": "Humpbackwhale2",
+  "urheber": "Spyrogumas",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Wal",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/171/171945_3206712-hq.mp3",
+  "seite": "https://freesound.org/people/RebekahDay/sounds/171945",
+  "titel": "LowWhalesong.wav",
+  "urheber": "RebekahDay",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Xerus",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/640/640992_392990-hq.mp3",
+  "seite": "https://freesound.org/people/burgersmoke/sounds/640992",
+  "titel": "Ground Squirrel First Chirp",
+  "urheber": "burgersmoke",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Xerus",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/640/640990_392990-hq.mp3",
+  "seite": "https://freesound.org/people/burgersmoke/sounds/640990",
+  "titel": "Ground Squirrel 2 Chirps Near Its Den",
+  "urheber": "burgersmoke",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Yak",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/233/233134_4056007-hq.mp3",
+  "seite": "https://freesound.org/people/JarredGibb/sounds/233134",
+  "titel": "Cow - Moo 5 - 96kHz.wav",
+  "urheber": "JarredGibb",
+  "lizenz": "CC0 1.0"
+ },
+ {
+  "wort": "Yak",
+  "slot": "laut",
+  "url": "https://cdn.freesound.org/previews/233/233129_4056007-hq.mp3",
+  "seite": "https://freesound.org/people/JarredGibb/sounds/233129",
+  "titel": "Cow - Moo 2 - 96kHz.wav",
+  "urheber": "JarredGibb",
+  "lizenz": "CC0 1.0"
+ }
+]

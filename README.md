@@ -53,6 +53,35 @@ Leertaste, Enter, F-Tasten, Shift, Esc und die Maus zeigen nichts. Shift wird
 nicht ausgewertet — es gibt nur Großbuchstaben und die ungeshifteten Zeichen.
 Die Tastenbelegung ist auf ein deutsches QWERTZ-Layout festgelegt.
 
+### Echte Tierfotos und -laute (CC0)
+
+Ohne Familien-Foto zeigt ein Tier ein echtes Foto statt des Emojis, ohne
+Familien-Laut spielt der echte Tierlaut statt der gesprochenen Lautmalerei.
+Familien-Dateien gehen immer vor. Alles ist **CC0** (gemeinfrei): Fotos von
+Wikimedia Commons, Laute von Freesound und Wikimedia Commons. Welche Datei
+woher kommt, steht in `tierquellen.json` (Seite, Urheber).
+
+Die Dateien liegen nicht im Repo, sondern unter `~/.local/share/oskalizer/tiere/`
+(gleiche Ordnernamen wie bei der Familie, `bild/` und `laut/`). Geholt werden sie mit:
+
+```bash
+python3 tiere_holen.py          # nur was fehlt;  --neu holt alles neu
+```
+
+Das Skript lädt nur per https von Wikimedia/Freesound, höchstens 20 MB pro
+Datei, erkennt den Dateityp an den ersten Bytes und lässt alles von **ClamAV**
+prüfen (Podman-Container `clamav/clamav`, sonst ein installiertes `clamscan`;
+ohne Scanner spielt es nichts ein). Danach wird alles neu kodiert: Fotos per
+rembg freigestellt (PNG), Laute als OGG mit der lautesten Stelle, höchstens
+4 s, laut normalisiert. Vom Original bleibt nur, was Pillow/ffmpeg dekodieren.
+Braucht ffmpeg, rembg (siehe unten) und podman. Die Ordner-Datei
+`QUELLEN.md` daneben listet die Urheber.
+
+Keinen echten Laut haben Chamäleon, Giraffe, Qualle, Raupe, Nashorn und Zebra
+(kein CC0-Original gefunden) — da bleibt die Lautmalerei. Der Yak muht mit
+einer Kuh-Aufnahme. Eine Datei rauswerfen: Eintrag aus `tierquellen.json`
+löschen und die Datei im Ordner löschen.
+
 ## Modus Tippen
 
 **Strg+Umschalt+D** schaltet zwischen den Modi „Tiere“ (Start) und „Tippen“ um.
@@ -68,6 +97,7 @@ während des Vorlesens fängt von vorn an.
 
 Drei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (lädt
 `woerter.json`, Tastenbelegung, Anzeige), `ton.py` (Sprechen und Tondateien).
+Dazu `tiere_holen.py` (CC0-Tierdateien holen) und `freistellen.py`.
 
 ## Familien-Webseite (`web/`)
 

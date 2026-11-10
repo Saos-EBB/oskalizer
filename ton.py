@@ -1,7 +1,9 @@
 """Was zu hoeren ist: Piper (Stimme Thorsten) spricht, espeak-ng springt ein, wenn
 Piper oder die Stimme fehlt. Familien-Aufnahmen (FAMILIE/<wort>/name|laut/) ersetzen
-den Satz "A wie Affe" bzw. den Laut, bei mehreren zufaellig eine. Solange etwas klingt, meldet spricht() True - der Modus Tiere sperrt
-dann die Tasten. Ein neuer Ton (Enter im Tippen-Modus) bricht den laufenden ab.
+den Satz "A wie Affe" bzw. den Laut, bei mehreren zufaellig eine. Ohne Familien-Laut
+kommt der echte Tierlaut (CC0, TIERE/<wort>/laut/), erst danach die Lautmalerei.
+Solange etwas klingt, meldet spricht() True - der Modus Tiere sperrt dann die Tasten.
+Ein neuer Ton (Enter im Tippen-Modus) bricht den laufenden ab.
 """
 
 import io
@@ -16,7 +18,7 @@ from pathlib import Path
 
 import pygame
 
-from tiere import FAMILIE, WOERTER, ordner, person
+from tiere import FAMILIE, TIERE, WOERTER, ordner, person
 
 PIPER_STIMME = Path.home() / ".local" / "share" / "oskalizer" / "de_DE-thorsten-high.onnx"
 ESPEAK_ARGS = ["-v", "de", "-s", "140"]
@@ -41,12 +43,17 @@ class Ton:
         self.espeak = shutil.which("espeak-ng")
         self.aufnahmen = {}                   # (Ordner, "name"|"laut") -> [(Person, Sound)]
         self.stimme = None
+        self.original = {}                    # Ordner -> [Sound], CC0-Tierlaute ohne Person
         if pygame.mixer.get_init():
             for path in sorted(FAMILIE.glob("*/*/*")):
                 slot = path.parent.name
                 if slot in ("name", "laut") and path.suffix.lower() in (".ogg", ".wav"):
                     self.aufnahmen.setdefault((path.parent.parent.name, slot), []).append(
                         (person(path), pygame.mixer.Sound(path)))
+            for path in sorted(TIERE.glob("*/laut/*")):
+                if path.suffix.lower() in (".ogg", ".wav"):
+                    self.original.setdefault(path.parent.parent.name, []).append(
+                        pygame.mixer.Sound(path))
             self.stimme = lade_piper()        # Piper spielt ueber den Mixer
         else:
             print("Kein Audiogeraet - Tondateien bleiben stumm.", file=sys.stderr)
@@ -73,7 +80,9 @@ class Ton:
             wort = random.choice([w for liste in WOERTER.values() for w in liste])
         else:
             teile.append(self._aufnahme(wort, "name") or f"{zeichen} wie {wort['name']}.")
-        teile.append(self._aufnahme(wort, "laut") or wort["laut"])
+        original = self.original.get(ordner(wort))
+        teile.append(self._aufnahme(wort, "laut")
+                     or (random.choice(original) if original else wort["laut"]))
 
         personen = []
         for teil in teile:
@@ -82,9 +91,11 @@ class Ton:
                     self.reihe[-1] += " " + teil      # ein Piper-Auftrag, keine Pause
                 else:
                     self.reihe.append(teil)
-            else:
+            elif isinstance(teil, tuple):         # Familien-Aufnahme (Person, Sound)
                 personen.append(teil[0])
                 self.reihe.append(teil[1])
+            else:                                 # CC0-Tierlaut, ohne Person
+                self.reihe.append(teil)
         return personen
 
     def _aufnahme(self, wort, slot):

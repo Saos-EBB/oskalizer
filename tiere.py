@@ -13,6 +13,7 @@ from evdev import ecodes
 
 EMOJI_FONT = "/usr/share/fonts/google-noto-emoji-fonts/NotoEmoji-Regular.ttf"
 FAMILIE = Path.home() / ".local" / "share" / "oskalizer" / "familie"
+TIERE = Path.home() / ".local" / "share" / "oskalizer" / "tiere"   # CC0, von tiere_holen.py
 POP_SECONDS = 0.25                  # so lange waechst ein neues Zeichen auf volle Groesse
 
 # Buchstabe -> Liste von Woertern (Tier oder Person) mit Name, Emoji, Laut und
@@ -73,17 +74,25 @@ class Tafel:
         self.font = pygame.font.Font(None, int(height * 0.55))
         self.emoji_font = pygame.font.Font(EMOJI_FONT, int(height * 0.35))
         self.von_font = pygame.font.Font(None, height // 18)
-        self.bilder = {}                    # Ordner -> Familien-Fotos statt Emoji
-        for path in sorted(FAMILIE.glob("*/bild/*")):
+        # Ordner -> Fotos statt Emoji. Familien-Fotos gehen vor, sonst die CC0-Tierfotos.
+        self.bilder = self._lade_bilder(FAMILIE, height)
+        for name, liste in self._lade_bilder(TIERE, height).items():
+            self.bilder.setdefault(name, liste)
+        self.bild = None
+        self.von = None                     # "[von Opa]" unten rechts
+        self.since = 0.0
+
+    @staticmethod
+    def _lade_bilder(wurzel, height):
+        bilder = {}
+        for path in sorted(wurzel.glob("*/bild/*")):
             if path.suffix.lower() in (".png", ".jpg", ".jpeg"):
                 bild = pygame.image.load(path).convert_alpha()
                 size = (int(bild.get_width() * height * 0.4 / bild.get_height()),
                         int(height * 0.4))
-                self.bilder.setdefault(path.parent.parent.name, []).append(
+                bilder.setdefault(path.parent.parent.name, []).append(
                     pygame.transform.smoothscale(bild, size))
-        self.bild = None
-        self.von = None                     # "[von Opa]" unten rechts
-        self.since = 0.0
+        return bilder
 
     def show(self, zeichen, wort, personen, now):
         """personen: wer die gerade gespielten Aufnahmen eingesprochen hat."""
