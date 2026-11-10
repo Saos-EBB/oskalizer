@@ -13,6 +13,9 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
   „tiere“ | „tippen“, Wechsel mit Strg+Umschalt+D). Pro Key-Down mit Zeichen: im
   Modus Tiere `tiere.naechstes()` → `Tafel.show()` + `Ton.play()` mit demselben Wort, im Modus Tippen `Schreibtafel.tippe()`,
   bei Enter `Ton.sage(schreib.text)`.
+- Licht — `oskalizer.licht()` schickt jeden Key-Down (Tastencode als Text) per
+  Unix-Datagramm an `$XDG_RUNTIME_DIR/kb-rgb-ozk.sock`. Dort hört `kb-rgb ozk`
+  (`~/.local/bin`, nicht im Repo), das wegen des Grabs per evdev nichts bekommt.
 - `woerter.json` — Buchstabe (A–Z, auch Ä/Ö/Ü) → Liste von Wörtern (Tier oder
   Person) mit `name`, `emoji`, `laut`, `lautschrift`. Die Lautschrift ist nur für
   die Familien-Webseite.

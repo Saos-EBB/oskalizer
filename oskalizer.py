@@ -21,6 +21,7 @@ import math
 import os
 import select
 import signal
+import socket
 import sys
 
 import evdev
@@ -32,6 +33,9 @@ import tiere
 from ton import Ton
 
 BACKGROUND = (10, 10, 18)
+# kb-rgb ozk (Tastatur-Beleuchtung) liest die Tasten per evdev - waehrend unseres Grabs
+# kommt dort nichts an. Darum bekommt es jeden Tastendruck als Datagramm von hier.
+LICHT_SOCKET = os.path.join(os.environ.get("XDG_RUNTIME_DIR", "/tmp"), "kb-rgb-ozk.sock")
 CTRL_KEYS = (ecodes.KEY_LEFTCTRL, ecodes.KEY_RIGHTCTRL)
 SHIFT_KEYS = (ecodes.KEY_LEFTSHIFT, ecodes.KEY_RIGHTSHIFT)
 
@@ -138,6 +142,7 @@ def handle_input(device, tafel, schreib, ton, state, now):
             state["shift"] = event.value != 0
         if event.value != 1:                      # nur Key-Down, keine Repeats
             continue
+        licht(state["licht"], event.code)
 
         if event.code == ecodes.KEY_D and state["ctrl"] and state["shift"]:
             state["modus"] = "tippen" if state["modus"] == "tiere" else "tiere"
@@ -157,6 +162,14 @@ def handle_input(device, tafel, schreib, ton, state, now):
                 zeichen = " "
             if zeichen:
                 schreib.tippe(zeichen)
+
+
+def licht(sock, code):
+    """Tastendruck an kb-rgb ozk weitergeben. Laeuft es nicht, verfaellt er still."""
+    try:
+        sock.sendto(str(code).encode(), LICHT_SOCKET)
+    except OSError:
+        pass
 
 
 def draw_exit_hint(screen, progress):
@@ -180,12 +193,15 @@ def run(devices):
     ton = Ton()
     clock = pygame.time.Clock()
     fds = {device.fd: device for device in devices}
-    state = {"esc_since": None, "ctrl": False, "shift": False, "modus": "tiere"}
+    state = {"esc_since": None, "ctrl": False, "shift": False, "modus": "tiere",
+             "licht": socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)}
+    state["licht"].setblocking(False)
 
     try:
         loop(screen, tafel, schreib, ton, fds, state, clock)
     finally:
         ton.stop()                  # sonst spricht espeak nach dem Beenden weiter
+        state["licht"].close()
 
 
 def loop(screen, tafel, schreib, ton, fds, state, clock):

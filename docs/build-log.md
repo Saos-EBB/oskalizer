@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-11-10 — feat(licht): Tastendrücke an kb-rgb ozk weitergeben
+**Was:** Die Tasten-Beleuchtung `kb-rgb ozk` blieb im oskalizer dunkel: der exklusive Grab (EVIOCGRAB) lässt keine Events mehr zu anderen Lesern durch. Jetzt schickt der oskalizer jeden Key-Down per Unix-Datagramm an `$XDG_RUNTIME_DIR/kb-rgb-ozk.sock`, `kb-rgb ozk` hört dort zusätzlich zu evdev.
+**Nicht gebaut:** kein automatisches Starten von `kb-rgb ozk` mit dem oskalizer, keine eigene Farblogik im oskalizer.
+
 ## 2026-11-10 — feat(tiere): echte CC0-Tierfotos und -laute
 **Was:** Es soll mehr passieren: 40 freigestellte Fotos und 46 echte Tierlaute für 26 bzw. 20 Tiere statt Emoji und gesprochener Lautmalerei. `tiere_holen.py` holt sie aus `tierquellen.json`, prüft (Host, Größe, Magic Bytes, ClamAV) und kodiert neu; Familien-Dateien gehen weiter vor.
 **Nicht gebaut:** keine GIFs/Animationen, keine Laute für Chamäleon, Giraffe, Qualle, Raupe, Nashorn, Zebra, kein Auswahl-Werkzeug (Liste von Hand), kein automatisches ClamAV-Update.

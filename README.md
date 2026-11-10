@@ -82,6 +82,15 @@ Keinen echten Laut haben Chamäleon, Giraffe, Qualle, Raupe, Nashorn und Zebra
 einer Kuh-Aufnahme. Eine Datei rauswerfen: Eintrag aus `tierquellen.json`
 löschen und die Datei im Ordner löschen.
 
+### Tastatur-Beleuchtung (`kb-rgb ozk`)
+
+Läuft die Beleuchtung `kb-rgb ozk` (KBD-Kachel, Modus „ozk“: jede gedrückte
+Taste leuchtet 5 s in einer zufälligen Farbe), leuchtet sie auch im oskalizer.
+Weil der oskalizer die Tastatur exklusiv grabbt, kommt bei `kb-rgb` per evdev
+nichts an. Darum schickt er jeden Tastendruck als Datagramm an
+`$XDG_RUNTIME_DIR/kb-rgb-ozk.sock`. Läuft `kb-rgb ozk` nicht, verfällt das still.
+`kb-rgb` liegt nicht im Repo (`~/.local/bin/kb-rgb`).
+
 ## Modus Tippen
 
 **Strg+Umschalt+D** schaltet zwischen den Modi „Tiere“ (Start) und „Tippen“ um.
