@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-11-12 — fix(laute): Rumpeln statt Tier, kaputte Laute raus
+**Was:** Amsel und Gorilla klangen falsch. Ursache Amsel (und viele Vögel/Insekten): die Suche nach der lautesten Stelle wurde von Wind- und Mikrofonrumpeln gewonnen, die Normierung zog es hoch. Jetzt sucht sie ohne Bass, und ein Hochpass pro Laut (`hochpass`: 300/150/80 Hz) nimmt das Rumpeln raus; alle Laute neu kodiert. Danach alle 150 per Spektrogramm, Abstand Ruf/Grundrauschen und Tonhaltigkeit geprüft: 8 Laute raus (Gorilla-Stotter-Effekt, Wal-Sinuston, Kamel-Brummen, fünf Aufnahmen, die nur Wind/Umgebung sind).
+**Nicht gebaut:** kein Ersatz für die entfernten Laute, kein automatischer Qualitäts-Check in `tiere_holen.py` (die Prüfskripte liefen nur einmal), niemand hat die Laute angehört.
+
 ## 2026-11-11 — feat(tiere): vier Tiere pro Taste
 **Was:** Jeder Buchstabe hat jetzt vier Tiere statt einem (78 neue, keins doppelt), damit beim Hämmern mehr passiert. Ausgewählt nach dem, wofür es einen echten CC0-Laut gibt, Fotos danach. `tiere_holen.py` erkennt MP3 jetzt am Frame-Sync (auch MPEG 2.5) und verwirft eine unzulässige Datei einzeln statt alles abzubrechen; optional `unten_weg` schneidet eine Bildunterschrift ab. Quarantäne liegt jetzt dauerhaft in `~/.cache/oskalizer/quarantaene/` (ein abgebrochener Lauf lädt nicht alles neu). Mono heißt jetzt erster Kanal statt Mischung: eine Möwen-Aufnahme hatte gegenphasige Kanäle und wurde beim Mischen stumm. Gemessen: Start 3,3 s statt 2,0 s, 461 MB Speicher.
 **Nicht gebaut:** keine Ä/Ö/Ü-Tiere, keine Laute für 25 Tiere (kein CC0-Original), kein Foto für den Kuckuck, kein Nachladen der Dateien bei Bedarf (alles beim Start).

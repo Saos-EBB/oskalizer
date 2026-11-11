@@ -78,13 +78,19 @@ rembg freigestellt (PNG), Laute als OGG mit der lautesten Stelle, höchstens
 Braucht ffmpeg, rembg (siehe unten) und podman. Die Ordner-Datei
 `QUELLEN.md` daneben listet die Urheber.
 
-Keinen echten Laut haben 25 der 104 Tiere, weil es kein brauchbares
-CC0-Original gibt: Chamäleon, Chinchilla, Giraffe, Iltis, Impala, Japanmakak,
-Nashorn, Orang-Utan, Otter, alle vier Q-Tiere, Raupe, Uferschwalbe, Urson,
-alle V-Tiere außer Vogel, alle X-Tiere außer Xerus, Yapok, Ypsiloneule und Zebra. Da bleibt
-die Lautmalerei. Yak und Kuh muhen mit verschiedenen Kuh-Aufnahmen, der
-Jungfernkranich ruft mit einem anderen Kranich. Der Kuckuck hat kein Foto (auf allen
-CC0-Fotos sitzt er zu klein im Gebüsch, rembg findet ihn nicht) und zeigt das Emoji. Eine Datei rauswerfen: Eintrag
+Keinen echten Laut haben 27 der 104 Tiere, weil es kein brauchbares
+CC0-Original gibt: Büffel, Chamäleon, Chinchilla, Giraffe, Gorilla, Iltis, Impala,
+Japanmakak, Nashorn, Orang-Utan, Otter, alle vier Q-Tiere, Raupe, Uferschwalbe,
+Urson, alle V-Tiere außer Vogel, alle X-Tiere außer Xerus, Yapok, Ypsiloneule und
+Zebra. Da bleibt die Lautmalerei. Yak und Kuh muhen mit verschiedenen
+Kuh-Aufnahmen, der Jungfernkranich ruft mit einem anderen Kranich. Der Kuckuck hat
+kein Foto (auf allen CC0-Fotos sitzt er zu klein im Gebüsch, rembg findet ihn
+nicht) und zeigt das Emoji.
+
+Beim Ausschneiden der 4 s wird die lauteste Stelle ohne Bass gesucht, sonst gewinnt
+Wind- und Mikrofonrumpeln gegen den Vogel. Ein Hochpass nimmt das Rumpeln auch aus
+dem fertigen Laut: 300 Hz für Vögel, Insekten und kleine Tiere, 150 Hz für mittlere,
+80 Hz für die großen (Feld `hochpass` in `tierquellen.json`). Eine Datei rauswerfen: Eintrag
 aus `tierquellen.json` löschen und die Datei im Ordner löschen.
 
 ### Tastatur-Beleuchtung (`kb-rgb ozk`)

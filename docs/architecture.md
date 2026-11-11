@@ -47,7 +47,7 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
   Seite, Urheber); das Skript lädt sie in eine Quarantäne (`~/.cache/oskalizer/quarantaene/`,
   bleibt über Abbrüche liegen, Datei weg erst nach dem Kodieren; nur https von
   Wikimedia/Freesound, ≤ 20 MB, Typ an den Magic Bytes), scannt mit ClamAV
-  (Podman), kodiert neu (rembg → PNG, ffmpeg → OGG, lauteste 4 s) und legt sie ab.
+  (Podman), kodiert neu (rembg → PNG, ffmpeg → OGG, lauteste 4 s ohne Bass gesucht, Hochpass pro Laut) und legt sie ab.
 - `freistellen.py` — `python3 freistellen.py foto.jpg ziel.png`: schneidet mit rembg
   (Modell u2net) das Motiv aus, für Fotos neuer Wörter. Läuft nur von Hand beim
   Einsortieren, nicht im oskalizer und nicht auf Vercel.

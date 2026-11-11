@@ -366,7 +366,8 @@
   "seite": "https://freesound.org/people/craigsmith/sounds/437954",
   "titel": "G12-22-Monkey Squeals.wav",
   "urheber": "craigsmith",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Affe",
@@ -375,7 +376,8 @@
   "seite": "https://freesound.org/people/craigsmith/sounds/479810",
   "titel": "R01-07-Monkeys Chirping.wav",
   "urheber": "craigsmith",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Bär",
@@ -402,7 +404,8 @@
   "seite": "https://commons.wikimedia.org/w/index.php?curid=170283903",
   "titel": "161691 felixblume dolphin-screaming-underwater-in-caribbean-sea-mexico",
   "urheber": "The user Felix.Blume https://freesound.org/people/felix.blume/",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Delfin",
@@ -411,7 +414,8 @@
   "seite": "https://freesound.org/people/craigsmith/sounds/437947",
   "titel": "G12-15-Dolphins Underwater.wav",
   "urheber": "craigsmith",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Elefant",
@@ -447,7 +451,8 @@
   "seite": "https://freesound.org/people/shaunhillyard/sounds/532235",
   "titel": "Frog Croaking (UK Common Frog)",
   "urheber": "shaunhillyard",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Frosch",
@@ -456,7 +461,8 @@
   "seite": "https://freesound.org/people/katzlbt/sounds/361117",
   "titel": "frog_quak.mp3",
   "urheber": "katzlbt",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Frosch",
@@ -465,7 +471,8 @@
   "seite": "https://freesound.org/people/betterchinese/sounds/354132",
   "titel": "Frog croaking sound effect",
   "urheber": "betterchinese",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Hund",
@@ -474,7 +481,8 @@
   "seite": "https://freesound.org/people/felix.blume/sounds/199261",
   "titel": "A dog barking (close recording)",
   "urheber": "felix.blume",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Hund",
@@ -483,7 +491,8 @@
   "seite": "https://freesound.org/people/giddster/sounds/484297",
   "titel": "Small dog bark",
   "urheber": "giddster",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Hund",
@@ -492,7 +501,8 @@
   "seite": "https://freesound.org/people/esperri/sounds/118964",
   "titel": "Dog Bark 4.wav",
   "urheber": "esperri",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Igel",
@@ -501,7 +511,8 @@
   "seite": "https://freesound.org/people/fthgurdy/sounds/528183",
   "titel": "Angry hedgehog sniffing 1",
   "urheber": "fthgurdy",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Igel",
@@ -510,7 +521,8 @@
   "seite": "https://freesound.org/people/fthgurdy/sounds/528176",
   "titel": "Angry hedgehog huffs and patters 1",
   "urheber": "fthgurdy",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Jaguar",
@@ -528,7 +540,8 @@
   "seite": "https://freesound.org/people/fthgurdy/sounds/528192",
   "titel": "Cat meow 5",
   "urheber": "fthgurdy",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Katze",
@@ -537,7 +550,8 @@
   "seite": "https://freesound.org/people/fthgurdy/sounds/528194",
   "titel": "Cat meow 3",
   "urheber": "fthgurdy",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Katze",
@@ -546,7 +560,8 @@
   "seite": "https://freesound.org/people/philsapphire/sounds/256452",
   "titel": "Cat meow",
   "urheber": "philsapphire",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Löwe",
@@ -582,7 +597,8 @@
   "seite": "https://freesound.org/people/adamamazing/sounds/557703",
   "titel": "Mice Sqeak.wav",
   "urheber": "adamamazing",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Maus",
@@ -591,7 +607,8 @@
   "seite": "https://freesound.org/people/berboberbo/sounds/727114",
   "titel": "Mice Squeaks",
   "urheber": "berboberbo",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Oktopus",
@@ -600,7 +617,8 @@
   "seite": "https://freesound.org/people/ristooooo1/sounds/539820",
   "titel": "Bubbles 003.wav",
   "urheber": "ristooooo1",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Oktopus",
@@ -609,16 +627,8 @@
   "seite": "https://freesound.org/people/jeremy123/sounds/460100",
   "titel": "bubbles",
   "urheber": "jeremy123",
-  "lizenz": "CC0 1.0"
- },
- {
-  "wort": "Pinguin",
-  "slot": "laut",
-  "url": "https://cdn.freesound.org/previews/150/150861_1257975-hq.mp3",
-  "seite": "https://freesound.org/people/al.barbosa/sounds/150861",
-  "titel": "Penguin at Brown Bluff",
-  "urheber": "al.barbosa",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Pinguin",
@@ -627,7 +637,8 @@
   "seite": "https://freesound.org/people/al.barbosa/sounds/150873",
   "titel": "Pinguin Colony at Gourdin Island in the Antarctica Peninsula",
   "urheber": "al.barbosa",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Schwein",
@@ -690,7 +701,8 @@
   "seite": "https://freesound.org/people/greither/sounds/115607",
   "titel": "eagle-owl.mp3",
   "urheber": "greither",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Uhu",
@@ -699,7 +711,8 @@
   "seite": "https://freesound.org/people/bruno.auzet/sounds/701135",
   "titel": "eagle owl.wav",
   "urheber": "bruno.auzet",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Vogel",
@@ -708,7 +721,8 @@
   "seite": "https://freesound.org/people/williew705/sounds/98447",
   "titel": "Bird song at Spfd Lake 2.wav",
   "urheber": "williew705",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Vogel",
@@ -717,7 +731,8 @@
   "seite": "https://freesound.org/people/Travesia_Sonora/sounds/332851",
   "titel": "Chaffinch Male Bird Song",
   "urheber": "Travesia_Sonora",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Wal",
@@ -729,31 +744,14 @@
   "lizenz": "CC0 1.0"
  },
  {
-  "wort": "Wal",
-  "slot": "laut",
-  "url": "https://cdn.freesound.org/previews/171/171945_3206712-hq.mp3",
-  "seite": "https://freesound.org/people/RebekahDay/sounds/171945",
-  "titel": "LowWhalesong.wav",
-  "urheber": "RebekahDay",
-  "lizenz": "CC0 1.0"
- },
- {
   "wort": "Xerus",
   "slot": "laut",
   "url": "https://cdn.freesound.org/previews/640/640992_392990-hq.mp3",
   "seite": "https://freesound.org/people/burgersmoke/sounds/640992",
   "titel": "Ground Squirrel First Chirp",
   "urheber": "burgersmoke",
-  "lizenz": "CC0 1.0"
- },
- {
-  "wort": "Xerus",
-  "slot": "laut",
-  "url": "https://cdn.freesound.org/previews/640/640990_392990-hq.mp3",
-  "seite": "https://freesound.org/people/burgersmoke/sounds/640990",
-  "titel": "Ground Squirrel 2 Chirps Near Its Den",
-  "urheber": "burgersmoke",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Yak",
@@ -789,7 +787,8 @@
   "seite": "https://freesound.org/people/Sacha.Julien/sounds/725058",
   "titel": "Blackbird song, solo, Madeira, good quality",
   "urheber": "Sacha.Julien",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Amsel",
@@ -798,7 +797,8 @@
   "seite": "https://freesound.org/people/calodas/sounds/188370",
   "titel": "Blackbird_Sweden_short.wav",
   "urheber": "calodas",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Ara",
@@ -816,7 +816,8 @@
   "seite": "https://freesound.org/people/felix.blume/sounds/504988",
   "titel": "Macaw Parrot screaming in a park",
   "urheber": "felix.blume",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Ara",
@@ -825,7 +826,8 @@
   "seite": "https://freesound.org/people/hollyjurbergs/sounds/562846",
   "titel": "MacawCall.wav",
   "urheber": "hollyjurbergs",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Alpaka",
@@ -843,7 +845,8 @@
   "seite": "https://freesound.org/people/gtg777/sounds/623809",
   "titel": "Alpaca noises",
   "urheber": "gtg777",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Biene",
@@ -861,7 +864,8 @@
   "seite": "https://freesound.org/people/JonCon_Library/sounds/481647",
   "titel": "Bee Buzzing",
   "urheber": "JonCon_Library",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Biene",
@@ -870,7 +874,8 @@
   "seite": "https://freesound.org/people/esperar/sounds/170760",
   "titel": "Bee buzz 1.wav",
   "urheber": "esperar",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Bussard",
@@ -888,7 +893,8 @@
   "seite": "https://freesound.org/people/bruno.auzet/sounds/648430",
   "titel": "Two buzzards in a windy forest.wav",
   "urheber": "bruno.auzet",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Büffel",
@@ -897,15 +903,6 @@
   "seite": "https://commons.wikimedia.org/wiki/File:Syncerus_caffer_caffer_682488952.jpg",
   "titel": "Syncerus caffer caffer 682488952.jpg",
   "urheber": "Sri Srikumar",
-  "lizenz": "CC0 1.0"
- },
- {
-  "wort": "Büffel",
-  "slot": "laut",
-  "url": "https://cdn.freesound.org/previews/197/197361_1661766-hq.mp3",
-  "seite": "https://freesound.org/people/felix.blume/sounds/197361",
-  "titel": "Buffalos in the tall-grass prairie in Oklahoma, growling, grunting, sniffing and eating some food",
-  "urheber": "felix.blume",
   "lizenz": "CC0 1.0"
  },
  {
@@ -924,7 +921,8 @@
   "seite": "https://freesound.org/people/Mewsel/sounds/208030",
   "titel": "Chihuahua Barks",
   "urheber": "Mewsel",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Chihuahua",
@@ -933,7 +931,8 @@
   "seite": "https://freesound.org/people/AustinXYZ/sounds/350591",
   "titel": "Chihuahua Puppy Bark",
   "urheber": "AustinXYZ",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Collie",
@@ -951,7 +950,8 @@
   "seite": "https://freesound.org/people/craigsmith/sounds/437943",
   "titel": "G12-11-Collie Barking.wav",
   "urheber": "craigsmith",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Chinchilla",
@@ -969,15 +969,6 @@
   "seite": "https://commons.wikimedia.org/wiki/File:Camelus_dromedarius_in_Tanzania.jpg",
   "titel": "Camelus dromedarius in Tanzania.jpg",
   "urheber": "cotterillmike",
-  "lizenz": "CC0 1.0"
- },
- {
-  "wort": "Dromedar",
-  "slot": "laut",
-  "url": "https://cdn.freesound.org/previews/437/437937_2524442-hq.mp3",
-  "seite": "https://freesound.org/people/craigsmith/sounds/437937",
-  "titel": "G12-05-Camel Grunt.wav",
-  "urheber": "craigsmith",
   "lizenz": "CC0 1.0"
  },
  {
@@ -1005,7 +996,8 @@
   "seite": "https://freesound.org/people/GeniusKevin/sounds/612814",
   "titel": "Group of jackdaw",
   "urheber": "GeniusKevin",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Dohle",
@@ -1014,7 +1006,8 @@
   "seite": "https://freesound.org/people/Walking.With.Microphones/sounds/556235",
   "titel": "Western jackdaw (Coloeus monedula)",
   "urheber": "Walking.With.Microphones",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Drossel",
@@ -1032,7 +1025,8 @@
   "seite": "https://freesound.org/people/naturenotesuk/sounds/416607",
   "titel": "Song Thrush",
   "urheber": "naturenotesuk",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Drossel",
@@ -1041,7 +1035,8 @@
   "seite": "https://freesound.org/people/holkham/sounds/151772",
   "titel": "song thrush",
   "urheber": "holkham",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Esel",
@@ -1086,7 +1081,8 @@
   "seite": "https://freesound.org/people/craigsmith/sounds/479608",
   "titel": "R30-32-Ducks Quack on Pond.wav",
   "urheber": "craigsmith",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Ente",
@@ -1095,7 +1091,8 @@
   "seite": "https://freesound.org/people/gibarroule/sounds/365133",
   "titel": "Duck Quack",
   "urheber": "gibarroule",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Elster",
@@ -1113,7 +1110,8 @@
   "seite": "https://freesound.org/people/naturenotesuk/sounds/555096",
   "titel": "Eurasian Magpie Calling",
   "urheber": "naturenotesuk",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Elster",
@@ -1122,7 +1120,8 @@
   "seite": "https://freesound.org/people/straget/sounds/402971",
   "titel": "A screeching Magpie in the top of a birch.wav",
   "urheber": "straget",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Fuchs",
@@ -1140,7 +1139,8 @@
   "seite": "https://freesound.org/people/gadzooks/sounds/397655",
   "titel": "Fox Barking",
   "urheber": "gadzooks",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Fuchs",
@@ -1149,7 +1149,8 @@
   "seite": "https://freesound.org/people/Simon%20Spiers/sounds/431302",
   "titel": "Fox Cry.wav",
   "urheber": "Simon Spiers",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Flamingo",
@@ -1167,7 +1168,8 @@
   "seite": "https://freesound.org/people/Breviceps/sounds/535778",
   "titel": "Flamingos",
   "urheber": "Breviceps",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Flamingo",
@@ -1176,7 +1178,8 @@
   "seite": "https://freesound.org/people/bruno.auzet/sounds/836289",
   "titel": "pink flamingo at Branféré",
   "urheber": "bruno.auzet",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Fledermaus",
@@ -1194,7 +1197,8 @@
   "seite": "https://freesound.org/people/craigsmith/sounds/437934",
   "titel": "G12-02-Bats Chirping.wav",
   "urheber": "craigsmith",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Fledermaus",
@@ -1203,7 +1207,8 @@
   "seite": "https://commons.wikimedia.org/w/index.php?curid=97244177",
   "titel": "Hoary bat chirp recording",
   "urheber": "Kaldari",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Gorilla",
@@ -1212,15 +1217,6 @@
   "seite": "https://commons.wikimedia.org/wiki/File:Gorilla_(13645147193).jpg",
   "titel": "Gorilla (13645147193).jpg",
   "urheber": "Mathias Appel",
-  "lizenz": "CC0 1.0"
- },
- {
-  "wort": "Gorilla",
-  "slot": "laut",
-  "url": "https://cdn.freesound.org/previews/178/178188_3085891-hq.mp3",
-  "seite": "https://freesound.org/people/Ihopethisworks/sounds/178188",
-  "titel": "G-Gorilla_1-2.aif",
-  "urheber": "Ihopethisworks",
   "lizenz": "CC0 1.0"
  },
  {
@@ -1239,7 +1235,8 @@
   "seite": "https://freesound.org/people/TRP/sounds/575369",
   "titel": "Canada Goose, honks, park, Calgary, March 10.flac",
   "urheber": "TRP",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Gans",
@@ -1248,7 +1245,8 @@
   "seite": "https://freesound.org/people/Kinoton/sounds/423346",
   "titel": "Canada Geese Honks",
   "urheber": "Kinoton",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Grille",
@@ -1262,20 +1260,12 @@
  {
   "wort": "Grille",
   "slot": "laut",
-  "url": "https://cdn.freesound.org/previews/360/360628_627541-hq.mp3",
-  "seite": "https://freesound.org/people/Pfannkuchn/sounds/360628",
-  "titel": "Single cricket chirping during a summer evening in the city (with traffic noise)",
-  "urheber": "Pfannkuchn",
-  "lizenz": "CC0 1.0"
- },
- {
-  "wort": "Grille",
-  "slot": "laut",
   "url": "https://cdn.freesound.org/previews/363/363111_6612464-hq.mp3",
   "seite": "https://freesound.org/people/TheWoodlandNomad/sounds/363111",
   "titel": "Cricket Chirp",
   "urheber": "TheWoodlandNomad",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Huhn",
@@ -1293,7 +1283,8 @@
   "seite": "https://freesound.org/people/tom_woysky/sounds/232495",
   "titel": "Polish hen cackling.wav",
   "urheber": "tom_woysky",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Huhn",
@@ -1302,7 +1293,8 @@
   "seite": "https://freesound.org/people/Jofae/sounds/353252",
   "titel": "Chicken Cackling",
   "urheber": "Jofae",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Hyäne",
@@ -1320,7 +1312,8 @@
   "seite": "https://freesound.org/people/sounagix/sounds/680844",
   "titel": "HyenaLaugh1.wav",
   "urheber": "sounagix",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Hyäne",
@@ -1329,7 +1322,8 @@
   "seite": "https://freesound.org/people/sounagix/sounds/680843",
   "titel": "HyenaLaugh0.wav",
   "urheber": "sounagix",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Hummel",
@@ -1347,7 +1341,8 @@
   "seite": "https://freesound.org/people/Breviceps/sounds/466795",
   "titel": "Bumblebee",
   "urheber": "Breviceps",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Hummel",
@@ -1356,7 +1351,8 @@
   "seite": "https://freesound.org/people/EilasSFX/sounds/665147",
   "titel": "Bumblebee",
   "urheber": "EilasSFX",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Ibis",
@@ -1374,7 +1370,8 @@
   "seite": "https://freesound.org/people/toadie/sounds/194872",
   "titel": "hadedas and thunder.mp3",
   "urheber": "toadie",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Iltis",
@@ -1410,7 +1407,8 @@
   "seite": "https://freesound.org/people/frontiersoundfx/sounds/456750",
   "titel": "Beagle Howling.wav",
   "urheber": "frontiersoundfx",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Jagdhund",
@@ -1419,7 +1417,8 @@
   "seite": "https://freesound.org/people/hotdogtornados/sounds/240330",
   "titel": "Old beagle mutt barking and whining.wav",
   "urheber": "hotdogtornados",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Jungfernkranich",
@@ -1437,7 +1436,8 @@
   "seite": "https://freesound.org/people/joakgust/sounds/548491",
   "titel": "Crane bird calling.wav",
   "urheber": "joakgust",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Japanmakak",
@@ -1482,7 +1482,8 @@
   "seite": "https://freesound.org/people/Monkay/sounds/81971",
   "titel": "Cuckoo 9.WAV",
   "urheber": "Monkay",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Kuckuck",
@@ -1491,7 +1492,8 @@
   "seite": "https://freesound.org/people/SiliconeSound/sounds/475049",
   "titel": "Cuckoo",
   "urheber": "SiliconeSound",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Krähe",
@@ -1509,7 +1511,8 @@
   "seite": "https://freesound.org/people/tripjazz/sounds/509103",
   "titel": "Crow Cawing",
   "urheber": "tripjazz",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Krähe",
@@ -1518,7 +1521,8 @@
   "seite": "https://freesound.org/people/storyofthelie/sounds/649580",
   "titel": "crow CAWS",
   "urheber": "storyofthelie",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Lama",
@@ -1536,7 +1540,8 @@
   "seite": "https://freesound.org/people/felix.blume/sounds/385941",
   "titel": "Guanaco sounds.",
   "urheber": "felix.blume",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Lerche",
@@ -1554,7 +1559,8 @@
   "seite": "https://freesound.org/people/Kinoton/sounds/387426",
   "titel": "Single Skylark",
   "urheber": "Kinoton",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Lerche",
@@ -1563,7 +1569,8 @@
   "seite": "https://freesound.org/people/Andy_Gardner/sounds/277149",
   "titel": "skylark.wav",
   "urheber": "Andy_Gardner",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Lemur",
@@ -1581,7 +1588,8 @@
   "seite": "https://commons.wikimedia.org/w/index.php?curid=174753174",
   "titel": "Lemur in Antefasy",
   "urheber": "Gasybeaugosse2020",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Möwe",
@@ -1599,7 +1607,8 @@
   "seite": "https://freesound.org/people/Vurca/sounds/318092",
   "titel": "Seagull",
   "urheber": "Vurca",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Möwe",
@@ -1608,7 +1617,8 @@
   "seite": "https://freesound.org/people/Snapper4298/sounds/166707",
   "titel": "seagull 2.wav",
   "urheber": "Snapper4298",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Meerschweinchen",
@@ -1626,7 +1636,8 @@
   "seite": "https://freesound.org/people/Breviceps/sounds/583078",
   "titel": "Squeaking Guinea Pigs",
   "urheber": "Breviceps",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Meerschweinchen",
@@ -1635,7 +1646,8 @@
   "seite": "https://freesound.org/people/Karola3206/sounds/459951",
   "titel": "Cute guinea pig.wav",
   "urheber": "Karola3206",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Meise",
@@ -1653,7 +1665,8 @@
   "seite": "https://freesound.org/people/D4XX/sounds/607242",
   "titel": "Great Tit",
   "urheber": "D4XX",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Meise",
@@ -1662,7 +1675,8 @@
   "seite": "https://freesound.org/people/isbeorn/sounds/429156",
   "titel": "great_tit.wav",
   "urheber": "isbeorn",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Nachtigall",
@@ -1680,7 +1694,8 @@
   "seite": "https://freesound.org/people/ollytc/sounds/632259",
   "titel": "Nightingale Song.wav",
   "urheber": "ollytc",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Nachtigall",
@@ -1689,7 +1704,8 @@
   "seite": "https://freesound.org/people/MATRIXXX_/sounds/365663",
   "titel": "Bird, Thrush Nightingale 02.wav",
   "urheber": "MATRIXXX_",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Nilpferd",
@@ -1734,7 +1750,8 @@
   "seite": "https://freesound.org/people/Sheyvan/sounds/457364",
   "titel": "Cockatiels: Sounds (Darwin & Curie)",
   "urheber": "Sheyvan",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Nymphensittich",
@@ -1743,7 +1760,8 @@
   "seite": "https://freesound.org/people/Tairblenn/sounds/540151",
   "titel": "cockatiel chirping.mp3",
   "urheber": "Tairblenn",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Ochsenfrosch",
@@ -1833,7 +1851,8 @@
   "seite": "https://freesound.org/people/Kinoton/sounds/688203",
   "titel": "Bird, Peacock Call",
   "urheber": "Kinoton",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Pfau",
@@ -1842,7 +1861,8 @@
   "seite": "https://freesound.org/people/craigsmith/sounds/675965",
   "titel": "S29-22 Peacock calls.wav",
   "urheber": "craigsmith",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Papagei",
@@ -1860,7 +1880,8 @@
   "seite": "https://freesound.org/people/OroborosNZ/sounds/141252",
   "titel": "Parrots in tree",
   "urheber": "OroborosNZ",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Papagei",
@@ -1869,7 +1890,8 @@
   "seite": "https://freesound.org/people/16FVolejnikovaA/sounds/498399",
   "titel": "Parrots talking",
   "urheber": "16FVolejnikovaA",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Quokka",
@@ -1914,7 +1936,8 @@
   "seite": "https://freesound.org/people/Bidone/sounds/67356",
   "titel": "Raven 2.mp3",
   "urheber": "Bidone",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Rabe",
@@ -1923,7 +1946,8 @@
   "seite": "https://freesound.org/people/nielstii/sounds/346318",
   "titel": "raven x3",
   "urheber": "nielstii",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Ratte",
@@ -1941,7 +1965,8 @@
   "seite": "https://freesound.org/people/toefur/sounds/288941",
   "titel": "rat-squeak.wav",
   "urheber": "toefur",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Ratte",
@@ -1950,7 +1975,8 @@
   "seite": "https://freesound.org/people/Zabuhailo/sounds/143125",
   "titel": "ratSqueak.wav",
   "urheber": "Zabuhailo",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Reh",
@@ -1968,16 +1994,8 @@
   "seite": "https://freesound.org/people/Sacha.Julien/sounds/724578",
   "titel": "Roe Deer calls Forest of Saou",
   "urheber": "Sacha.Julien",
-  "lizenz": "CC0 1.0"
- },
- {
-  "wort": "Reh",
-  "slot": "laut",
-  "url": "https://cdn.freesound.org/previews/203/203593_548893-hq.mp3",
-  "seite": "https://freesound.org/people/raoul_slayer/sounds/203593",
-  "titel": "barkingroedeer.wav",
-  "urheber": "raoul_slayer",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Schaf",
@@ -1995,7 +2013,8 @@
   "seite": "https://freesound.org/people/emilyws/sounds/414541",
   "titel": "Sheep Baa",
   "urheber": "emilyws",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Schaf",
@@ -2004,7 +2023,8 @@
   "seite": "https://freesound.org/people/satoristudios3/sounds/692900",
   "titel": "Ewe Shetland Sheep Baa",
   "urheber": "satoristudios3",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Specht",
@@ -2022,7 +2042,8 @@
   "seite": "https://freesound.org/people/JKata/sounds/620236",
   "titel": "CourtshipDrummingOfWoodpecker.wav",
   "urheber": "JKata",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Specht",
@@ -2031,7 +2052,8 @@
   "seite": "https://freesound.org/people/naturenotesuk/sounds/428146",
   "titel": "Great Spotted Woodpecker",
   "urheber": "naturenotesuk",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Schlange",
@@ -2049,7 +2071,8 @@
   "seite": "https://freesound.org/people/JesterWhoo/sounds/706977",
   "titel": "Angry snake hissing. OWI.wav",
   "urheber": "JesterWhoo",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Schlange",
@@ -2058,7 +2081,8 @@
   "seite": "https://freesound.org/people/schreibsel/sounds/540162",
   "titel": "Snake hissing.mp3",
   "urheber": "schreibsel",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Taube",
@@ -2076,7 +2100,8 @@
   "seite": "https://freesound.org/people/5ro4/sounds/649390",
   "titel": "pigeon territorial coo.wav",
   "urheber": "5ro4",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Taube",
@@ -2085,7 +2110,8 @@
   "seite": "https://freesound.org/people/squashy555/sounds/319512",
   "titel": "pigeon.wav",
   "urheber": "squashy555",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Truthahn",
@@ -2103,7 +2129,8 @@
   "seite": "https://freesound.org/people/JarredGibb/sounds/233123",
   "titel": "Turkey - Gobble - 96kHz.wav",
   "urheber": "JarredGibb",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Truthahn",
@@ -2112,7 +2139,8 @@
   "seite": "https://freesound.org/people/JarredGibb/sounds/233125",
   "titel": "Turkey - Gobble 3 - 96kHz.wav",
   "urheber": "JarredGibb",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Tukan",
@@ -2130,7 +2158,8 @@
   "seite": "https://freesound.org/people/felix.blume/sounds/376669",
   "titel": "Toucan screaming in the Amazon Forest (Venezuela)",
   "urheber": "felix.blume",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Unke",
@@ -2148,7 +2177,8 @@
   "seite": "https://freesound.org/people/darthbaul/sounds/270411",
   "titel": "Fire-bellied toads in a windy spring day",
   "urheber": "darthbaul",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Uferschwalbe",
@@ -2239,7 +2269,8 @@
   "seite": "https://freesound.org/people/tomattka/sounds/436498",
   "titel": "Budgie chirps",
   "urheber": "tomattka",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Wellensittich",
@@ -2248,7 +2279,8 @@
   "seite": "https://freesound.org/people/tomattka/sounds/436497",
   "titel": "Budgie singing",
   "urheber": "tomattka",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Waschbär",
@@ -2266,7 +2298,8 @@
   "seite": "https://freesound.org/people/TRP/sounds/616622",
   "titel": "120827 Raccoon, bark, screech, yelp, squeal, backyard, Toronto.wav",
   "urheber": "TRP",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Xenopus",
@@ -2311,7 +2344,8 @@
   "seite": "https://freesound.org/people/giouliangel100/sounds/546918",
   "titel": "Yorkshire's terrier bark.m4a",
   "urheber": "giouliangel100",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Yapok",
@@ -2347,7 +2381,8 @@
   "seite": "https://freesound.org/people/Kinoton/sounds/581240",
   "titel": "Single Goat Bleating 2x",
   "urheber": "Kinoton",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Ziege",
@@ -2356,7 +2391,8 @@
   "seite": "https://freesound.org/people/poodaddy69/sounds/495688",
   "titel": "Happy Goat",
   "urheber": "poodaddy69",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 150
  },
  {
   "wort": "Zikade",
@@ -2374,7 +2410,8 @@
   "seite": "https://freesound.org/people/macdaddyno1/sounds/321591",
   "titel": "Japanese Cicada",
   "urheber": "macdaddyno1",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Zikade",
@@ -2383,7 +2420,8 @@
   "seite": "https://commons.wikimedia.org/w/index.php?curid=75143841",
   "titel": "Chorus Cicada singing",
   "urheber": "Siobhan Leachman",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Zaunkönig",
@@ -2401,7 +2439,8 @@
   "seite": "https://freesound.org/people/FreqWincy/sounds/724091",
   "titel": "Eurasian Wren @ the Moonraker Trowbridge, Bradford-on-Avon",
   "urheber": "FreqWincy",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  },
  {
   "wort": "Zaunkönig",
@@ -2410,6 +2449,7 @@
   "seite": "https://freesound.org/people/hargissssound/sounds/636744",
   "titel": "Carolina Wren, loop",
   "urheber": "hargissssound",
-  "lizenz": "CC0 1.0"
+  "lizenz": "CC0 1.0",
+  "hochpass": 300
  }
 ]

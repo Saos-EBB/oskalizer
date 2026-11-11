@@ -9,7 +9,7 @@ Jede Datei landet erst in einer Quarantaene (~/.cache/oskalizer/quarantaene/) un
 muss durch: nur https von den erlaubten Hosts, hoechstens 20 MB, Dateityp an den
 ersten Bytes erkannt (nicht an der Endung), ClamAV-Scan (Podman-Container clamav/clamav, sonst clamscan; ohne
 Scanner bricht es ab). Danach wird alles neu kodiert - Fotos per rembg
-freigestellt als PNG, Laute per ffmpeg als OGG (die lauteste Stelle,
+freigestellt als PNG, Laute per ffmpeg als OGG (die lauteste Stelle ohne Bass, Rumpeln per Hochpass weg,
 hoechstens MAX_SEKUNDEN, laut normalisiert). Von der Originaldatei bleibt nur, was
 Pillow/ffmpeg daraus dekodieren; Metadaten und angehaengte Bytes fallen weg.
 Braucht ffmpeg, rembg (siehe freistellen.py) und podman oder clamscan.
@@ -38,6 +38,7 @@ MAX_SEKUNDEN = 4.0
 # Nur der erste Kanal statt Mono-Mix: manche Aufnahmen haben gegenphasige Kanaele,
 # die sich beim Mischen zu Stille aufheben (gemessen: "seagull 2.wav", -91 dB)
 MONO = "pan=mono|c0=c0"
+HOCHPASS = 80                                  # Hz, wenn tierquellen.json nichts anderes sagt
 CLAMAV_BILD = "docker.io/clamav/clamav:stable"
 
 # erste Bytes -> Typ; was hier nicht passt, fliegt raus
@@ -127,10 +128,12 @@ def bild(quelle, ziel, unten_weg=0.0):
     frei.save(ziel, "PNG")
 
 
-def lauteste_stelle(quelle):
+def lauteste_stelle(quelle, hochpass):
     """Start (s) des lautesten MAX_SEKUNDEN-Fensters. Lange Aufnahmen haben vorn
-    oft nur Rauschen."""
-    roh = subprocess.run(["ffmpeg", "-v", "error", "-i", str(quelle), "-vn", "-af", MONO,
+    oft nur Rauschen. Gemessen ohne Bass: sonst gewinnt Wind- und Mikrofonrumpeln
+    gegen den Vogel (gemessen: Amsel, Lerche)."""
+    filt = f"{MONO},highpass=f={max(hochpass, 150)}:poles=2,highpass=f={max(hochpass, 150)}:poles=2"
+    roh = subprocess.run(["ffmpeg", "-v", "error", "-i", str(quelle), "-vn", "-af", filt,
                           "-ar", "8000", "-f", "s16le", "-"], capture_output=True, check=True).stdout
     werte = array.array("h", roh[: len(roh) // 2 * 2])
     block = 800                                    # 0,1 s
@@ -147,11 +150,13 @@ def lauteste_stelle(quelle):
     return max(0.0, start / 10 - 0.1)
 
 
-def laut(quelle, ziel):
+def laut(quelle, ziel, hochpass=HOCHPASS):
+    """hochpass (Hz) schneidet Rumpeln weg: 300 fuer Voegel/Insekten, 80 fuer Loewe & Co."""
     subprocess.run(
-        ["ffmpeg", "-v", "error", "-y", "-ss", str(lauteste_stelle(quelle)), "-i", str(quelle),
+        ["ffmpeg", "-v", "error", "-y", "-ss", str(lauteste_stelle(quelle, hochpass)), "-i", str(quelle),
          "-vn", "-sn", "-map_metadata", "-1", "-af",
-         f"{MONO},atrim=0:{MAX_SEKUNDEN},afade=t=in:d=0.05,afade=t=out:st={MAX_SEKUNDEN - 0.4}:d=0.4,"
+         f"{MONO},highpass=f={hochpass}:poles=2,highpass=f={hochpass}:poles=2,"
+         f"atrim=0:{MAX_SEKUNDEN},afade=t=in:d=0.05,afade=t=out:st={MAX_SEKUNDEN - 0.4}:d=0.4,"
          # loudnorm rechnet mit 192 kHz und haelt kurz die Spitzen nicht - Limiter danach
          "loudnorm=I=-16:TP=-1.5,aresample=44100,alimiter=limit=0.7:level=false",
          "-ar", "44100", "-c:a", "libvorbis", "-q:a", "5", str(ziel)], check=True)
@@ -206,7 +211,7 @@ def main():
         if e["slot"] == "bild":
             bild(roh[e["url"]], ziel, e.get("unten_weg", 0.0))
         else:
-            laut(roh[e["url"]], ziel)
+            laut(roh[e["url"]], ziel, e.get("hochpass", HOCHPASS))
         roh[e["url"]].unlink()
 
     schreibe_quellen(eintraege)
