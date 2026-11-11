@@ -44,7 +44,8 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
   `Tafel` nimmt sie, wenn es kein Familien-Foto gibt (Familie > CC0-Foto > Emoji),
   `Ton.play` für den Laut (Familien-Laut > CC0-Laut > Piper-Lautmalerei).
 - `tierquellen.json` + `tiere_holen.py` — Liste der gewählten CC0-Dateien (URL,
-  Seite, Urheber); das Skript lädt sie in eine Quarantäne (nur https von
+  Seite, Urheber); das Skript lädt sie in eine Quarantäne (`~/.cache/oskalizer/quarantaene/`,
+  bleibt über Abbrüche liegen, Datei weg erst nach dem Kodieren; nur https von
   Wikimedia/Freesound, ≤ 20 MB, Typ an den Magic Bytes), scannt mit ClamAV
   (Podman), kodiert neu (rembg → PNG, ffmpeg → OGG, lauteste 4 s) und legt sie ab.
 - `freistellen.py` — `python3 freistellen.py foto.jpg ziel.png`: schneidet mit rembg

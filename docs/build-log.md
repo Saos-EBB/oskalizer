@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-11-11 — feat(tiere): vier Tiere pro Taste
+**Was:** Jeder Buchstabe hat jetzt vier Tiere statt einem (78 neue, keins doppelt), damit beim Hämmern mehr passiert. Ausgewählt nach dem, wofür es einen echten CC0-Laut gibt, Fotos danach. `tiere_holen.py` erkennt MP3 jetzt am Frame-Sync (auch MPEG 2.5) und verwirft eine unzulässige Datei einzeln statt alles abzubrechen; optional `unten_weg` schneidet eine Bildunterschrift ab. Quarantäne liegt jetzt dauerhaft in `~/.cache/oskalizer/quarantaene/` (ein abgebrochener Lauf lädt nicht alles neu). Mono heißt jetzt erster Kanal statt Mischung: eine Möwen-Aufnahme hatte gegenphasige Kanäle und wurde beim Mischen stumm. Gemessen: Start 3,3 s statt 2,0 s, 461 MB Speicher.
+**Nicht gebaut:** keine Ä/Ö/Ü-Tiere, keine Laute für 25 Tiere (kein CC0-Original), kein Foto für den Kuckuck, kein Nachladen der Dateien bei Bedarf (alles beim Start).
+
 ## 2026-11-10 — feat(licht): Tastendrücke an kb-rgb ozk weitergeben
 **Was:** Die Tasten-Beleuchtung `kb-rgb ozk` blieb im oskalizer dunkel: der exklusive Grab (EVIOCGRAB) lässt keine Events mehr zu anderen Lesern durch. Jetzt schickt der oskalizer jeden Key-Down per Unix-Datagramm an `$XDG_RUNTIME_DIR/kb-rgb-ozk.sock`, `kb-rgb ozk` hört dort zusätzlich zu evdev.
 **Nicht gebaut:** kein automatisches Starten von `kb-rgb ozk` mit dem oskalizer, keine eigene Farblogik im oskalizer.

@@ -5,9 +5,9 @@
     python3 tiere_holen.py            # nur was noch fehlt
     python3 tiere_holen.py --neu      # alles neu holen
 
-Jede Datei landet erst in einer Quarantaene und muss durch: nur https von den
-erlaubten Hosts, hoechstens 20 MB, Dateityp an den ersten Bytes erkannt (nicht an
-der Endung), ClamAV-Scan (Podman-Container clamav/clamav, sonst clamscan; ohne
+Jede Datei landet erst in einer Quarantaene (~/.cache/oskalizer/quarantaene/) und
+muss durch: nur https von den erlaubten Hosts, hoechstens 20 MB, Dateityp an den
+ersten Bytes erkannt (nicht an der Endung), ClamAV-Scan (Podman-Container clamav/clamav, sonst clamscan; ohne
 Scanner bricht es ab). Danach wird alles neu kodiert - Fotos per rembg
 freigestellt als PNG, Laute per ffmpeg als OGG (die lauteste Stelle,
 hoechstens MAX_SEKUNDEN, laut normalisiert). Von der Originaldatei bleibt nur, was
@@ -21,7 +21,6 @@ import json
 import shutil
 import subprocess
 import sys
-import tempfile
 import time
 import urllib.error
 import urllib.parse
@@ -32,16 +31,19 @@ from tiere import ordner
 
 QUELLEN = Path(__file__).parent / "tierquellen.json"
 TIERE = Path.home() / ".local" / "share" / "oskalizer" / "tiere"
+QUARANTAENE = Path.home() / ".cache" / "oskalizer" / "quarantaene"
 HOSTS = {"live.staticflickr.com", "upload.wikimedia.org", "cdn.freesound.org"}
 MAX_BYTES = 20 * 1024 * 1024
 MAX_SEKUNDEN = 4.0
+# Nur der erste Kanal statt Mono-Mix: manche Aufnahmen haben gegenphasige Kanaele,
+# die sich beim Mischen zu Stille aufheben (gemessen: "seagull 2.wav", -91 dB)
+MONO = "pan=mono|c0=c0"
 CLAMAV_BILD = "docker.io/clamav/clamav:stable"
 
 # erste Bytes -> Typ; was hier nicht passt, fliegt raus
 MAGIC = {
     "bild": [(b"\xff\xd8\xff", "jpeg"), (b"\x89PNG\r\n\x1a\n", "png")],
-    "laut": [(b"ID3", "mp3"), (b"\xff\xfb", "mp3"), (b"\xff\xf3", "mp3"), (b"\xff\xf2", "mp3"),
-             (b"OggS", "ogg"), (b"RIFF", "wav"), (b"fLaC", "flac")],
+    "laut": [(b"ID3", "mp3"), (b"OggS", "ogg"), (b"RIFF", "wav"), (b"fLaC", "flac")],
 }
 
 
@@ -76,6 +78,9 @@ def typ(path, slot):
             if name == "wav" and kopf[8:12] != b"WAVE":
                 break
             return name
+    # MP3 ohne ID3-Tag: Frame-Sync (11 Bit) und Layer III, egal ob MPEG 1, 2 oder 2.5
+    if slot == "laut" and kopf[0] == 0xFF and kopf[1] & 0xE0 == 0xE0 and kopf[1] & 0x06 == 0x02:
+        return "mp3"
     raise ValueError(f"{path.name}: kein erlaubter Dateityp (Kopf {kopf[:8].hex()})")
 
 
@@ -100,7 +105,7 @@ def scanne(ordner_):
 _SITZUNG = []                                  # rembg-Modell, einmal geladen
 
 
-def bild(quelle, ziel):
+def bild(quelle, ziel, unten_weg=0.0):
     from io import BytesIO
 
     from PIL import Image
@@ -112,6 +117,8 @@ def bild(quelle, ziel):
     with Image.open(quelle) as roh:
         roh.load()
         rgb = roh.convert("RGB")           # nur Pixel, keine Metadaten
+    if unten_weg:                          # Bildunterschrift-Balken, sonst bleibt er beim Freistellen
+        rgb = rgb.crop((0, 0, rgb.width, int(rgb.height * (1 - unten_weg))))
     rgb.thumbnail((1024, 1024))
     puffer = BytesIO()
     rgb.save(puffer, "PNG")
@@ -123,7 +130,7 @@ def bild(quelle, ziel):
 def lauteste_stelle(quelle):
     """Start (s) des lautesten MAX_SEKUNDEN-Fensters. Lange Aufnahmen haben vorn
     oft nur Rauschen."""
-    roh = subprocess.run(["ffmpeg", "-v", "error", "-i", str(quelle), "-vn", "-ac", "1",
+    roh = subprocess.run(["ffmpeg", "-v", "error", "-i", str(quelle), "-vn", "-af", MONO,
                           "-ar", "8000", "-f", "s16le", "-"], capture_output=True, check=True).stdout
     werte = array.array("h", roh[: len(roh) // 2 * 2])
     block = 800                                    # 0,1 s
@@ -144,10 +151,10 @@ def laut(quelle, ziel):
     subprocess.run(
         ["ffmpeg", "-v", "error", "-y", "-ss", str(lauteste_stelle(quelle)), "-i", str(quelle),
          "-vn", "-sn", "-map_metadata", "-1", "-af",
-         f"atrim=0:{MAX_SEKUNDEN},afade=t=in:d=0.05,afade=t=out:st={MAX_SEKUNDEN - 0.4}:d=0.4,"
+         f"{MONO},atrim=0:{MAX_SEKUNDEN},afade=t=in:d=0.05,afade=t=out:st={MAX_SEKUNDEN - 0.4}:d=0.4,"
          # loudnorm rechnet mit 192 kHz und haelt kurz die Spitzen nicht - Limiter danach
          "loudnorm=I=-16:TP=-1.5,aresample=44100,alimiter=limit=0.7:level=false",
-         "-ac", "1", "-ar", "44100", "-c:a", "libvorbis", "-q:a", "5", str(ziel)], check=True)
+         "-ar", "44100", "-c:a", "libvorbis", "-q:a", "5", str(ziel)], check=True)
 
 
 def schreibe_quellen(eintraege):
@@ -172,22 +179,35 @@ def main():
         print("Alles schon da.")
         return
 
-    with tempfile.TemporaryDirectory(prefix="oskalizer-quarantaene-") as q:
-        q = Path(q)
-        for i, (e, _) in enumerate(offen):
+    # Quarantaene bleibt ueber Abbrueche hinweg liegen (Wikimedia drosselt, ein Lauf
+    # dauert lange); eine Datei verschwindet erst, wenn sie fertig kodiert ist
+    QUARANTAENE.mkdir(parents=True, exist_ok=True)
+    roh = {}
+    for e, _ in offen:
+        datei = QUARANTAENE / hashlib.sha1(e["url"].encode()).hexdigest()
+        if not datei.exists():
             print(f"lade {e['wort']} {e['slot']}: {e['url']}")
-            lade(e["url"], q / str(i))
+            lade(e["url"], datei)
             time.sleep(1)
-            typ(q / str(i), e["slot"])
-        print(f"ClamAV prueft {len(offen)} Dateien ...")
-        scanne(q)
-        for i, (e, ziel) in enumerate(offen):
-            ziel.parent.mkdir(parents=True, exist_ok=True)
-            print(f"kodiere {ziel.relative_to(TIERE)}")
-            if e["slot"] == "bild":
-                bild(q / str(i), ziel)
-            else:
-                laut(q / str(i), ziel)
+        try:
+            typ(datei, e["slot"])
+        except ValueError as exc:              # nur diese Datei fliegt raus
+            print(f"  ! verworfen: {e['wort']} {exc}")
+            datei.unlink()
+            continue
+        roh[e["url"]] = datei
+    print(f"ClamAV prueft {len(list(QUARANTAENE.iterdir()))} Dateien ...")
+    scanne(QUARANTAENE)
+    for e, ziel in offen:
+        if e["url"] not in roh:
+            continue
+        ziel.parent.mkdir(parents=True, exist_ok=True)
+        print(f"kodiere {ziel.relative_to(TIERE)}")
+        if e["slot"] == "bild":
+            bild(roh[e["url"]], ziel, e.get("unten_weg", 0.0))
+        else:
+            laut(roh[e["url"]], ziel)
+        roh[e["url"]].unlink()
 
     schreibe_quellen(eintraege)
     print(f"Fertig. Quellen in {TIERE / 'QUELLEN.md'}")

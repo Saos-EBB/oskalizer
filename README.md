@@ -24,9 +24,10 @@ Esc (Beenden) und Strg+Umschalt+D (Modus) gehen weiterhin.
 
 ### Wörter
 
-Die Tiere (Name, Emoji, Laut, Lautschrift) stehen in `woerter.json`. Ein
-Buchstabe kann mehrere Einträge haben, z.B. O: Oktopus und Opa. Die kommen dann
-der Reihe nach dran. Ä, Ö und Ü dürfen auch Einträge bekommen. Ein Eintrag ohne
+Die Tiere (Name, Emoji, Laut, Lautschrift) stehen in `woerter.json`. Jeder
+Buchstabe A–Z hat vier Tiere, keins kommt doppelt vor (A: Affe, Amsel, Ara,
+Alpaka). Die kommen der Reihe nach dran, jeder Tastendruck das nächste. Weitere
+Einträge gehen auch, z.B. O: Opa. Ä, Ö und Ü dürfen auch Einträge bekommen. Ein Eintrag ohne
 `emoji` (z.B. eine Person) braucht ein Foto, sonst steht nur der Buchstabe da.
 
 ### Familien-Aufnahmen
@@ -77,10 +78,14 @@ rembg freigestellt (PNG), Laute als OGG mit der lautesten Stelle, höchstens
 Braucht ffmpeg, rembg (siehe unten) und podman. Die Ordner-Datei
 `QUELLEN.md` daneben listet die Urheber.
 
-Keinen echten Laut haben Chamäleon, Giraffe, Qualle, Raupe, Nashorn und Zebra
-(kein CC0-Original gefunden) — da bleibt die Lautmalerei. Der Yak muht mit
-einer Kuh-Aufnahme. Eine Datei rauswerfen: Eintrag aus `tierquellen.json`
-löschen und die Datei im Ordner löschen.
+Keinen echten Laut haben 25 der 104 Tiere, weil es kein brauchbares
+CC0-Original gibt: Chamäleon, Chinchilla, Giraffe, Iltis, Impala, Japanmakak,
+Nashorn, Orang-Utan, Otter, alle vier Q-Tiere, Raupe, Uferschwalbe, Urson,
+alle V-Tiere außer Vogel, alle X-Tiere außer Xerus, Yapok, Ypsiloneule und Zebra. Da bleibt
+die Lautmalerei. Yak und Kuh muhen mit verschiedenen Kuh-Aufnahmen, der
+Jungfernkranich ruft mit einem anderen Kranich. Der Kuckuck hat kein Foto (auf allen
+CC0-Fotos sitzt er zu klein im Gebüsch, rembg findet ihn nicht) und zeigt das Emoji. Eine Datei rauswerfen: Eintrag
+aus `tierquellen.json` löschen und die Datei im Ordner löschen.
 
 ### Tastatur-Beleuchtung (`kb-rgb ozk`)
 
