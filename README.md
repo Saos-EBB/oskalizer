@@ -93,6 +93,26 @@ dem fertigen Laut: 300 Hz für Vögel, Insekten und kleine Tiere, 150 Hz für mi
 80 Hz für die großen (Feld `hochpass` in `tierquellen.json`). Eine Datei rauswerfen: Eintrag
 aus `tierquellen.json` löschen und die Datei im Ordner löschen.
 
+### Tiervideos (CC0)
+
+40 der 104 Tiere haben ein kurzes Video (Wikimedia Commons, CC0): meist zwei pro
+Taste, eins bei I, J, L, Q, U und Z, keins bei C, X und Y, weil es dafür kein
+brauchbares CC0-Video gibt. Ein Video läuft statt des Fotos neben dem Buchstaben,
+einmal, höchstens 8 s, ohne eigenen Ton (den Laut spielt wie immer `ton.py`), und
+bleibt am Ende auf dem letzten Bild stehen. Die nächste Taste bricht es ab. Ein
+Familien-Foto geht vor.
+
+pygame 2.6 kann kein Video, darum dekodiert pro Video ein `ffmpeg`-Prozess in
+Echtzeit (`-re`), ein Thread liest die Einzelbilder. Geholt werden die Videos mit
+`tiere_holen.py` wie Fotos und Laute: Typ an den ersten Bytes (WebM/Ogg), ClamAV,
+dann neu kodiert als WebM/VP9 ohne Ton, 480 Zeilen, 24 fps (`~/.local/share/oskalizer/tiere/<wort>/video/`,
+zusammen ~38 MB).
+
+Achtung beim Erweitern: Unter CC0 auf Commons liegen zu harmlosen Suchwörtern
+auch Schlachtungen, Paarungen, Tierversuche und bei „snake“ sogar Pornografie.
+Jedes Video vor dem Eintragen ansehen, und vom fertigen Video Bilder aus der
+Mitte und vom Ende prüfen, nicht nur das Vorschaubild.
+
 ### Tastatur-Beleuchtung (`kb-rgb ozk`)
 
 Läuft die Beleuchtung `kb-rgb ozk` (KBD-Kachel, Modus „ozk“: jede gedrückte

@@ -147,6 +147,7 @@ def handle_input(device, tafel, schreib, ton, state, now):
         if event.code == ecodes.KEY_D and state["ctrl"] and state["shift"]:
             state["modus"] = "tippen" if state["modus"] == "tiere" else "tiere"
             ton.stop()
+            tafel.stop()
             continue
         zeichen = tiere.ZEICHEN.get(event.code)
         if state["modus"] == "tiere":
@@ -201,6 +202,7 @@ def run(devices):
         loop(screen, tafel, schreib, ton, fds, state, clock)
     finally:
         ton.stop()                  # sonst spricht espeak nach dem Beenden weiter
+        tafel.stop()                # sonst dekodiert ffmpeg weiter
         state["licht"].close()
 
 

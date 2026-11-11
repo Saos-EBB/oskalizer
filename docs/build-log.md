@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-11-12 — feat(tiere): Tiervideos
+**Was:** Es soll mehr passieren: 40 Tiere zeigen statt des Fotos ein kurzes CC0-Video (Commons), möglichst zwei pro Taste. `Film` in `tiere.py` lässt `ffmpeg` in Echtzeit in einen Thread dekodieren, `Tafel` setzt jedes Frame neben den Buchstaben; neue Taste, Moduswechsel und Ende beenden den Prozess. `tiere_holen.py` kann den Slot `video` (WebM/Ogg erkannt, bis 80 MB, ClamAV, neu als VP9 ohne Ton, 8 s ab `start`). Jedes Video von Hand gesichtet, vom fertigen Video vier Bilder geprüft.
+**Nicht gebaut:** keine Videos für C, X, Y (kein brauchbares CC0), kein Ton aus dem Video, keine Schleife (bleibt am Ende stehen), kein Vorladen (Start beim Tastendruck, ~0,2 s bis zum ersten Bild), keine Familien-Videos.
+
 ## 2026-11-12 — fix(laute): Rumpeln statt Tier, kaputte Laute raus
 **Was:** Amsel und Gorilla klangen falsch. Ursache Amsel (und viele Vögel/Insekten): die Suche nach der lautesten Stelle wurde von Wind- und Mikrofonrumpeln gewonnen, die Normierung zog es hoch. Jetzt sucht sie ohne Bass, und ein Hochpass pro Laut (`hochpass`: 300/150/80 Hz) nimmt das Rumpeln raus; alle Laute neu kodiert. Danach alle 150 per Spektrogramm, Abstand Ruf/Grundrauschen und Tonhaltigkeit geprüft: 8 Laute raus (Gorilla-Stotter-Effekt, Wal-Sinuston, Kamel-Brummen, fünf Aufnahmen, die nur Wind/Umgebung sind).
 **Nicht gebaut:** kein Ersatz für die entfernten Laute, kein automatischer Qualitäts-Check in `tiere_holen.py` (die Prüfskripte liefen nur einmal), niemand hat die Laute angehört.

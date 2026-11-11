@@ -6,6 +6,8 @@ Kennt keine Geraete - bekommt nur evdev-Keycodes.
 import itertools
 import json
 import random
+import subprocess
+import threading
 from pathlib import Path
 
 import pygame
@@ -15,6 +17,7 @@ EMOJI_FONT = "/usr/share/fonts/google-noto-emoji-fonts/NotoEmoji-Regular.ttf"
 FAMILIE = Path.home() / ".local" / "share" / "oskalizer" / "familie"
 TIERE = Path.home() / ".local" / "share" / "oskalizer" / "tiere"   # CC0, von tiere_holen.py
 POP_SECONDS = 0.25                  # so lange waechst ein neues Zeichen auf volle Groesse
+VIDEO_HOEHE = 0.45                  # Anteil der Bildschirmhoehe fuer ein Tiervideo
 
 # Buchstabe -> Liste von Woertern (Tier oder Person) mit Name, Emoji, Laut und
 # Lautschrift. Die Lautschrift ist nur fuer die Familien-Webseite. Hat ein Buchstabe
@@ -65,6 +68,40 @@ def ease_out(t):
     return 1.0 - (1.0 - t) ** 3
 
 
+class Film:
+    """Spielt ein stummes Video einmal in Echtzeit ab. ffmpeg dekodiert in einem eigenen
+    Prozess (pygame 2.6 kann kein Video), ein Thread liest die Einzelbilder, bild()
+    holt das neueste. Am Ende bleibt das letzte Bild stehen."""
+
+    def __init__(self, path, groesse):
+        self.groesse = groesse
+        breite, hoehe = groesse
+        self.prozess = subprocess.Popen(
+            ["ffmpeg", "-v", "error", "-re", "-i", str(path), "-an", "-vf", f"scale={breite}:{hoehe}",
+             "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
+            stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        self.neu = None                     # rohe Bytes des neuesten Bilds aus dem Thread
+        self.letztes = None
+        threading.Thread(target=self._lies, daemon=True).start()
+
+    def _lies(self):
+        laenge = self.groesse[0] * self.groesse[1] * 3
+        while len(daten := self.prozess.stdout.read(laenge)) == laenge:
+            self.neu = daten
+
+    def bild(self):
+        """Neuestes Bild oder None, solange noch keins da ist."""
+        if self.neu is not None:
+            self.letztes = pygame.image.frombuffer(self.neu, self.groesse, "RGB")
+            self.neu = None
+        return self.letztes
+
+    def stop(self):
+        if self.prozess.poll() is None:
+            self.prozess.kill()
+        self.prozess.wait()
+
+
 class Tafel:
     """Zeigt immer genau ein Zeichen. Jeder Tastendruck ersetzt es."""
 
@@ -78,7 +115,12 @@ class Tafel:
         self.bilder = self._lade_bilder(FAMILIE, height)
         for name, liste in self._lade_bilder(TIERE, height).items():
             self.bilder.setdefault(name, liste)
-        self.bild = None
+        self.videos = {}                    # Ordner -> CC0-Videos, geladen erst beim Abspielen
+        for path in sorted(TIERE.glob("*/video/*.webm")):
+            self.videos.setdefault(path.parent.parent.name, []).append(path)
+        self.groessen = {}                  # Video -> Groesse auf dem Schirm, per ffprobe
+        self.teile = []                     # Buchstabe, dann Foto/Emoji (Surface) oder Film
+        self.film = None
         self.von = None                     # "[von Opa]" unten rechts
         self.since = 0.0
 
@@ -99,32 +141,65 @@ class Tafel:
         color = pygame.Color(0)
         color.hsva = (random.uniform(0.0, 360.0), 75.0, 100.0, 100.0)
 
-        teile = [self.font.render(zeichen, True, color)]
-        if wort and ordner(wort) in self.bilder:
-            teile.append(random.choice(self.bilder[ordner(wort)]))  # eigene Farben
+        self.stop()
+        self.teile = [self.font.render(zeichen, True, color)]
+        familie = wort and any(FAMILIE.glob(f"{ordner(wort)}/bild/*"))
+        if wort and ordner(wort) in self.videos and not familie:   # Familien-Foto geht vor
+            path = random.choice(self.videos[ordner(wort)])
+            self.film = Film(path, self._groesse(path))
+            self.teile.append(self.film)
+        elif wort and ordner(wort) in self.bilder:
+            self.teile.append(random.choice(self.bilder[ordner(wort)]))  # eigene Farben
         elif wort and wort.get("emoji"):
-            teile.append(self.emoji_font.render(wort["emoji"], True, color))
-
-        gap = self.screen.get_height() // 12
-        width = sum(t.get_width() for t in teile) + gap * (len(teile) - 1)
-        height = max(t.get_height() for t in teile)
-        self.bild = pygame.Surface((width, height), pygame.SRCALPHA)
-        x = 0
-        for teil in teile:
-            self.bild.blit(teil, (x, (height - teil.get_height()) // 2))
-            x += teil.get_width() + gap
+            self.teile.append(self.emoji_font.render(wort["emoji"], True, color))
         self.von = None
         if personen:
             text = f"[von {', '.join(dict.fromkeys(personen))}]"
             self.von = self.von_font.render(text, True, (150, 150, 175))
         self.since = now
 
+    def _groesse(self, path):
+        """Videogroesse auf dem Schirm: VIDEO_HOEHE der Hoehe, Seitenverhaeltnis bleibt."""
+        if path not in self.groessen:
+            ausgabe = subprocess.run(
+                ["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
+                 "stream=width,height", "-of", "csv=p=0", str(path)],
+                capture_output=True, text=True).stdout
+            breite, hoehe = (int(x) for x in ausgabe.strip().split(",")[:2])
+            ziel = int(self.screen.get_height() * VIDEO_HOEHE) // 2 * 2
+            self.groessen[path] = (int(breite * ziel / hoehe) // 2 * 2, ziel)
+        return self.groessen[path]
+
+    def stop(self):
+        """Laufendes Video beenden (neue Taste, Moduswechsel, Ende)."""
+        if self.film:
+            self.film.stop()
+            self.film = None
+
+    def _bild(self):
+        """Buchstabe und Tier nebeneinander. Mit Video jedes Frame neu, solange
+        noch kein Videobild da ist, haelt eine leere Flaeche den Platz frei."""
+        teile = []
+        for teil in self.teile:
+            if isinstance(teil, Film):
+                teil = teil.bild() or pygame.Surface(teil.groesse, pygame.SRCALPHA)
+            teile.append(teil)
+        gap = self.screen.get_height() // 12
+        width = sum(t.get_width() for t in teile) + gap * (len(teile) - 1)
+        height = max(t.get_height() for t in teile)
+        bild = pygame.Surface((width, height), pygame.SRCALPHA)
+        x = 0
+        for teil in teile:
+            bild.blit(teil, (x, (height - teil.get_height()) // 2))
+            x += teil.get_width() + gap
+        return bild
+
     def draw(self, now):
-        if self.bild is None:
+        if not self.teile:
             return
         t = min(1.0, (now - self.since) / POP_SECONDS)
         scale = 0.6 + 0.4 * ease_out(t)
-        bild = self.bild
+        bild = self._bild()
         if scale < 1.0:
             size = (int(bild.get_width() * scale), int(bild.get_height() * scale))
             bild = pygame.transform.smoothscale(bild, size)

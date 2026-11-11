@@ -25,6 +25,10 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
   Zeichen im Modus Tiere; lädt beim Start `FAMILIE/<wort>/bild/*` als Ersatz fürs Emoji,
   zeigt „[von X]“ unten rechts). `ordner(wort)` und `person(path)` übersetzen
   zwischen Wort/Datei und Familien-Ordner (Leerzeichen → `-`, Umlaute → ae/oe/ue).
+  Hat ein Wort ein CC0-Video (`TIERE/<wort>/video/*.webm`) und kein Familien-Foto,
+  startet `Tafel.show()` einen `Film`: `ffmpeg -re` dekodiert in Echtzeit nach rgb24,
+  ein Daemon-Thread liest die Bilder, `draw()` setzt jedes Frame neu zusammen.
+  `Tafel.stop()` beendet den Prozess (neue Taste, Moduswechsel, Programmende).
   `Schreibtafel` zeigt im Modus Tippen den getippten Text, wortweise umgebrochen.
   Kennt keine Geräte. `oskalizer.py` ruft `Tafel.show(zeichen, wort, personen)` pro Key-Down und
   `Tafel.draw()` pro Frame.

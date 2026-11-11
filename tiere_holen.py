@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
 """Holt die CC0-Tierfotos und -laute aus tierquellen.json nach
-~/.local/share/oskalizer/tiere/<wort>/bild|laut/.
+~/.local/share/oskalizer/tiere/<wort>/bild|laut|video/.
 
     python3 tiere_holen.py            # nur was noch fehlt
     python3 tiere_holen.py --neu      # alles neu holen
 
 Jede Datei landet erst in einer Quarantaene (~/.cache/oskalizer/quarantaene/) und
-muss durch: nur https von den erlaubten Hosts, hoechstens 20 MB, Dateityp an den
-ersten Bytes erkannt (nicht an der Endung), ClamAV-Scan (Podman-Container clamav/clamav, sonst clamscan; ohne
-Scanner bricht es ab). Danach wird alles neu kodiert - Fotos per rembg
-freigestellt als PNG, Laute per ffmpeg als OGG (die lauteste Stelle ohne Bass, Rumpeln per Hochpass weg,
-hoechstens MAX_SEKUNDEN, laut normalisiert). Von der Originaldatei bleibt nur, was
+muss durch: nur https von den erlaubten Hosts, hoechstens 20 MB (Video 80 MB),
+Dateityp an den ersten Bytes erkannt (nicht an der Endung), ClamAV-Scan
+(Podman-Container clamav/clamav, sonst clamscan; ohne Scanner bricht es ab).
+Danach wird alles neu kodiert - Fotos per rembg freigestellt als PNG, Laute per
+ffmpeg als OGG (die lauteste Stelle ohne Bass, Rumpeln per Hochpass weg,
+hoechstens MAX_SEKUNDEN, laut normalisiert), Videos als WebM/VP9 ohne Ton
+(hoechstens VIDEO_SEKUNDEN ab `start`, 480 Zeilen). Von der Originaldatei bleibt nur, was
 Pillow/ffmpeg daraus dekodieren; Metadaten und angehaengte Bytes fallen weg.
 Braucht ffmpeg, rembg (siehe freistellen.py) und podman oder clamscan.
 """
@@ -33,7 +35,9 @@ QUELLEN = Path(__file__).parent / "tierquellen.json"
 TIERE = Path.home() / ".local" / "share" / "oskalizer" / "tiere"
 QUARANTAENE = Path.home() / ".cache" / "oskalizer" / "quarantaene"
 HOSTS = {"live.staticflickr.com", "upload.wikimedia.org", "cdn.freesound.org"}
-MAX_BYTES = 20 * 1024 * 1024
+MAX_BYTES = {"bild": 20 * 1024 * 1024, "laut": 20 * 1024 * 1024, "video": 80 * 1024 * 1024}
+VIDEO_SEKUNDEN = 8.0
+ENDUNG = {"bild": ".png", "laut": ".ogg", "video": ".webm"}
 MAX_SEKUNDEN = 4.0
 # Nur der erste Kanal statt Mono-Mix: manche Aufnahmen haben gegenphasige Kanaele,
 # die sich beim Mischen zu Stille aufheben (gemessen: "seagull 2.wav", -91 dB)
@@ -45,20 +49,21 @@ CLAMAV_BILD = "docker.io/clamav/clamav:stable"
 MAGIC = {
     "bild": [(b"\xff\xd8\xff", "jpeg"), (b"\x89PNG\r\n\x1a\n", "png")],
     "laut": [(b"ID3", "mp3"), (b"OggS", "ogg"), (b"RIFF", "wav"), (b"fLaC", "flac")],
+    "video": [(b"\x1a\x45\xdf\xa3", "webm"), (b"OggS", "ogv")],
 }
 
 
-def lade(url, ziel, versuche=4):
+def lade(url, ziel, slot, versuche=4):
     for i in range(versuche):
         try:
-            return _lade(url, ziel)
+            return _lade(url, ziel, MAX_BYTES[slot])
         except urllib.error.HTTPError as exc:
             if exc.code not in (429, 503) or i == versuche - 1:
                 raise
             time.sleep(20 * (i + 1))           # Wikimedia drosselt, kurz warten
 
 
-def _lade(url, ziel):
+def _lade(url, ziel, max_bytes):
     teile = urllib.parse.urlparse(url)
     if teile.scheme != "https" or teile.hostname not in HOSTS:
         raise ValueError(f"Host nicht erlaubt: {url}")
@@ -67,8 +72,8 @@ def _lade(url, ziel):
         geladen = 0
         while block := antwort.read(65536):
             geladen += len(block)
-            if geladen > MAX_BYTES:
-                raise ValueError(f"groesser als {MAX_BYTES // 2**20} MB: {url}")
+            if geladen > max_bytes:
+                raise ValueError(f"groesser als {max_bytes // 2**20} MB: {url}")
             f.write(block)
 
 
@@ -162,6 +167,15 @@ def laut(quelle, ziel, hochpass=HOCHPASS):
          "-ar", "44100", "-c:a", "libvorbis", "-q:a", "5", str(ziel)], check=True)
 
 
+def video(quelle, ziel, start):
+    """Stumm, 24 fps, hoechstens 480 Zeilen. Den Laut spielt Ton, nicht das Video."""
+    subprocess.run(
+        ["ffmpeg", "-v", "error", "-y", "-ss", str(start), "-i", str(quelle), "-t", str(VIDEO_SEKUNDEN),
+         "-an", "-sn", "-dn", "-map_metadata", "-1", "-vf", "scale=-2:'min(480,ih)',fps=24,format=yuv420p",
+         "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "36", "-row-mt", "1", "-deadline", "good",
+         "-cpu-used", "4", str(ziel)], check=True)
+
+
 def schreibe_quellen(eintraege):
     zeilen = ["# Quellen der Tierfotos und -laute (alle CC0 1.0)", ""]
     for e in eintraege:
@@ -176,7 +190,7 @@ def main():
     offen = []
     for e in eintraege:
         ziel = TIERE / ordner({"name": e["wort"]}) / e["slot"] / (
-            hashlib.sha1(e["url"].encode()).hexdigest()[:10] + (".png" if e["slot"] == "bild" else ".ogg"))
+            hashlib.sha1(e["url"].encode()).hexdigest()[:10] + ENDUNG[e["slot"]])
         if neu or not ziel.exists():
             offen.append((e, ziel))
     if not offen:
@@ -192,7 +206,7 @@ def main():
         datei = QUARANTAENE / hashlib.sha1(e["url"].encode()).hexdigest()
         if not datei.exists():
             print(f"lade {e['wort']} {e['slot']}: {e['url']}")
-            lade(e["url"], datei)
+            lade(e["url"], datei, e["slot"])
             time.sleep(1)
         try:
             typ(datei, e["slot"])
@@ -210,6 +224,8 @@ def main():
         print(f"kodiere {ziel.relative_to(TIERE)}")
         if e["slot"] == "bild":
             bild(roh[e["url"]], ziel, e.get("unten_weg", 0.0))
+        elif e["slot"] == "video":
+            video(roh[e["url"]], ziel, e.get("start", 0.0))
         else:
             laut(roh[e["url"]], ziel, e.get("hochpass", HOCHPASS))
         roh[e["url"]].unlink()
