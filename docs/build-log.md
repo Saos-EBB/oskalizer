@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-11-12 — feat(tiere): Affe und Katze auf jeder Taste, keine Zoo-Videos
+**Was:** Beim Testen mit dem Kind: es mag fast nur Affen und Katzen. Jetzt hat jeder Buchstabe eine Affen- und eine Katzenart (`primaer`, 48 Arten, alle verschieden, außer Q und X), die bevorzugt drankommen (zweimal Affe+Katze, dann ein anderes Tier). Alle Videos aus Zoo, Aquarium, Museum oder Gehege sind raus (16 + die neuen Kandidaten), dazu drei, auf denen das Tier nur ein Punkt ist. Für die Lücken `clip_einsortieren.py`: eigener Clip → ClamAV → Video und Laut unter `clips/`, die oskalizer und Vorschau mitladen.
+**Nicht gebaut:** kein YouTube-Download (Clips holt der Nutzer selbst), keine Affen/Katzen für Q und X, kein Nachladen ohne Neustart. Mit Video und Laut komplett sind erst 6 der 48 Lieblingstiere.
+
 ## 2026-11-12 — feat(tiere): Tiervideos
 **Was:** Es soll mehr passieren: 40 Tiere zeigen statt des Fotos ein kurzes CC0-Video (Commons), möglichst zwei pro Taste. `Film` in `tiere.py` lässt `ffmpeg` in Echtzeit in einen Thread dekodieren, `Tafel` setzt jedes Frame neben den Buchstaben; neue Taste, Moduswechsel und Ende beenden den Prozess. `tiere_holen.py` kann den Slot `video` (WebM/Ogg erkannt, bis 80 MB, ClamAV, neu als VP9 ohne Ton, 8 s ab `start`). Jedes Video von Hand gesichtet, vom fertigen Video vier Bilder geprüft.
 **Nicht gebaut:** keine Videos für C, X, Y (kein brauchbares CC0), kein Ton aus dem Video, keine Schleife (bleibt am Ende stehen), kein Vorladen (Start beim Tastendruck, ~0,2 s bis zum ersten Bild), keine Familien-Videos.

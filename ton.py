@@ -18,7 +18,7 @@ from pathlib import Path
 
 import pygame
 
-from tiere import FAMILIE, TIERE, WOERTER, ordner, person
+from tiere import CLIPS, FAMILIE, TIERE, WOERTER, ordner, person
 
 PIPER_STIMME = Path.home() / ".local" / "share" / "oskalizer" / "de_DE-thorsten-high.onnx"
 ESPEAK_ARGS = ["-v", "de", "-s", "140"]
@@ -43,14 +43,14 @@ class Ton:
         self.espeak = shutil.which("espeak-ng")
         self.aufnahmen = {}                   # (Ordner, "name"|"laut") -> [(Person, Sound)]
         self.stimme = None
-        self.original = {}                    # Ordner -> [Sound], CC0-Tierlaute ohne Person
+        self.original = {}                    # Ordner -> [Sound], CC0-Tierlaute und eigene Clips
         if pygame.mixer.get_init():
             for path in sorted(FAMILIE.glob("*/*/*")):
                 slot = path.parent.name
                 if slot in ("name", "laut") and path.suffix.lower() in (".ogg", ".wav"):
                     self.aufnahmen.setdefault((path.parent.parent.name, slot), []).append(
                         (person(path), pygame.mixer.Sound(path)))
-            for path in sorted(TIERE.glob("*/laut/*")):
+            for path in sorted([*TIERE.glob("*/laut/*"), *CLIPS.glob("*/laut/*")]):
                 if path.suffix.lower() in (".ogg", ".wav"):
                     self.original.setdefault(path.parent.parent.name, []).append(
                         pygame.mixer.Sound(path))

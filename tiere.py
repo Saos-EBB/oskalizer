@@ -16,6 +16,7 @@ from evdev import ecodes
 EMOJI_FONT = "/usr/share/fonts/google-noto-emoji-fonts/NotoEmoji-Regular.ttf"
 FAMILIE = Path.home() / ".local" / "share" / "oskalizer" / "familie"
 TIERE = Path.home() / ".local" / "share" / "oskalizer" / "tiere"   # CC0, von tiere_holen.py
+CLIPS = Path.home() / ".local" / "share" / "oskalizer" / "clips"   # eigene, von clip_einsortieren.py
 POP_SECONDS = 0.25                  # so lange waechst ein neues Zeichen auf volle Groesse
 VIDEO_HOEHE = 0.45                  # Anteil der Bildschirmhoehe fuer ein Tiervideo
 
@@ -25,7 +26,24 @@ VIDEO_HOEHE = 0.45                  # Anteil der Bildschirmhoehe fuer ein Tiervi
 # Die bunte Noto-Variante (COLRv1) zeichnet pygame leer, deshalb die einfarbige
 # Schrift, eingefaerbt pro Tastendruck.
 WOERTER = json.loads((Path(__file__).parent / "woerter.json").read_text(encoding="utf-8"))
-_REIHE = {b: itertools.cycle(liste) for b, liste in WOERTER.items()}
+PRIMAER_RUNDEN = 2                  # so oft Affe+Katze, bevor ein anderes Tier drankommt
+
+
+def _reihe(liste):
+    """Woerter mit "primaer" (pro Buchstabe eine Affen- und eine Katzenart, die mag
+    das Kind am liebsten) kommen bevorzugt: PRIMAER_RUNDEN-mal alle primaeren, dann
+    ein anderes Wort, dann wieder von vorn."""
+    primaer = [w for w in liste if w.get("primaer")]
+    andere = [w for w in liste if not w.get("primaer")]
+    if not primaer or not andere:
+        return liste
+    folge = []
+    for wort in andere:
+        folge += primaer * PRIMAER_RUNDEN + [wort]
+    return folge
+
+
+_REIHE = {b: itertools.cycle(_reihe(liste)) for b, liste in WOERTER.items()}
 
 
 def naechstes(zeichen):
@@ -116,7 +134,7 @@ class Tafel:
         for name, liste in self._lade_bilder(TIERE, height).items():
             self.bilder.setdefault(name, liste)
         self.videos = {}                    # Ordner -> CC0-Videos, geladen erst beim Abspielen
-        for path in sorted(TIERE.glob("*/video/*.webm")):
+        for path in sorted([*TIERE.glob("*/video/*.webm"), *CLIPS.glob("*/video/*.webm")]):
             self.videos.setdefault(path.parent.parent.name, []).append(path)
         self.groessen = {}                  # Video -> Groesse auf dem Schirm, per ffprobe
         self.teile = []                     # Buchstabe, dann Foto/Emoji (Surface) oder Film

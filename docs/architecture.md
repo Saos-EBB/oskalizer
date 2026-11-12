@@ -19,8 +19,8 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
 - `woerter.json` — Buchstabe (A–Z, auch Ä/Ö/Ü) → Liste von Wörtern (Tier oder
   Person) mit `name`, `emoji`, `laut`, `lautschrift`. Die Lautschrift ist nur für
   die Familien-Webseite.
-- `tiere.py` — lädt `woerter.json` als `WOERTER`, `naechstes(zeichen)` rotiert der
-  Reihe nach durch die Wörter eines Buchstabens (None für Ziffern/Zeichen), Tastenbelegung
+- `tiere.py` — lädt `woerter.json` als `WOERTER`, `naechstes(zeichen)` rotiert durch die
+  Wörter eines Buchstabens, Wörter mit `primaer` (Affe/Katze) `PRIMAER_RUNDEN`-mal so oft (None für Ziffern/Zeichen), Tastenbelegung
   `ZEICHEN` (evdev-Keycode → Zeichen, QWERTZ) und `Tafel` (zeichnet das aktuelle
   Zeichen im Modus Tiere; lädt beim Start `FAMILIE/<wort>/bild/*` als Ersatz fürs Emoji,
   zeigt „[von X]“ unten rechts). `ordner(wort)` und `person(path)` übersetzen
@@ -52,6 +52,10 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
   bleibt über Abbrüche liegen, Datei weg erst nach dem Kodieren; nur https von
   Wikimedia/Freesound, ≤ 20 MB, Typ an den Magic Bytes), scannt mit ClamAV
   (Podman), kodiert neu (rembg → PNG, ffmpeg → OGG, lauteste 4 s ohne Bass gesucht, Hochpass pro Laut) und legt sie ab.
+- `clip_einsortieren.py` — eigener Clip → ClamAV (`tiere_holen.scanne`) → `tiere_holen.video()`
+  und aus demselben Ausschnitt `tiere_holen.laut()` nach `CLIPS/<wort>/video|laut/`.
+  `Tafel` und `Ton` laden `CLIPS` zusätzlich zu `TIERE`. `--fehlt` listet Lieblingstiere
+  ohne Video oder Laut.
 - `freistellen.py` — `python3 freistellen.py foto.jpg ziel.png`: schneidet mit rembg
   (Modell u2net) das Motiv aus, für Fotos neuer Wörter. Läuft nur von Hand beim
   Einsortieren, nicht im oskalizer und nicht auf Vercel.
@@ -78,6 +82,9 @@ Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Ente
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-11-12 — Keine Videos aus Zoo, Aquarium, Museum oder Gehege (Wunsch des Nutzers),
+  auch wenn dann viele Affen/Katzen kein CC0-Video haben. Eigene Clips liegen getrennt
+  unter `clips/`, damit `tierquellen.json` nur CC0-Quellen kennt.
 - 2026-11-10 — CC0-Tierdateien außerhalb des Repos, im Repo nur die Quellenliste.
   Grund: Repo bleibt klein, jede Datei ist nachvollziehbar. Fotos von Commons
   (1280-px-Thumbnails, Originale drosselt Wikimedia mit 429), Laute über Openverse

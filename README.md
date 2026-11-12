@@ -26,8 +26,11 @@ Esc (Beenden) und Strg+Umschalt+D (Modus) gehen weiterhin.
 
 Die Tiere (Name, Emoji, Laut, Lautschrift) stehen in `woerter.json`. Jeder
 Buchstabe A–Z hat vier Tiere, keins kommt doppelt vor (A: Affe, Amsel, Ara,
-Alpaka). Die kommen der Reihe nach dran, jeder Tastendruck das nächste. Weitere
-Einträge gehen auch, z.B. O: Opa. Ä, Ö und Ü dürfen auch Einträge bekommen. Ein Eintrag ohne
+Alpaka). Dazu kommt pro Buchstabe eine Affen- und eine Katzenart (`"primaer": true`,
+z.B. B: Brüllaffe und Britisch Kurzhaar), weil das Kind die am liebsten mag. Q und X
+haben keine, es gibt keine mit dem Anfangsbuchstaben. Die Lieblingstiere kommen
+bevorzugt: zweimal Affe und Katze, dann ein anderes Tier (`PRIMAER_RUNDEN` in
+`tiere.py`). Weitere Einträge gehen auch, z.B. O: Opa. Ä, Ö und Ü dürfen auch Einträge bekommen. Ein Eintrag ohne
 `emoji` (z.B. eine Person) braucht ein Foto, sonst steht nur der Buchstabe da.
 
 ### Familien-Aufnahmen
@@ -95,9 +98,8 @@ aus `tierquellen.json` löschen und die Datei im Ordner löschen.
 
 ### Tiervideos (CC0)
 
-40 der 104 Tiere haben ein kurzes Video (Wikimedia Commons, CC0): meist zwei pro
-Taste, eins bei I, J, L, Q, U und Z, keins bei C, X und Y, weil es dafür kein
-brauchbares CC0-Video gibt. Ein Video läuft statt des Fotos neben dem Buchstaben,
+29 Tiere haben ein kurzes CC0-Video (Wikimedia Commons), keins davon aus Zoo,
+Aquarium, Museum oder Gehege. Den Rest füllen eigene Clips. Ein Video läuft statt des Fotos neben dem Buchstaben,
 einmal, höchstens 8 s, ohne eigenen Ton (den Laut spielt wie immer `ton.py`), und
 bleibt am Ende auf dem letzten Bild stehen. Die nächste Taste bricht es ab. Ein
 Familien-Foto geht vor.
@@ -112,6 +114,24 @@ Achtung beim Erweitern: Unter CC0 auf Commons liegen zu harmlosen Suchwörtern
 auch Schlachtungen, Paarungen, Tierversuche und bei „snake“ sogar Pornografie.
 Jedes Video vor dem Eintragen ansehen, und vom fertigen Video Bilder aus der
 Mitte und vom Ende prüfen, nicht nur das Vorschaubild.
+
+### Eigene Clips (`clip_einsortieren.py`)
+
+Für Affen und Katzen gibt es kaum CC0-Videos, die nicht aus dem Zoo sind (Zoo-,
+Aquarium- und Gehege-Videos sind bewusst raus). Eigene Clips, z.B. von YouTube für
+den privaten Gebrauch, sortiert das Skript ein:
+
+```bash
+python3 clip_einsortieren.py --fehlt                       # welche Affen/Katzen noch etwas brauchen
+python3 clip_einsortieren.py mandrill.mp4 Mandrill          # Video + Ton ab Sekunde 0
+python3 clip_einsortieren.py mandrill.mp4 Mandrill --start 12.5
+python3 clip_einsortieren.py katze.mp4 Siamkatze --ohne-ton
+```
+
+Es prüft den Clip mit ClamAV und kodiert ihn wie die CC0-Videos neu (8 s, VP9, stumm).
+Den Laut nimmt es aus denselben 8 s (die lautesten 4 s, ohne Rumpeln). Abgelegt wird
+unter `~/.local/share/oskalizer/clips/<wort>/video|laut/`, außerhalb des Repos. Mehrere
+Clips pro Tier gehen, dann zufällig einer. Neu geladen wird beim nächsten Start.
 
 ### Tastatur-Beleuchtung (`kb-rgb ozk`)
 
