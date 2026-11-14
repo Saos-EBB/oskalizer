@@ -1526,15 +1526,6 @@
  },
  {
   "wort": "Lama",
-  "slot": "bild",
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Llama_o_alpaca_moteada_en_el_Zoofari%2C_Cuernavaca%2C_Morelos.jpg/1280px-Llama_o_alpaca_moteada_en_el_Zoofari%2C_Cuernavaca%2C_Morelos.jpg",
-  "seite": "https://commons.wikimedia.org/wiki/File:Llama_o_alpaca_moteada_en_el_Zoofari,_Cuernavaca,_Morelos.jpg",
-  "titel": "Llama o alpaca moteada en el Zoofari, Cuernavaca, Morelos.jpg",
-  "urheber": "Álvaro de la Paz Franco",
-  "lizenz": "CC0 1.0"
- },
- {
-  "wort": "Lama",
   "slot": "laut",
   "url": "https://cdn.freesound.org/previews/385/385941_1661766-hq.mp3",
   "seite": "https://freesound.org/people/felix.blume/sounds/385941",
@@ -2348,15 +2339,6 @@
   "hochpass": 300
  },
  {
-  "wort": "Yapok",
-  "slot": "bild",
-  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Chironectes_minimus_Yapock_Mus%C3%A9e_d%27Histoire_Naturelle_Tournai_27122015_1.jpg/1280px-Chironectes_minimus_Yapock_Mus%C3%A9e_d%27Histoire_Naturelle_Tournai_27122015_1.jpg",
-  "seite": "https://commons.wikimedia.org/wiki/File:Chironectes_minimus_Yapock_Mus%C3%A9e_d%27Histoire_Naturelle_Tournai_27122015_1.jpg",
-  "titel": "Chironectes minimus Yapock Musée d'Histoire Naturelle Tournai 27122015 1.jpg",
-  "urheber": "Vassil",
-  "lizenz": "CC0 1.0"
- },
- {
   "wort": "Ypsiloneule",
   "slot": "bild",
   "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Autographa_gamma_%28Silver_Y%29%2C_Elst_%28Gld%29%2C_the_Netherlands.jpg/1280px-Autographa_gamma_%28Silver_Y%29%2C_Elst_%28Gld%29%2C_the_Netherlands.jpg",
@@ -2763,16 +2745,6 @@
   "seite": "https://commons.wikimedia.org/wiki/File:Sykes_monkey_2.webm",
   "titel": "Sykes monkey 2.webm",
   "urheber": "Shyamal",
-  "lizenz": "CC0 1.0",
-  "start": 2.0
- },
- {
-  "wort": "Britisch Kurzhaar",
-  "slot": "video",
-  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/ed/Burmese_Kitten_Grooming_Itself.webm/Burmese_Kitten_Grooming_Itself.webm.480p.vp9.webm",
-  "seite": "https://commons.wikimedia.org/wiki/File:Burmese_Kitten_Grooming_Itself.webm",
-  "titel": "Burmese Kitten Grooming Itself.webm",
-  "urheber": "Alistair Findlay",
   "lizenz": "CC0 1.0",
   "start": 2.0
  },
@@ -3864,16 +3836,6 @@
  {
   "wort": "Siamkatze",
   "slot": "video",
-  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/70/2_year_old_Siamese_Tabby_Cat_1_2016-05-22.webm/2_year_old_Siamese_Tabby_Cat_1_2016-05-22.webm.480p.vp9.webm",
-  "seite": "https://commons.wikimedia.org/wiki/File:2_year_old_Siamese_Tabby_Cat_1_2016-05-22.webm",
-  "titel": "2 year old Siamese Tabby Cat 1 2016-05-22.webm",
-  "urheber": "FASTILY",
-  "lizenz": "CC BY-SA 4.0",
-  "start": 1.3
- },
- {
-  "wort": "Siamkatze",
-  "slot": "video",
   "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/2a/Cat_eating_peas.ogv/Cat_eating_peas.ogv.240p.vp9.webm",
   "seite": "https://commons.wikimedia.org/wiki/File:Cat_eating_peas.ogv",
   "titel": "Cat eating peas.ogv",
@@ -4102,5 +4064,23 @@
   "titel": "Bobcat-image-MariadB.png",
   "urheber": "Maria de Bruyn",
   "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Lama",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Lama_1_Luc_Viatour.jpg/1280px-Lama_1_Luc_Viatour.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Lama_1_Luc_Viatour.jpg",
+  "titel": "Lama 1 Luc Viatour.jpg",
+  "urheber": "Luc Viatour",
+  "lizenz": "CC BY-SA 3.0"
+ },
+ {
+  "wort": "Yapok",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Chironectes_minimus_91742388.jpg/1280px-Chironectes_minimus_91742388.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Chironectes_minimus_91742388.jpg",
+  "titel": "Chironectes minimus 91742388.jpg",
+  "urheber": "Eduardo Chacón-Madrigal",
+  "lizenz": "CC BY 4.0"
  }
 ]
