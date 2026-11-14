@@ -1,5 +1,9 @@
 # Build-Log
 
+## 2026-11-14 — feat(tiere): freie Videos und Fotos für Affen und Katzen
+**Was:** Neben CC0 jetzt auch CC BY / CC BY-SA / gemeinfrei von Commons (nie NC/ND), Lizenz und Urheber pro Datei in `tierquellen.json` und `QUELLEN.md`. Pro Lieblingstier Videos und Fotos gesucht, Zoo/Gehege/Labor/Jagd per Stichwort raus, Rest von Hand auf Kontaktbögen gesichtet, vom fertigen Video vier Bilder geprüft (6 Videos und 4 missratene Freistellungen danach wieder raus). Jetzt haben 26 der 48 Lieblingstiere ein Video aus der Natur oder von zu Hause, 20 ein Foto, 2 nur das Emoji. D und R bekommen statt Devon Rex und Ragdoll (kein Video zu finden) Dschungelkatze und Rotluchs als Lieblingskatze. 112 Dateien, alle durch ClamAV.
+**Nicht gebaut:** keine Laute aus den neuen Videos (viele haben Ton, z.B. schnurrender Gepard), kein Video für 22 Lieblingstiere (Rassekatzen, seltene Affen: auf Commons nur aus dem Zoo oder gar nicht), kein Foto für York Chocolate und Zwergtigerkatze.
+
 ## 2026-11-12 — feat(tiere): Affe und Katze auf jeder Taste, keine Zoo-Videos
 **Was:** Beim Testen mit dem Kind: es mag fast nur Affen und Katzen. Jetzt hat jeder Buchstabe eine Affen- und eine Katzenart (`primaer`, 48 Arten, alle verschieden, außer Q und X), die bevorzugt drankommen (zweimal Affe+Katze, dann ein anderes Tier). Alle Videos aus Zoo, Aquarium, Museum oder Gehege sind raus (16 + die neuen Kandidaten), dazu drei, auf denen das Tier nur ein Punkt ist. Für die Lücken `clip_einsortieren.py`: eigener Clip → ClamAV → Video und Laut unter `clips/`, die oskalizer und Vorschau mitladen.
 **Nicht gebaut:** kein YouTube-Download (Clips holt der Nutzer selbst), keine Affen/Katzen für Q und X, kein Nachladen ohne Neustart. Mit Video und Laut komplett sind erst 6 der 48 Lieblingstiere.

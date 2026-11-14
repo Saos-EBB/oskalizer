@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Holt die CC0-Tierfotos und -laute aus tierquellen.json nach
+"""Holt die freien Tierfotos, -laute und -videos (CC0/CC BY/CC BY-SA) aus tierquellen.json nach
 ~/.local/share/oskalizer/tiere/<wort>/bild|laut|video/.
 
     python3 tiere_holen.py            # nur was noch fehlt
@@ -177,10 +177,10 @@ def video(quelle, ziel, start):
 
 
 def schreibe_quellen(eintraege):
-    zeilen = ["# Quellen der Tierfotos und -laute (alle CC0 1.0)", ""]
+    zeilen = ["# Quellen der Tierfotos und -laute (CC0, CC BY, CC BY-SA oder gemeinfrei, siehe jeweils)", ""]
     for e in eintraege:
         zeilen.append(f"- {e['wort']} ({e['slot']}): „{e['titel']}“ von {e['urheber']}, "
-                      f"{e['seite']}")
+                      f"{e.get('lizenz', 'CC0 1.0')}, {e['seite']}")
     (TIERE / "QUELLEN.md").write_text("\n".join(zeilen) + "\n", encoding="utf-8")
 
 

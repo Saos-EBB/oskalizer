@@ -25,7 +25,7 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
   Zeichen im Modus Tiere; lädt beim Start `FAMILIE/<wort>/bild/*` als Ersatz fürs Emoji,
   zeigt „[von X]“ unten rechts). `ordner(wort)` und `person(path)` übersetzen
   zwischen Wort/Datei und Familien-Ordner (Leerzeichen → `-`, Umlaute → ae/oe/ue).
-  Hat ein Wort ein CC0-Video (`TIERE/<wort>/video/*.webm`) und kein Familien-Foto,
+  Hat ein Wort ein Video (`TIERE/<wort>/video/*.webm`) und kein Familien-Foto,
   startet `Tafel.show()` einen `Film`: `ffmpeg -re` dekodiert in Echtzeit nach rgb24,
   ein Daemon-Thread liest die Bilder, `draw()` setzt jedes Frame neu zusammen.
   `Tafel.stop()` beendet den Prozess (neue Taste, Moduswechsel, Programmende).
@@ -44,11 +44,11 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
 
 - Familien-Daten — `~/.local/share/oskalizer/familie/<wort>/name|laut|bild/<person>_<…>`,
   außerhalb des Repos (Repo wird öffentlich).
-- CC0-Tierdateien — `~/.local/share/oskalizer/tiere/<wort>/bild|laut/`, ohne Person.
-  `Tafel` nimmt sie, wenn es kein Familien-Foto gibt (Familie > CC0-Foto > Emoji),
-  `Ton.play` für den Laut (Familien-Laut > CC0-Laut > Piper-Lautmalerei).
-- `tierquellen.json` + `tiere_holen.py` — Liste der gewählten CC0-Dateien (URL,
-  Seite, Urheber); das Skript lädt sie in eine Quarantäne (`~/.cache/oskalizer/quarantaene/`,
+- Freie Tierdateien — `~/.local/share/oskalizer/tiere/<wort>/bild|laut|video/`, ohne Person.
+  `Tafel` nimmt sie, wenn es kein Familien-Foto gibt (Familie > Video > Commons-Foto > Emoji),
+  `Ton.play` für den Laut (Familien-Laut > echter Laut > Piper-Lautmalerei).
+- `tierquellen.json` + `tiere_holen.py` — Liste der gewählten freien Dateien (URL,
+  Seite, Urheber, Lizenz); das Skript lädt sie in eine Quarantäne (`~/.cache/oskalizer/quarantaene/`,
   bleibt über Abbrüche liegen, Datei weg erst nach dem Kodieren; nur https von
   Wikimedia/Freesound, ≤ 20 MB, Typ an den Magic Bytes), scannt mit ClamAV
   (Podman), kodiert neu (rembg → PNG, ffmpeg → OGG, lauteste 4 s ohne Bass gesucht, Hochpass pro Laut) und legt sie ab.
@@ -82,9 +82,14 @@ Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Ente
 `Ton.sage(text)`, die nächste Taste leert den Text.
 
 ## Entscheidungen
+- 2026-11-14 — Neben CC0 auch CC BY und CC BY-SA (nie NC/ND), weil es unter CC0 für
+  die meisten Affen/Katzen nur Zoo-Videos gibt. Namensnennung steht in `tierquellen.json`
+  und `QUELLEN.md`. Für eine Rasse ohne jedes Video kann eine Wildkatze gleichen
+  Buchstabens Lieblingstier werden (D Dschungelkatze statt Devon Rex, R Rotluchs statt
+  Ragdoll; die Rassen bleiben als normale Tiere).
 - 2026-11-12 — Keine Videos aus Zoo, Aquarium, Museum oder Gehege (Wunsch des Nutzers),
   auch wenn dann viele Affen/Katzen kein CC0-Video haben. Eigene Clips liegen getrennt
-  unter `clips/`, damit `tierquellen.json` nur CC0-Quellen kennt.
+  unter `clips/`, damit `tierquellen.json` nur freie Quellen kennt.
 - 2026-11-10 — CC0-Tierdateien außerhalb des Repos, im Repo nur die Quellenliste.
   Grund: Repo bleibt klein, jede Datei ist nachvollziehbar. Fotos von Commons
   (1280-px-Thumbnails, Originale drosselt Wikimedia mit 429), Laute über Openverse

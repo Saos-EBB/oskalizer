@@ -57,13 +57,15 @@ Leertaste, Enter, F-Tasten, Shift, Esc und die Maus zeigen nichts. Shift wird
 nicht ausgewertet — es gibt nur Großbuchstaben und die ungeshifteten Zeichen.
 Die Tastenbelegung ist auf ein deutsches QWERTZ-Layout festgelegt.
 
-### Echte Tierfotos und -laute (CC0)
+### Echte Tierfotos und -laute (freie Lizenzen)
 
 Ohne Familien-Foto zeigt ein Tier ein echtes Foto statt des Emojis, ohne
 Familien-Laut spielt der echte Tierlaut statt der gesprochenen Lautmalerei.
-Familien-Dateien gehen immer vor. Alles ist **CC0** (gemeinfrei): Fotos von
-Wikimedia Commons, Laute von Freesound und Wikimedia Commons. Welche Datei
-woher kommt, steht in `tierquellen.json` (Seite, Urheber).
+Familien-Dateien gehen immer vor. Alles steht unter einer freien Lizenz: die
+ersten Dateien **CC0**, für die Affen und Katzen auch **CC BY / CC BY-SA** und
+gemeinfrei (nie NC oder ND). Fotos und Videos von Wikimedia Commons, Laute von
+Freesound und Wikimedia Commons. Welche Datei woher kommt, steht in
+`tierquellen.json` (Seite, Urheber, Lizenz), die Namensnennung in `QUELLEN.md`.
 
 Die Dateien liegen nicht im Repo, sondern unter `~/.local/share/oskalizer/tiere/`
 (gleiche Ordnernamen wie bei der Familie, `bild/` und `laut/`). Geholt werden sie mit:
@@ -96,10 +98,11 @@ dem fertigen Laut: 300 Hz für Vögel, Insekten und kleine Tiere, 150 Hz für mi
 80 Hz für die großen (Feld `hochpass` in `tierquellen.json`). Eine Datei rauswerfen: Eintrag
 aus `tierquellen.json` löschen und die Datei im Ordner löschen.
 
-### Tiervideos (CC0)
+### Tiervideos
 
-29 Tiere haben ein kurzes CC0-Video (Wikimedia Commons), keins davon aus Zoo,
-Aquarium, Museum oder Gehege. Den Rest füllen eigene Clips. Ein Video läuft statt des Fotos neben dem Buchstaben,
+47 Tiere haben ein kurzes Video von Wikimedia Commons (CC0, CC BY oder CC BY-SA),
+keins davon aus Zoo, Aquarium, Museum, Labor oder Gehege, nichts mit Jagd oder
+Beute (der Zuschauer ist anderthalb). Den Rest füllen eigene Clips. Ein Video läuft statt des Fotos neben dem Buchstaben,
 einmal, höchstens 8 s, ohne eigenen Ton (den Laut spielt wie immer `ton.py`), und
 bleibt am Ende auf dem letzten Bild stehen. Die nächste Taste bricht es ab. Ein
 Familien-Foto geht vor.
@@ -108,16 +111,16 @@ pygame 2.6 kann kein Video, darum dekodiert pro Video ein `ffmpeg`-Prozess in
 Echtzeit (`-re`), ein Thread liest die Einzelbilder. Geholt werden die Videos mit
 `tiere_holen.py` wie Fotos und Laute: Typ an den ersten Bytes (WebM/Ogg), ClamAV,
 dann neu kodiert als WebM/VP9 ohne Ton, 480 Zeilen, 24 fps (`~/.local/share/oskalizer/tiere/<wort>/video/`,
-zusammen ~38 MB).
+zusammen ~90 MB).
 
-Achtung beim Erweitern: Unter CC0 auf Commons liegen zu harmlosen Suchwörtern
+Achtung beim Erweitern: Auf Commons liegen zu harmlosen Suchwörtern
 auch Schlachtungen, Paarungen, Tierversuche und bei „snake“ sogar Pornografie.
 Jedes Video vor dem Eintragen ansehen, und vom fertigen Video Bilder aus der
 Mitte und vom Ende prüfen, nicht nur das Vorschaubild.
 
 ### Eigene Clips (`clip_einsortieren.py`)
 
-Für Affen und Katzen gibt es kaum CC0-Videos, die nicht aus dem Zoo sind (Zoo-,
+Nicht für jeden Affen und jede Katze gibt es ein freies Video aus der Natur (Zoo-,
 Aquarium- und Gehege-Videos sind bewusst raus). Eigene Clips, z.B. von YouTube für
 den privaten Gebrauch, sortiert das Skript ein:
 
@@ -128,7 +131,7 @@ python3 clip_einsortieren.py mandrill.mp4 Mandrill --start 12.5
 python3 clip_einsortieren.py katze.mp4 Siamkatze --ohne-ton
 ```
 
-Es prüft den Clip mit ClamAV und kodiert ihn wie die CC0-Videos neu (8 s, VP9, stumm).
+Es prüft den Clip mit ClamAV und kodiert ihn wie die Commons-Videos neu (8 s, VP9, stumm).
 Den Laut nimmt es aus denselben 8 s (die lautesten 4 s, ohne Rumpeln). Abgelegt wird
 unter `~/.local/share/oskalizer/clips/<wort>/video|laut/`, außerhalb des Repos. Mehrere
 Clips pro Tier gehen, dann zufällig einer. Neu geladen wird beim nächsten Start.

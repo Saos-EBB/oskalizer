@@ -3145,5 +3145,962 @@
   "urheber": "itsgabbo",
   "lizenz": "CC0 1.0",
   "hochpass": 300
+ },
+ {
+  "wort": "Affe",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/72/Mona_monkey_Lagos_Nigeria.ogv/Mona_monkey_Lagos_Nigeria.ogv.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Mona_monkey_Lagos_Nigeria.ogv",
+  "titel": "Mona monkey Lagos Nigeria.ogv",
+  "urheber": "Zacharymccune",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 1.1
+ },
+ {
+  "wort": "Affe",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b9/Uluwatu_monkey_3_-_eating.webm/Uluwatu_monkey_3_-_eating.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Uluwatu_monkey_3_-_eating.webm",
+  "titel": "Uluwatu monkey 3 - eating.webm",
+  "urheber": "Mx. Granger",
+  "lizenz": "CC0",
+  "start": 2.0
+ },
+ {
+  "wort": "Japanmakak",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/36/Japanmakaken_im_Jigokudani_Monkey_Park_bei_der_Fellpflege.webm/Japanmakaken_im_Jigokudani_Monkey_Park_bei_der_Fellpflege.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Japanmakaken_im_Jigokudani_Monkey_Park_bei_der_Fellpflege.webm",
+  "titel": "Japanmakaken im Jigokudani Monkey Park bei der Fellpflege.webm",
+  "urheber": "Frank Schulenburg",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 15.9
+ },
+ {
+  "wort": "Japanmakak",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/55/Jigokudani_Monkey_Park_-_hotsprings.ogv/Jigokudani_Monkey_Park_-_hotsprings.ogv.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Jigokudani_Monkey_Park_-_hotsprings.ogv",
+  "titel": "Jigokudani Monkey Park - hotsprings.ogv",
+  "urheber": "Nesnad",
+  "lizenz": "CC BY-SA 3.0",
+  "start": 0.5
+ },
+ {
+  "wort": "Angorakatze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Angora_Turc_chatonnes.jpg/1280px-Angora_Turc_chatonnes.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Angora_Turc_chatonnes.jpg",
+  "titel": "Angora Turc chatonnes.jpg",
+  "urheber": "Vinydeluz",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Brüllaffe",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/21/Amazonas_-_Manaus_-_Bugio.webm/Amazonas_-_Manaus_-_Bugio.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Amazonas_-_Manaus_-_Bugio.webm",
+  "titel": "Amazonas - Manaus - Bugio.webm",
+  "urheber": "Ppgold1963",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Brüllaffe",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/62/Mantled_Howler_Monkey._Alouatta_palliata_video.webm/Mantled_Howler_Monkey._Alouatta_palliata_video.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Mantled_Howler_Monkey._Alouatta_palliata_video.webm",
+  "titel": "Mantled Howler Monkey. Alouatta palliata video.webm",
+  "urheber": "https://www.flickr.com/photos/gails_pictures/",
+  "lizenz": "CC BY 2.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Brüllaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Brown_Howler_Monkey_6.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Brown_Howler_Monkey_6.jpg",
+  "titel": "Brown Howler Monkey 6.jpg",
+  "urheber": "Peter Schoen",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Britisch Kurzhaar",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/75/Katze_isst_Katzengras_20250531_C1387.webm/Katze_isst_Katzengras_20250531_C1387.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Katze_isst_Katzengras_20250531_C1387.webm",
+  "titel": "Katze isst Katzengras 20250531 C1387.webm",
+  "urheber": "PantheraLeo1359531",
+  "lizenz": "CC BY 4.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Britisch Kurzhaar",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/British_Shorthair._Female._18_months_old.jpg/1280px-British_Shorthair._Female._18_months_old.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:British_Shorthair._Female._18_months_old.jpg",
+  "titel": "British Shorthair. Female. 18 months old.jpg",
+  "urheber": "George E. Koronaios",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Chartreux",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/5/57/Chartreux-Bonheur-nuits_indiennes-neige2009.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Chartreux-Bonheur-nuits_indiennes-neige2009.jpg",
+  "titel": "Chartreux-Bonheur-nuits indiennes-neige2009.jpg",
+  "urheber": "Clarisse VINOT",
+  "lizenz": "Public domain"
+ },
+ {
+  "wort": "Chartreux",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Chartreux-femelle-rayures-fantome.jpg/1280px-Chartreux-femelle-rayures-fantome.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Chartreux-femelle-rayures-fantome.jpg",
+  "titel": "Chartreux-femelle-rayures-fantome.jpg",
+  "urheber": "Abujoy",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Colobus",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/04/Colobus_congoensis_recorded_on_a_video_while_vocalizing.webm/Colobus_congoensis_recorded_on_a_video_while_vocalizing.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Colobus_congoensis_recorded_on_a_video_while_vocalizing.webm",
+  "titel": "Colobus congoensis recorded on a video while vocalizing.webm",
+  "urheber": "Hart JA, Amboko JD, Arenson JL, Horton ER, Coates KF, et al.",
+  "lizenz": "CC BY 4.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Colobus",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Eastern_black-and-white_colobus_%28Colobus_guereza_matschiei%29_head.jpg/1280px-Eastern_black-and-white_colobus_%28Colobus_guereza_matschiei%29_head.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Eastern_black-and-white_colobus_(Colobus_guereza_matschiei)_head.jpg",
+  "titel": "Eastern black-and-white colobus (Colobus guereza matschiei) head.jpg",
+  "urheber": "Charles J. Sharp",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Colobus",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Colobus_guereza_Kilimanjaro.jpg/1280px-Colobus_guereza_Kilimanjaro.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Colobus_guereza_Kilimanjaro.jpg",
+  "titel": "Colobus guereza Kilimanjaro.jpg",
+  "urheber": "mitchpa1984",
+  "lizenz": "CC BY 2.0"
+ },
+ {
+  "wort": "Devon Rex",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Devon-rex_%E2%80%A2_%D0%94%D0%B5%D0%B2%D0%BE%D0%BD-%D1%80%D0%B5%D0%BA%D1%81_%285289173321%29.jpg/1280px-Devon-rex_%E2%80%A2_%D0%94%D0%B5%D0%B2%D0%BE%D0%BD-%D1%80%D0%B5%D0%BA%D1%81_%285289173321%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Devon-rex_%E2%80%A2_%D0%94%D0%B5%D0%B2%D0%BE%D0%BD-%D1%80%D0%B5%D0%BA%D1%81_(5289173321).jpg",
+  "titel": "Devon-rex • Девон-рекс (5289173321).jpg",
+  "urheber": "Nickolas Titkov from Moscow, Russian Federation",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Devon Rex",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Devon_Rex_Cassini.jpeg/1280px-Devon_Rex_Cassini.jpeg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Devon_Rex_Cassini.jpeg",
+  "titel": "Devon Rex Cassini.jpeg",
+  "urheber": "Anna Belial",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Drill",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Drill_Monkey.jpg/1280px-Drill_Monkey.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Drill_Monkey.jpg",
+  "titel": "Drill Monkey.jpg",
+  "urheber": "Dotun55",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Drill",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Drill_%28Mandrillus_leucophaeus%29_male_%2818440927556%29.jpg/1280px-Drill_%28Mandrillus_leucophaeus%29_male_%2818440927556%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Drill_(Mandrillus_leucophaeus)_male_(18440927556).jpg",
+  "titel": "Drill (Mandrillus leucophaeus) male (18440927556).jpg",
+  "urheber": "Bernard DUPONT from FRANCE",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Eulenkopfmeerkatze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Femelle_cercopith%C3%A8que_%C3%A0_t%C3%AAte_de_hibou.jpg/1280px-Femelle_cercopith%C3%A8que_%C3%A0_t%C3%AAte_de_hibou.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Femelle_cercopith%C3%A8que_%C3%A0_t%C3%AAte_de_hibou.jpg",
+  "titel": "Femelle cercopithèque à tête de hibou.jpg",
+  "urheber": "Christophe Chauvin Janekvorik",
+  "lizenz": "Public domain"
+ },
+ {
+  "wort": "Europäisch Kurzhaar",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/European_shorthair_TUROK_cat_show_Turku_2010-03-27.JPG/1280px-European_shorthair_TUROK_cat_show_Turku_2010-03-27.JPG",
+  "seite": "https://commons.wikimedia.org/wiki/File:European_shorthair_TUROK_cat_show_Turku_2010-03-27.JPG",
+  "titel": "European shorthair TUROK cat show Turku 2010-03-27.JPG",
+  "urheber": "Heikki Siltala",
+  "lizenz": "CC BY-SA 3.0"
+ },
+ {
+  "wort": "Europäisch Kurzhaar",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/European-cat_show_Helsinki_2008.JPG",
+  "seite": "https://commons.wikimedia.org/wiki/File:European-cat_show_Helsinki_2008.JPG",
+  "titel": "European-cat show Helsinki 2008.JPG",
+  "urheber": "Heikki Siltala 2008",
+  "lizenz": "CC BY 3.0"
+ },
+ {
+  "wort": "Europäisch Kurzhaar",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/1a/2022-09-18_LJUBLJANA_doma_CARNIVORA_Felis_catus_DOMA%C4%8CA_MA%C4%8CKA_3.webm/2022-09-18_LJUBLJANA_doma_CARNIVORA_Felis_catus_DOMA%C4%8CA_MA%C4%8CKA_3.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:2022-09-18_LJUBLJANA_doma_CARNIVORA_Felis_catus_DOMA%C4%8CA_MA%C4%8CKA_3.webm",
+  "titel": "2022-09-18 LJUBLJANA doma CARNIVORA Felis catus DOMAČA MAČKA 3.webm",
+  "urheber": "NaIzletuSi ™",
+  "lizenz": "CC BY 3.0",
+  "start": 15.0
+ },
+ {
+  "wort": "Europäisch Kurzhaar",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/50/2022-09-21_LJUBLJANA_doma_CARNIVORA_Felis_catus_DOMA%C4%8CA_MA%C4%8CKA_4.webm/2022-09-21_LJUBLJANA_doma_CARNIVORA_Felis_catus_DOMA%C4%8CA_MA%C4%8CKA_4.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:2022-09-21_LJUBLJANA_doma_CARNIVORA_Felis_catus_DOMA%C4%8CA_MA%C4%8CKA_4.webm",
+  "titel": "2022-09-21 LJUBLJANA doma CARNIVORA Felis catus DOMAČA MAČKA 4.webm",
+  "urheber": "NaIzletuSi ™",
+  "lizenz": "CC BY 3.0",
+  "start": 1.7
+ },
+ {
+  "wort": "Falbkatze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Felis_lybica_270414532.jpg/1280px-Felis_lybica_270414532.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Felis_lybica_270414532.jpg",
+  "titel": "Felis lybica 270414532.jpg",
+  "urheber": "Justin Ponder",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Faulaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Coucang.jpg/1280px-Coucang.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Coucang.jpg",
+  "titel": "Coucang.jpg",
+  "urheber": "Aprisonsan",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Faulaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Nycticebus_coucang%2C_the_Sunda_Slow_Loris_%2811662803076%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Nycticebus_coucang,_the_Sunda_Slow_Loris_(11662803076).jpg",
+  "titel": "Nycticebus coucang, the Sunda Slow Loris (11662803076).jpg",
+  "urheber": "Dick Culbert from Gibsons, B.C., Canada",
+  "lizenz": "CC BY 2.0"
+ },
+ {
+  "wort": "Gepard",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fa/Cheetah_%28Acinonyx_jubatus%29_crossing_the_road.webm/Cheetah_%28Acinonyx_jubatus%29_crossing_the_road.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Cheetah_(Acinonyx_jubatus)_crossing_the_road.webm",
+  "titel": "Cheetah (Acinonyx jubatus) crossing the road.webm",
+  "urheber": "Bernard DUPONT",
+  "lizenz": "CC BY-SA 2.0",
+  "start": 0.8
+ },
+ {
+  "wort": "Gepard",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/6c/Cheetah_%28Acinonyx_jubatus%29_cub_....webm/Cheetah_%28Acinonyx_jubatus%29_cub_....webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Cheetah_(Acinonyx_jubatus)_cub_....webm",
+  "titel": "Cheetah (Acinonyx jubatus) cub ....webm",
+  "urheber": "Bernard DUPONT",
+  "lizenz": "CC BY-SA 2.0",
+  "start": 0.7
+ },
+ {
+  "wort": "Gepard",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/2f/Cheetah_%28Acinonyx_jubatus%29_purring_and_calling_its_brother_from_a_road_marker.webm/Cheetah_%28Acinonyx_jubatus%29_purring_and_calling_its_brother_from_a_road_marker.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Cheetah_(Acinonyx_jubatus)_purring_and_calling_its_brother_from_a_road_marker.webm",
+  "titel": "Cheetah (Acinonyx jubatus) purring and calling its brother from a road marker.webm",
+  "urheber": "Bernard DUPONT",
+  "lizenz": "CC BY-SA 2.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Gepard",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/037_Cheetah_close-up_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg/1280px-037_Cheetah_close-up_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:037_Cheetah_close-up_in_the_Serengeti_National_Park_Photo_by_Giles_Laurent.jpg",
+  "titel": "037 Cheetah close-up in the Serengeti National Park Photo by Giles Laurent.jpg",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Gorilla",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/af/006_Mountain_gorilla_eating_at_Bwindi_Impenetrable_Forest_National_Park_Video_by_Giles_Laurent.webm/006_Mountain_gorilla_eating_at_Bwindi_Impenetrable_Forest_National_Park_Video_by_Giles_Laurent.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:006_Mountain_gorilla_eating_at_Bwindi_Impenetrable_Forest_National_Park_Video_by_Giles_Laurent.webm",
+  "titel": "006 Mountain gorilla eating at Bwindi Impenetrable Forest National Park Video by Giles Laurent.webm",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 1.4
+ },
+ {
+  "wort": "Gorilla",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/5f/007_Silverback_Mountain_gorilla_eating_at_Bwindi_Impenetrable_Forest_National_Park_Video_by_Giles_Laurent.webm/007_Silverback_Mountain_gorilla_eating_at_Bwindi_Impenetrable_Forest_National_Park_Video_by_Giles_Laurent.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:007_Silverback_Mountain_gorilla_eating_at_Bwindi_Impenetrable_Forest_National_Park_Video_by_Giles_Laurent.webm",
+  "titel": "007 Silverback Mountain gorilla eating at Bwindi Impenetrable Forest National Park Video by Giles Laurent.webm",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 1.4
+ },
+ {
+  "wort": "Gorilla",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/068_Mountain_gorilla_close-up_at_Bwindi_Impenetrable_Forest_National_Park_Photo_by_Giles_Laurent.jpg/1280px-068_Mountain_gorilla_close-up_at_Bwindi_Impenetrable_Forest_National_Park_Photo_by_Giles_Laurent.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:068_Mountain_gorilla_close-up_at_Bwindi_Impenetrable_Forest_National_Park_Photo_by_Giles_Laurent.jpg",
+  "titel": "068 Mountain gorilla close-up at Bwindi Impenetrable Forest National Park Photo by Giles Laurent.jpg",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Husarenaffe",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/da/Wei%C3%9Fnasen-Husarenaffe_%28Erythrocebus_patas_pyrrhonotus%29_im_Murchison_Falls_Nationalpark_in_Uganda.webm/Wei%C3%9Fnasen-Husarenaffe_%28Erythrocebus_patas_pyrrhonotus%29_im_Murchison_Falls_Nationalpark_in_Uganda.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Wei%C3%9Fnasen-Husarenaffe_(Erythrocebus_patas_pyrrhonotus)_im_Murchison_Falls_Nationalpark_in_Uganda.webm",
+  "titel": "Weißnasen-Husarenaffe (Erythrocebus patas pyrrhonotus) im Murchison Falls Nationalpark in Uganda.webm",
+  "urheber": "[1]",
+  "lizenz": "CC BY 2.0",
+  "start": 1.0
+ },
+ {
+  "wort": "Husarenaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/39/Erythrocebus_patas_patas_85840905.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Erythrocebus_patas_patas_85840905.jpg",
+  "titel": "Erythrocebus patas patas 85840905.jpg",
+  "urheber": "Wich'yanan L",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Himalaya-Katze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Himalayan_Cat.jpg/1280px-Himalayan_Cat.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Himalayan_Cat.jpg",
+  "titel": "Himalayan Cat.jpg",
+  "urheber": "Joseph Morris",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Himalaya-Katze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Himalayan_Male_Cat_Cosmo_51x84x3456_2012-2-7_by_A_Silverstein.jpg/1280px-Himalayan_Male_Cat_Cosmo_51x84x3456_2012-2-7_by_A_Silverstein.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Himalayan_Male_Cat_Cosmo_51x84x3456_2012-2-7_by_A_Silverstein.jpg",
+  "titel": "Himalayan Male Cat Cosmo 51x84x3456 2012-2-7 by A Silverstein.jpg",
+  "urheber": "Asilverstein",
+  "lizenz": "CC BY-SA 3.0"
+ },
+ {
+  "wort": "Indri",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Babakoto_INDRI_INDRI_7.jpg/1280px-Babakoto_INDRI_INDRI_7.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Babakoto_INDRI_INDRI_7.jpg",
+  "titel": "Babakoto INDRI INDRI 7.jpg",
+  "urheber": "MPMF24",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Indri",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/INDRI_INDRI_4.jpg/1280px-INDRI_INDRI_4.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:INDRI_INDRI_4.jpg",
+  "titel": "INDRI INDRI 4.jpg",
+  "urheber": "MPMF24",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Irbis",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/9/9e/A_New_Year%27s_Snow_Leopard_Encounter_in_India.webm/A_New_Year%27s_Snow_Leopard_Encounter_in_India.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:A_New_Year%27s_Snow_Leopard_Encounter_in_India.webm",
+  "titel": "A New Year's Snow Leopard Encounter in India.webm",
+  "urheber": "Tanzin Thinley, NCF India, Snow Leopard Trust",
+  "lizenz": "CC BY 3.0",
+  "start": 16.3
+ },
+ {
+  "wort": "Irbis",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/06/Snow_leopard_family%2C_Spiti%2C_Himachal_Pradesh%2C_India.webm/Snow_leopard_family%2C_Spiti%2C_Himachal_Pradesh%2C_India.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Snow_leopard_family,_Spiti,_Himachal_Pradesh,_India.webm",
+  "titel": "Snow leopard family, Spiti, Himachal Pradesh, India.webm",
+  "urheber": "Rishi Sharma, Nature Conservation Foundation, India (uploaded by Matthias Fiechter)",
+  "lizenz": "CC BY 3.0",
+  "start": 16.7
+ },
+ {
+  "wort": "Irbis",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Snow_leopard_puppy_%28Uncia_uncia%29.jpg/1280px-Snow_leopard_puppy_%28Uncia_uncia%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Snow_leopard_puppy_(Uncia_uncia).jpg",
+  "titel": "Snow leopard puppy (Uncia uncia).jpg",
+  "urheber": "Sini Merikallio",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Jaguar",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/013_Jaguar_leaving_the_river_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/1280px-013_Jaguar_leaving_the_river_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:013_Jaguar_leaving_the_river_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+  "titel": "013 Jaguar leaving the river in Encontro das Águas State Park Photo by Giles Laurent.jpg",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Jaguar",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/009_Female_jaguar_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg/1280px-009_Female_jaguar_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:009_Female_jaguar_in_Encontro_das_%C3%81guas_State_Park_Photo_by_Giles_Laurent.jpg",
+  "titel": "009 Female jaguar in Encontro das Águas State Park Photo by Giles Laurent.jpg",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Kapuzineraffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Capuchin_Costa_Rica.jpg/1280px-Capuchin_Costa_Rica.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Capuchin_Costa_Rica.jpg",
+  "titel": "Capuchin Costa Rica.jpg",
+  "urheber": "David M. Jensen (Storkk)",
+  "lizenz": "CC BY-SA 3.0"
+ },
+ {
+  "wort": "Kapuzineraffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Cebus_capucinus_241523285.jpg/1280px-Cebus_capucinus_241523285.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Cebus_capucinus_241523285.jpg",
+  "titel": "Cebus capucinus 241523285.jpg",
+  "urheber": "Dario Taraborelli",
+  "lizenz": "CC0"
+ },
+ {
+  "wort": "Siamkatze",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/37/8_months_old_Siamese-Tabby_kitten_self-cleaning_1_2014-10-15.ogv/8_months_old_Siamese-Tabby_kitten_self-cleaning_1_2014-10-15.ogv.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:8_months_old_Siamese-Tabby_kitten_self-cleaning_1_2014-10-15.ogv",
+  "titel": "8 months old Siamese-Tabby kitten self-cleaning 1 2014-10-15.ogv",
+  "urheber": "FASTILY",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Langschwanzmakak",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Long-tailed_macaque_%28Macaca_fascicularis%29_juvenile_2.jpg/1280px-Long-tailed_macaque_%28Macaca_fascicularis%29_juvenile_2.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Long-tailed_macaque_(Macaca_fascicularis)_juvenile_2.jpg",
+  "titel": "Long-tailed macaque (Macaca fascicularis) juvenile 2.jpg",
+  "urheber": "Charles J. Sharp",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Löwe",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/de/Lion_%28Panthera_leo%29_walking_on_the_road.webm/Lion_%28Panthera_leo%29_walking_on_the_road.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Lion_(Panthera_leo)_walking_on_the_road.webm",
+  "titel": "Lion (Panthera leo) walking on the road.webm",
+  "urheber": "Bernard DUPONT",
+  "lizenz": "CC BY-SA 2.0",
+  "start": 14.2
+ },
+ {
+  "wort": "Löwe",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/2d/Lion_cubs_%28Panthera_leo%29.webm/Lion_cubs_%28Panthera_leo%29.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Lion_cubs_(Panthera_leo).webm",
+  "titel": "Lion cubs (Panthera leo).webm",
+  "urheber": "Bettina May",
+  "lizenz": "CC BY 3.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Mandrill",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Mandrillus_sphinx_339428057.jpg/1280px-Mandrillus_sphinx_339428057.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Mandrillus_sphinx_339428057.jpg",
+  "titel": "Mandrillus sphinx 339428057.jpg",
+  "urheber": "Julien Renoult",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Mandrill",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Mandrillus_sphinx_339428097.jpg/1280px-Mandrillus_sphinx_339428097.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Mandrillus_sphinx_339428097.jpg",
+  "titel": "Mandrillus sphinx 339428097.jpg",
+  "urheber": "Julien Renoult",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Maine Coon",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a3/Siamese_Maine_Coon_2_2019-06-10.webm/Siamese_Maine_Coon_2_2019-06-10.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Siamese_Maine_Coon_2_2019-06-10.webm",
+  "titel": "Siamese Maine Coon 2 2019-06-10.webm",
+  "urheber": "FASTILY",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 1.2
+ },
+ {
+  "wort": "Maine Coon",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/fa/Siamese_Maine_Coon_3_2019-06-10.webm/Siamese_Maine_Coon_3_2019-06-10.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Siamese_Maine_Coon_3_2019-06-10.webm",
+  "titel": "Siamese Maine Coon 3 2019-06-10.webm",
+  "urheber": "FASTILY",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Maine Coon",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Maine_Coon_Cat_List_Characteristics.jpg/1280px-Maine_Coon_Cat_List_Characteristics.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Maine_Coon_Cat_List_Characteristics.jpg",
+  "titel": "Maine Coon Cat List Characteristics.jpg",
+  "urheber": "ales brad",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Maine Coon",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Chatte_Maine_Coon_Portrait.jpg/1280px-Chatte_Maine_Coon_Portrait.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Chatte_Maine_Coon_Portrait.jpg",
+  "titel": "Chatte Maine Coon Portrait.jpg",
+  "urheber": "Azurfrog",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Nasenaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Proboscis_Monkey_in_Borneo.jpg/1280px-Proboscis_Monkey_in_Borneo.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Proboscis_Monkey_in_Borneo.jpg",
+  "titel": "Proboscis Monkey in Borneo.jpg",
+  "urheber": "David Dennis",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Orang-Utan",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/6c/Orangutans.ogv/Orangutans.ogv.240p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Orangutans.ogv",
+  "titel": "Orangutans.ogv",
+  "urheber": "Ian and Wendy Sewell",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 47.4
+ },
+ {
+  "wort": "Orang-Utan",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Bornean_orangutan_%28Pongo_pygmaeus%29%2C_Tanjung_Putting_National_Park_01.jpg/1280px-Bornean_orangutan_%28Pongo_pygmaeus%29%2C_Tanjung_Putting_National_Park_01.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Bornean_orangutan_(Pongo_pygmaeus),_Tanjung_Putting_National_Park_01.jpg",
+  "titel": "Bornean orangutan (Pongo pygmaeus), Tanjung Putting National Park 01.jpg",
+  "urheber": "Thomas Fuhrmann",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Pavian",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/52/005_Baby_Olive_baboon_holding_to_its_mother_at_Queen_Elizabeth_National_Park_Video_by_Giles_Laurent.webm/005_Baby_Olive_baboon_holding_to_its_mother_at_Queen_Elizabeth_National_Park_Video_by_Giles_Laurent.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:005_Baby_Olive_baboon_holding_to_its_mother_at_Queen_Elizabeth_National_Park_Video_by_Giles_Laurent.webm",
+  "titel": "005 Baby Olive baboon holding to its mother at Queen Elizabeth National Park Video by Giles Laurent.webm",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Pavian",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c9/009_Olive_baboon_grooming_at_Queen_Elizabeth_National_Park_Video_by_Giles_Laurent.webm/009_Olive_baboon_grooming_at_Queen_Elizabeth_National_Park_Video_by_Giles_Laurent.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:009_Olive_baboon_grooming_at_Queen_Elizabeth_National_Park_Video_by_Giles_Laurent.webm",
+  "titel": "009 Olive baboon grooming at Queen Elizabeth National Park Video by Giles Laurent.webm",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 0.9
+ },
+ {
+  "wort": "Pavian",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Olive_baboon_%28Papio_anubis%29_follows_the_camera.webm/Olive_baboon_%28Papio_anubis%29_follows_the_camera.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Olive_baboon_(Papio_anubis)_follows_the_camera.webm",
+  "titel": "Olive baboon (Papio anubis) follows the camera.webm",
+  "urheber": "Benoit Chartier",
+  "lizenz": "CC BY 2.0",
+  "start": 18.0
+ },
+ {
+  "wort": "Pavian",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/060_Olive_baboon_walking_at_Queen_Elizabeth_National_Park_Photo_by_Giles_Laurent.jpg/1280px-060_Olive_baboon_walking_at_Queen_Elizabeth_National_Park_Photo_by_Giles_Laurent.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:060_Olive_baboon_walking_at_Queen_Elizabeth_National_Park_Photo_by_Giles_Laurent.jpg",
+  "titel": "060 Olive baboon walking at Queen Elizabeth National Park Photo by Giles Laurent.jpg",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Ocicat",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Adult_female_ocicat_sitting.jpg/1280px-Adult_female_ocicat_sitting.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Adult_female_ocicat_sitting.jpg",
+  "titel": "Adult female ocicat sitting.jpg",
+  "urheber": "Ljhlusko",
+  "lizenz": "CC0"
+ },
+ {
+  "wort": "Puma",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e2/Florida_Panther_Trail_cam.webm/Florida_Panther_Trail_cam.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Florida_Panther_Trail_cam.webm",
+  "titel": "Florida Panther Trail cam.webm",
+  "urheber": "U.S. Fish & Wildlife Service",
+  "lizenz": "Public domain",
+  "start": 2.0
+ },
+ {
+  "wort": "Puma",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e5/Kitten_P-23_at_den_%2839991475282%29.webm/Kitten_P-23_at_den_%2839991475282%29.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Kitten_P-23_at_den_(39991475282).webm",
+  "titel": "Kitten P-23 at den (39991475282).webm",
+  "urheber": "Santa Monica Mountains National Recreation Area",
+  "lizenz": "Public domain",
+  "start": 2.0
+ },
+ {
+  "wort": "Puma",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Puma_%28Puma_concolor_concolor%29_female_Leona_Amarga_6.jpg/1280px-Puma_%28Puma_concolor_concolor%29_female_Leona_Amarga_6.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Puma_(Puma_concolor_concolor)_female_Leona_Amarga_6.jpg",
+  "titel": "Puma (Puma concolor concolor) female Leona Amarga 6.jpg",
+  "urheber": "Charles J. Sharp",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Ragdoll",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Gato_Ragdoll_BreedingCat.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Gato_Ragdoll_BreedingCat.jpg",
+  "titel": "Gato Ragdoll BreedingCat.jpg",
+  "urheber": "Cgomez766",
+  "lizenz": "CC0"
+ },
+ {
+  "wort": "Ragdoll",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/1/15/Ragdoll_%28cat_breed%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Ragdoll_(cat_breed).jpg",
+  "titel": "Ragdoll (cat breed).jpg",
+  "urheber": "DestinationFearFan",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Rhesusaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/006_Baby_rhesus_macaque_in_Jim_Corbett_National_Park_Photo_by_Giles_Laurent.jpg/1280px-006_Baby_rhesus_macaque_in_Jim_Corbett_National_Park_Photo_by_Giles_Laurent.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:006_Baby_rhesus_macaque_in_Jim_Corbett_National_Park_Photo_by_Giles_Laurent.jpg",
+  "titel": "006 Baby rhesus macaque in Jim Corbett National Park Photo by Giles Laurent.jpg",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Rhesusaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Davidraju_img15%28Macaca_mulatta%29_Rhesus_macaque.jpg/1280px-Davidraju_img15%28Macaca_mulatta%29_Rhesus_macaque.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Davidraju_img15(Macaca_mulatta)_Rhesus_macaque.jpg",
+  "titel": "Davidraju img15(Macaca mulatta) Rhesus macaque.jpg",
+  "urheber": "Davidvraju",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Schimpanse",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/72/Able-Bodied-Wild-Chimpanzees-Imitate-a-Motor-Procedure-Used-by-a-Disabled-Individual-to-Overcome-pone.0011959.s003.ogv/Able-Bodied-Wild-Chimpanzees-Imitate-a-Motor-Procedure-Used-by-a-Disabled-Individual-to-Overcome-pone.0011959.s003.ogv.240p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Able-Bodied-Wild-Chimpanzees-Imitate-a-Motor-Procedure-Used-by-a-Disabled-Individual-to-Overcome-pone.0011959.s003.ogv",
+  "titel": "Able-Bodied-Wild-Chimpanzees-Imitate-a-Motor-Procedure-Used-by-a-Disabled-Individual-to-Overcome-pone.0011959.s003.ogv",
+  "urheber": "Hobaiter C, Byrne R",
+  "lizenz": "CC BY 2.5",
+  "start": 2.0
+ },
+ {
+  "wort": "Schimpanse",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b0/Able-Bodied-Wild-Chimpanzees-Imitate-a-Motor-Procedure-Used-by-a-Disabled-Individual-to-Overcome-pone.0011959.s009.ogv/Able-Bodied-Wild-Chimpanzees-Imitate-a-Motor-Procedure-Used-by-a-Disabled-Individual-to-Overcome-pone.0011959.s009.ogv.240p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Able-Bodied-Wild-Chimpanzees-Imitate-a-Motor-Procedure-Used-by-a-Disabled-Individual-to-Overcome-pone.0011959.s009.ogv",
+  "titel": "Able-Bodied-Wild-Chimpanzees-Imitate-a-Motor-Procedure-Used-by-a-Disabled-Individual-to-Overcome-pone.0011959.s009.ogv",
+  "urheber": "Hobaiter C, Byrne R",
+  "lizenz": "CC BY 2.5",
+  "start": 1.1
+ },
+ {
+  "wort": "Schimpanse",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg/1280px-015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:015_Chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg",
+  "titel": "015 Chimpanzee at Kibale forest National Park Photo by Giles Laurent.jpg",
+  "urheber": "Giles Laurent",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Schimpanse",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Common_chimpanzee_%28Pan_troglodytes_schweinfurthii%29_grooming_Kibale.jpg/1280px-Common_chimpanzee_%28Pan_troglodytes_schweinfurthii%29_grooming_Kibale.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Common_chimpanzee_(Pan_troglodytes_schweinfurthii)_grooming_Kibale.jpg",
+  "titel": "Common chimpanzee (Pan troglodytes schweinfurthii) grooming Kibale.jpg",
+  "urheber": "Charles J. Sharp",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Siamkatze",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/7/70/2_year_old_Siamese_Tabby_Cat_1_2016-05-22.webm/2_year_old_Siamese_Tabby_Cat_1_2016-05-22.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:2_year_old_Siamese_Tabby_Cat_1_2016-05-22.webm",
+  "titel": "2 year old Siamese Tabby Cat 1 2016-05-22.webm",
+  "urheber": "FASTILY",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 1.3
+ },
+ {
+  "wort": "Siamkatze",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/2a/Cat_eating_peas.ogv/Cat_eating_peas.ogv.240p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Cat_eating_peas.ogv",
+  "titel": "Cat eating peas.ogv",
+  "urheber": "Turbojet",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Siamkatze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/PhaithaiDafne_Siamese_cat.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:PhaithaiDafne_Siamese_cat.jpg",
+  "titel": "PhaithaiDafne Siamese cat.jpg",
+  "urheber": "Phaithai Cattery",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Siamkatze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/31/Siamese_Cat_ACAS-SI-4.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Siamese_Cat_ACAS-SI-4.jpg",
+  "titel": "Siamese Cat ACAS-SI-4.jpg",
+  "urheber": "Shadowmeld Photography",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Tiger",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b2/A_walk_with_the_Tigress.webm/A_walk_with_the_Tigress.webm.240p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:A_walk_with_the_Tigress.webm",
+  "titel": "A walk with the Tigress.webm",
+  "urheber": "Ismail Shariff",
+  "lizenz": "CC BY 3.0",
+  "start": 1.8
+ },
+ {
+  "wort": "Totenkopfaffe",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/01/Amazonas_-_Manaus_-_Macaco_de_Cheiro.webm/Amazonas_-_Manaus_-_Macaco_de_Cheiro.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Amazonas_-_Manaus_-_Macaco_de_Cheiro.webm",
+  "titel": "Amazonas - Manaus - Macaco de Cheiro.webm",
+  "urheber": "Ppgold1963",
+  "lizenz": "CC BY-SA 4.0",
+  "start": 0.9
+ },
+ {
+  "wort": "Totenkopfaffe",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/cb/Squirrel_monkeys_doing_their_thing.webm/Squirrel_monkeys_doing_their_thing.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Squirrel_monkeys_doing_their_thing.webm",
+  "titel": "Squirrel monkeys doing their thing.webm",
+  "urheber": "Magnus Hagdorn",
+  "lizenz": "CC BY-SA 2.0",
+  "start": 2.0
+ },
+ {
+  "wort": "Totenkopfaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Ecuadorian_squirrel_monkey_%28Saimiri_macrodon%29_head_Rio_Napo.jpg/1280px-Ecuadorian_squirrel_monkey_%28Saimiri_macrodon%29_head_Rio_Napo.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Ecuadorian_squirrel_monkey_(Saimiri_macrodon)_head_Rio_Napo.jpg",
+  "titel": "Ecuadorian squirrel monkey (Saimiri macrodon) head Rio Napo.jpg",
+  "urheber": "Charles J. Sharp",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Totenkopfaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Humboldt%E2%80%99s_Squirrel_Monkey_imported_from_iNaturalist_photo_219111904_on_15_March_2024.jpg/1280px-Humboldt%E2%80%99s_Squirrel_Monkey_imported_from_iNaturalist_photo_219111904_on_15_March_2024.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Humboldt%E2%80%99s_Squirrel_Monkey_imported_from_iNaturalist_photo_219111904_on_15_March_2024.jpg",
+  "titel": "Humboldt’s Squirrel Monkey imported from iNaturalist photo 219111904 on 15 March 2024.jpg",
+  "urheber": "(c) Paul Hoekman, some rights reserved (CC BY)",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Uakari",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Cacajao_calvus_206605203.jpg/1280px-Cacajao_calvus_206605203.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Cacajao_calvus_206605203.jpg",
+  "titel": "Cacajao calvus 206605203.jpg",
+  "urheber": "Whaldener Endo",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Uakari",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Cacajao_calvus_Solimoes_river.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Cacajao_calvus_Solimoes_river.jpg",
+  "titel": "Cacajao calvus Solimoes river.jpg",
+  "urheber": "Giovanni Mari",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Ural Rex",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/URX_%D0%90%D0%BC%D1%83%D0%BB%D0%B5%D1%82_%D0%A3%D1%80%D0%B0%D0%BB%D0%BE%D1%87%D0%BA%D0%B0_%285273548961%29.jpg/1280px-URX_%D0%90%D0%BC%D1%83%D0%BB%D0%B5%D1%82_%D0%A3%D1%80%D0%B0%D0%BB%D0%BE%D1%87%D0%BA%D0%B0_%285273548961%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:URX_%D0%90%D0%BC%D1%83%D0%BB%D0%B5%D1%82_%D0%A3%D1%80%D0%B0%D0%BB%D0%BE%D1%87%D0%BA%D0%B0_(5273548961).jpg",
+  "titel": "URX Амулет Уралочка (5273548961).jpg",
+  "urheber": "Nickolas Titkov from Moscow, Russian Federation",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Van-Katze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Red_Turkish_Van_Male_Tom.png",
+  "seite": "https://commons.wikimedia.org/wiki/File:Red_Turkish_Van_Male_Tom.png",
+  "titel": "Red Turkish Van Male Tom.png",
+  "urheber": "SamD7",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Van-Katze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Momo_the_Turkish_Van_doing_a_big_stretch.jpg/1280px-Momo_the_Turkish_Van_doing_a_big_stretch.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Momo_the_Turkish_Van_doing_a_big_stretch.jpg",
+  "titel": "Momo the Turkish Van doing a big stretch.jpg",
+  "urheber": "Andrewandmomo",
+  "lizenz": "CC0"
+ },
+ {
+  "wort": "Vari",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Black-and-White_Ruffed_Lemur%2C_Mantadia%2C_Madagascar.jpg/1280px-Black-and-White_Ruffed_Lemur%2C_Mantadia%2C_Madagascar.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Black-and-White_Ruffed_Lemur,_Mantadia,_Madagascar.jpg",
+  "titel": "Black-and-White Ruffed Lemur, Mantadia, Madagascar.jpg",
+  "urheber": "Frank Vassen",
+  "lizenz": "CC BY 2.0"
+ },
+ {
+  "wort": "Weißkehlmeerkatze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Cercopithecus_mitis_albogularis_22717740.jpg/1280px-Cercopithecus_mitis_albogularis_22717740.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Cercopithecus_mitis_albogularis_22717740.jpg",
+  "titel": "Cercopithecus mitis albogularis 22717740.jpg",
+  "urheber": "Leonel Roget",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Wildkatze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Felis_silvestris_%28%CE%91%CE%B3%CF%81%CE%B9%CF%8C%CE%B3%CE%B1%CF%84%CE%B1%29.jpg/1280px-Felis_silvestris_%28%CE%91%CE%B3%CF%81%CE%B9%CF%8C%CE%B3%CE%B1%CF%84%CE%B1%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Felis_silvestris_(%CE%91%CE%B3%CF%81%CE%B9%CF%8C%CE%B3%CE%B1%CF%84%CE%B1).jpg",
+  "titel": "Felis silvestris (Αγριόγατα).jpg",
+  "urheber": "D.Kaliakoudas",
+  "lizenz": "CC BY-SA 4.0"
+ },
+ {
+  "wort": "Yunnan-Stumpfnasenaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Juvenile_Yunnan_Snub-nosed_Monkeys.jpg/1280px-Juvenile_Yunnan_Snub-nosed_Monkeys.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Juvenile_Yunnan_Snub-nosed_Monkeys.jpg",
+  "titel": "Juvenile Yunnan Snub-nosed Monkeys.jpg",
+  "urheber": "Rod Waddington",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Yunnan-Stumpfnasenaffe",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Schwarze_Stumpfnase_%28Rhinopithecus_bieti%29%2C_adult.jpg/1280px-Schwarze_Stumpfnase_%28Rhinopithecus_bieti%29%2C_adult.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Schwarze_Stumpfnase_(Rhinopithecus_bieti),_adult.jpg",
+  "titel": "Schwarze Stumpfnase (Rhinopithecus bieti), adult.jpg",
+  "urheber": "Rod Waddington",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Zwergseidenäffchen",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pygmy_Marmoset_%285336773146%29.jpg/1280px-Pygmy_Marmoset_%285336773146%29.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Pygmy_Marmoset_(5336773146).jpg",
+  "titel": "Pygmy Marmoset (5336773146).jpg",
+  "urheber": "Don Faulkner",
+  "lizenz": "CC BY-SA 2.0"
+ },
+ {
+  "wort": "Zwergseidenäffchen",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Cebuella_pygmaea_158463315.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Cebuella_pygmaea_158463315.jpg",
+  "titel": "Cebuella pygmaea 158463315.jpg",
+  "urheber": "Abby Darrah",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Dschungelkatze",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/09/Rohrkatze_%28Felis_chaus%29%2C_aufmerksam_im_Yala_Nationalpark_in_Sri_Lanka.webm/Rohrkatze_%28Felis_chaus%29%2C_aufmerksam_im_Yala_Nationalpark_in_Sri_Lanka.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Rohrkatze_(Felis_chaus),_aufmerksam_im_Yala_Nationalpark_in_Sri_Lanka.webm",
+  "titel": "Rohrkatze (Felis chaus), aufmerksam im Yala Nationalpark in Sri Lanka.webm",
+  "urheber": "[1]",
+  "lizenz": "CC BY 2.0",
+  "start": 1.7
+ },
+ {
+  "wort": "Dschungelkatze",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Felis_chaus_413819177.jpg/1280px-Felis_chaus_413819177.jpg",
+  "seite": "https://commons.wikimedia.org/wiki/File:Felis_chaus_413819177.jpg",
+  "titel": "Felis chaus 413819177.jpg",
+  "urheber": "sunnyjosef",
+  "lizenz": "CC BY 4.0"
+ },
+ {
+  "wort": "Rotluchs",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8d/Bobcat_%28Lynx_rufus%29_in_Buckeye_Tree.webm/Bobcat_%28Lynx_rufus%29_in_Buckeye_Tree.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Bobcat_(Lynx_rufus)_in_Buckeye_Tree.webm",
+  "titel": "Bobcat (Lynx rufus) in Buckeye Tree.webm",
+  "urheber": "Joyce cory",
+  "lizenz": "CC BY 2.0",
+  "start": 1.6
+ },
+ {
+  "wort": "Rotluchs",
+  "slot": "video",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f1/Bobcat_%28Lynx_rufus%29_in_Arizona.webm/Bobcat_%28Lynx_rufus%29_in_Arizona.webm.480p.vp9.webm",
+  "seite": "https://commons.wikimedia.org/wiki/File:Bobcat_(Lynx_rufus)_in_Arizona.webm",
+  "titel": "Bobcat (Lynx rufus) in Arizona.webm",
+  "urheber": "Randy Raish",
+  "lizenz": "CC BY 3.0",
+  "start": 65.7
+ },
+ {
+  "wort": "Rotluchs",
+  "slot": "bild",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Bobcat-image-MariadB.png",
+  "seite": "https://commons.wikimedia.org/wiki/File:Bobcat-image-MariadB.png",
+  "titel": "Bobcat-image-MariadB.png",
+  "urheber": "Maria de Bruyn",
+  "lizenz": "CC BY-SA 4.0"
  }
 ]
