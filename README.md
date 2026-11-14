@@ -111,7 +111,7 @@ pygame 2.6 kann kein Video, darum dekodiert pro Video ein `ffmpeg`-Prozess in
 Echtzeit (`-re`), ein Thread liest die Einzelbilder. Geholt werden die Videos mit
 `tiere_holen.py` wie Fotos und Laute: Typ an den ersten Bytes (WebM/Ogg), ClamAV,
 dann neu kodiert als WebM/VP9 ohne Ton, 480 Zeilen, 24 fps (`~/.local/share/oskalizer/tiere/<wort>/video/`,
-zusammen ~90 MB).
+zusammen ~65 MB).
 
 Achtung beim Erweitern: Auf Commons liegen zu harmlosen Suchwörtern
 auch Schlachtungen, Paarungen, Tierversuche und bei „snake“ sogar Pornografie.
