@@ -1,10 +1,12 @@
 """Was auf dem Schirm steht. Modus Tiere: ein Buchstabe mit Tier, eine Ziffer oder
-ein Zeichen (Tafel). Modus Tippen: der getippte Text (Schreibtafel).
+ein Zeichen (Tafel). Modus Tippen: der getippte Text (Schreibtafel). Modus Wirbel:
+jedes Zeichen landet irgendwo auf dem Schirm und schwebt dort (Wirbeltafel).
 Kennt keine Geraete - bekommt nur evdev-Keycodes.
 """
 
 import itertools
 import json
+import math
 import random
 import subprocess
 import threading
@@ -237,12 +239,8 @@ class Schreibtafel:
         self.font = pygame.font.Font(None, screen.get_height() // 6)
         self.text = ""
         self.zeilen = []
-        self.vorgelesen = False             # nach Enter beginnt die naechste Taste neu
 
     def tippe(self, zeichen):
-        if self.vorgelesen:
-            self.text = ""
-            self.vorgelesen = False
         self.text += zeichen
         self.zeilen = self._umbrechen()
         sichtbar = int(self.screen.get_height() * 0.9) // self.font.get_linesize()
@@ -277,3 +275,301 @@ class Schreibtafel:
             bild = self.font.render(zeile, True, (235, 235, 245))
             self.screen.blit(bild, bild.get_rect(midtop=(self.screen.get_width() // 2,
                                                         top + i * line)))
+
+
+# Wirbel: wie "Let's talk now" auf kev.dev (src/contact/contact.ts). Jeder Buchstabe
+# faellt von etwas weiter oben, leicht verdreht und unsichtbar, an seinen Platz
+# (back.out(2.4), 1 s) und schwebt dann fuer sich auf und ab (sine, eigene Dauer
+# und eigener Start). Ein Mausklick laesst ihn fallen: Schwerkraft, Abprallen, Stoss
+# zwischen Buchstaben und Schubsen mit der Maus wie in src/contact/contact-physics.ts.
+# Die Weiten auf kev.dev sind px bei ~1 em (100 px), hier in em.
+WIRBEL_MAX = 30                     # mehr schwebende Buchstaben, dann blendet der aelteste aus
+WIRBEL_HAUFEN_MAX = 60              # mehr gefallene, dann blendet der aelteste aus
+WIRBEL_LANDEN = 1.0                 # s vom Erscheinen bis zum Landen
+WIRBEL_AUS = 0.4                    # s Ausblenden
+WIRBEL_UEBERSCHWINGEN = 2.4         # back.out(2.4)
+# Physik pro Frame (60 fps), Weiten mal em/100 px
+FALL_SCHWERKRAFT = 0.4
+FALL_ABPRALL = 0.22                 # Energie, die pro Aufprall bleibt
+FALL_LUFT = 0.018                   # Bremsen pro Frame in der Luft
+FALL_BODEN_X = 0.9                  # Bremsen seitwaerts bei Bodenkontakt
+FALL_BODEN_DREH = 0.85              # Bremsen der Drehung bei Bodenkontakt
+FALL_MAUS_RADIUS = 0.75             # em: so nah muss die Maus kommen, um zu schubsen
+FALL_BODEN_ABSTAND = 0.1            # em: Boden so weit ueber dem unteren Rand
+FALL_STUBS = 12                     # Klick auf einen gefallenen: so stark nach oben
+FALL_RUHIG = 0.6                    # weniger Weg pro Frame als das ...
+FALL_EINSCHLAFEN = 30               # ... so viele Frames lang: liegt still
+FALL_WECKEN = 2.0                   # so schnell muss ein anderer aufprallen, um ihn zu wecken
+
+
+def back_out(t, c1=WIRBEL_UEBERSCHWINGEN):
+    return 1 + (c1 + 1) * (t - 1) ** 3 + c1 * (t - 1) ** 2
+
+
+class Wirbelbuchstabe:
+    def __init__(self, bild, mitte, groesse, now):
+        self.bild = bild
+        self.mitte = mitte
+        self.since = now
+        self.weg = None                     # Zeitpunkt, ab dem er ausblendet
+        self.radius = (bild.get_width() + bild.get_height()) / 4
+        # Start (wird zu 0): y -46..-26 px, x +-6 px, Drehung +-12 Grad
+        self.dy = random.uniform(-0.46, -0.26) * groesse
+        self.dx = random.uniform(-0.06, 0.06) * groesse
+        self.dreh = random.uniform(-12, 12)
+        # Schweben: y +-5 px, Drehung +-3 Grad, 0.9-1.6 s, bis 1 s versetzt
+        self.schwebe_y = random.uniform(-0.05, 0.05) * groesse
+        self.schwebe_dreh = random.uniform(-3, 3)
+        self.schwebe_dauer = random.uniform(0.9, 1.6)
+        self.schwebe_start = random.uniform(0, 1)
+        self.faellt = False                 # nach dem Klick: Physik statt Schweben
+        self.x = self.y = self.winkel = 0.0
+        self.vx = self.vy = self.dv = 0.0
+        self.liegt = False
+        self.ruhig = 0                      # Frames fast ohne Bewegung
+        self.am_boden = self.beruehrt = False
+        self.vorher = (0.0, 0.0)            # Lage vor dem letzten Physik-Schritt
+
+    def lage(self, now):
+        """(x, y, winkel, alpha) fuer diesen Frame."""
+        if self.faellt:
+            x, y, winkel, alpha = self.x, self.y, self.winkel, 1.0
+        else:
+            alter = now - self.since
+            t = min(1.0, alter / WIRBEL_LANDEN)
+            rest = 1 - back_out(t)          # 1 -> 0, schwingt kurz ueber
+            x = self.mitte[0] + self.dx * rest
+            y = self.mitte[1] + self.dy * rest
+            winkel = self.dreh * rest
+            alpha = max(0.0, min(1.0, back_out(t)))
+            schwebe = alter - WIRBEL_LANDEN - self.schwebe_start
+            if schwebe > 0:                 # sine.inOut mit yoyo
+                p = (1 - math.cos(math.pi * schwebe / self.schwebe_dauer)) / 2
+                y += self.schwebe_y * p
+                winkel += self.schwebe_dreh * p
+        if self.weg is not None:
+            alpha *= max(0.0, 1 - (now - self.weg) / WIRBEL_AUS)
+        return x, y, winkel, alpha
+
+    def trifft(self, punkt, now):
+        x, y, _, _ = self.lage(now)
+        return (abs(punkt[0] - x) <= self.bild.get_width() / 2
+                and abs(punkt[1] - y) <= self.bild.get_height() / 2)
+
+    def loslassen(self, now, k):
+        """Vom Schweben in die Physik, mit einem kleinen Schubs (wie auf kev.dev)."""
+        self.x, self.y, self.winkel, _ = self.lage(now)
+        self.faellt = True
+        self.vx = random.uniform(-3, 3) * k
+        self.vy = random.uniform(2, 6) * k
+        self.dv = random.uniform(-5, 5)
+
+    def draw(self, screen, now):
+        x, y, winkel, alpha = self.lage(now)
+        bild = pygame.transform.rotozoom(self.bild, -winkel, 1.0)
+        bild.set_alpha(int(255 * alpha))
+        screen.blit(bild, bild.get_rect(center=(int(x), int(y))))
+
+    def fertig(self, now):
+        return self.weg is not None and now - self.weg >= WIRBEL_AUS
+
+
+def _ausmass(b):
+    """Halbe Breite/Hoehe des gedrehten Buchstabens."""
+    w, h = b.bild.get_size()
+    c, s = abs(math.cos(math.radians(b.winkel))), abs(math.sin(math.radians(b.winkel)))
+    return (w * c + h * s) / 2, (w * s + h * c) / 2
+
+
+def _physik(koerper, breite, boden, k):
+    """Ein Frame: Schwerkraft, Waende, Boden, dann Stoesse untereinander. Wer eine
+    halbe Sekunde fast still ist, schlaeft (liegt) und bewegt sich erst wieder, wenn
+    ihn etwas kraeftig trifft, die Maus schubst oder nichts mehr unter ihm ist."""
+    for b in koerper:
+        b.am_boden = False
+        b.vorher = (b.x, b.y)
+        if b.liegt:
+            b.am_boden = b.y + _ausmass(b)[1] >= boden - 2
+            continue
+        b.vx *= 1 - FALL_LUFT
+        b.vy *= 1 - FALL_LUFT
+        b.dv *= 1 - FALL_LUFT
+        b.vy += FALL_SCHWERKRAFT * k
+        b.x += b.vx
+        b.y += b.vy
+        b.winkel += b.dv
+        halb_b, halb_h = _ausmass(b)
+        if b.x < halb_b:
+            b.x, b.vx, b.dv = halb_b, abs(b.vx) * FALL_ABPRALL, b.dv * -0.7
+        if b.x > breite - halb_b:
+            b.x, b.vx, b.dv = breite - halb_b, -abs(b.vx) * FALL_ABPRALL, b.dv * -0.7
+        if b.y > boden - halb_h:
+            b.am_boden = True
+            b.y = boden - halb_h
+            b.vy = -abs(b.vy) * FALL_ABPRALL
+            b.vx *= FALL_BODEN_X
+            b.dv *= FALL_BODEN_DREH
+
+    for b in koerper:
+        b.beruehrt = False
+    for i, a in enumerate(koerper):
+        for b in koerper[i + 1:]:
+            dx, dy = b.x - a.x, b.y - a.y
+            dist = math.hypot(dx, dy) or 0.0001
+            min_d = a.radius + b.radius
+            if dist >= min_d + 2:
+                continue
+            a.beruehrt = b.beruehrt = True
+            if dist >= min_d or (a.liegt and b.liegt):
+                continue
+            nx, ny = dx / dist, dy / dist
+            ueber = min_d - dist
+            dot = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny      # < 0: aufeinander zu
+            if (a.liegt or b.liegt) and -dot > FALL_WECKEN * k:
+                a.liegt = b.liegt = False                     # kraeftig getroffen
+            if a.liegt:                     # a steht fest, nur b weicht
+                b.x += nx * ueber
+                b.y += ny * ueber
+                if dot < 0:
+                    b.vx -= dot * (1 + FALL_ABPRALL) * nx
+                    b.vy -= dot * (1 + FALL_ABPRALL) * ny
+            elif b.liegt:
+                a.x -= nx * ueber
+                a.y -= ny * ueber
+                if dot < 0:
+                    a.vx += dot * (1 + FALL_ABPRALL) * nx
+                    a.vy += dot * (1 + FALL_ABPRALL) * ny
+            else:
+                a.x -= nx * ueber / 2
+                a.y -= ny * ueber / 2
+                b.x += nx * ueber / 2
+                b.y += ny * ueber / 2
+                if dot < 0:
+                    stoss = -dot * (1 + FALL_ABPRALL) / 2
+                    a.vx -= stoss * nx
+                    a.vy -= stoss * ny
+                    b.vx += stoss * nx
+                    b.vy += stoss * ny
+
+    for b in koerper:
+        if not b.liegt:                     # Stoesse duerfen nicht durch Boden/Wand druecken
+            halb_b, halb_h = _ausmass(b)
+            b.x = min(max(b.x, halb_b), breite - halb_b)
+            if b.y > boden - halb_h:
+                b.y = boden - halb_h
+                b.vy = min(b.vy, 0.0)
+                b.am_boden = True
+        if b.liegt:
+            if not b.am_boden and not b.beruehrt:
+                b.liegt = False             # Unterlage ist weg
+                b.ruhig = 0
+            continue
+        if math.dist(b.vorher, (b.x, b.y)) < FALL_RUHIG * k and abs(b.dv) < 1:
+            b.ruhig += 1
+        else:
+            b.ruhig = 0
+        if b.ruhig > FALL_EINSCHLAFEN and (b.am_boden or b.beruehrt):
+            b.vx = b.vy = b.dv = 0.0
+            b.liegt = True
+
+
+def _schubsen(koerper, maus, dx, dy, radius):
+    """Wer nah an der Maus ist, wird mit ihrer Geschwindigkeit weggeschubst."""
+    tempo = math.hypot(dx, dy)
+    if tempo < 0.5:
+        return
+    for b in koerper:
+        ax, ay = b.x - maus[0], b.y - maus[1]
+        dist = math.hypot(ax, ay) or 1
+        if dist >= radius:
+            continue
+        kraft = tempo * 0.3
+        b.vx += ax / dist * kraft
+        b.vy += ay / dist * kraft
+        b.dv += random.uniform(-0.5, 0.5) * kraft * 0.3
+        b.liegt = False
+
+
+def _zeiger(hoehe):
+    """Pfeil-Mauszeiger, weiss mit dunklem Rand. pygame sieht die Maus nicht (gegrabbt)."""
+    s = hoehe / 28 / 19
+    punkte = [(2 + x * s, 2 + y * s) for x, y in [(0, 0), (0, 16), (4, 12), (7, 19),
+                                                    (10, 18), (7, 11), (12, 11)]]
+    bild = pygame.Surface((int(13 * s) + 5, int(20 * s) + 5), pygame.SRCALPHA)
+    pygame.draw.polygon(bild, (250, 250, 255), punkte)
+    pygame.draw.polygon(bild, (10, 10, 18), punkte, max(2, int(s)))
+    return bild
+
+
+class Wirbeltafel:
+    """Wirbel-Modus: jedes Zeichen bekommt einen freien Platz irgendwo auf dem Schirm,
+    faellt dort ein und bleibt schwebend stehen. Ein Mausklick laesst es fallen, unten
+    waechst ein Haufen, in dem die Maus herumschubst. Mauszeiger wird selbst gezeichnet."""
+
+    def __init__(self, screen):
+        self.screen = screen
+        self.groesse = screen.get_height() // 5
+        self.k = self.groesse / 100         # kev.dev-px -> hier
+        self.font = pygame.font.Font(None, self.groesse)
+        self.buchstaben = []
+        self.maus = [screen.get_width() / 2, screen.get_height() / 2]
+        self.maus_weg = [0.0, 0.0]          # Bewegung seit dem letzten Frame
+        self.zeiger = _zeiger(screen.get_height())
+
+    def _platz(self):
+        """Zufaelliger Platz, moeglichst weit weg von den anderen."""
+        breite, hoehe = self.screen.get_size()
+        rand = self.groesse * 0.6
+        abstand = self.groesse * 0.9
+        platz = None
+        for _ in range(40):
+            platz = (random.uniform(rand, breite - rand), random.uniform(rand, hoehe - rand))
+            if all(math.dist(platz, b.mitte) >= abstand
+                   for b in self.buchstaben if b.weg is None and not b.faellt):
+                break
+        return platz
+
+    def _begrenzen(self, now, fallend, hoechstens):
+        lebend = [b for b in self.buchstaben if b.weg is None and b.faellt == fallend]
+        for b in lebend[:max(0, len(lebend) - hoechstens)]:
+            b.weg = now
+
+    def tippe(self, zeichen, now):
+        color = pygame.Color(0)
+        color.hsva = (random.uniform(0.0, 360.0), 75.0, 100.0, 100.0)
+        bild = self.font.render(zeichen, True, color)
+        bild = bild.subsurface(bild.get_bounding_rect()).copy()   # nur der Buchstabe
+        self.buchstaben.append(Wirbelbuchstabe(bild, self._platz(), self.groesse, now))
+        self._begrenzen(now, False, WIRBEL_MAX)
+
+    def bewege(self, dx, dy):
+        breite, hoehe = self.screen.get_size()
+        self.maus[0] = min(max(0.0, self.maus[0] + dx), breite - 1)
+        self.maus[1] = min(max(0.0, self.maus[1] + dy), hoehe - 1)
+        self.maus_weg[0] += dx
+        self.maus_weg[1] += dy
+
+    def klick(self, now):
+        """Schwebender Buchstabe unter der Maus faellt, ein gefallener huepft hoch."""
+        for b in reversed(self.buchstaben):             # der oberste zuerst
+            if b.weg is None and b.trifft(self.maus, now):
+                if b.faellt:
+                    b.vy = -FALL_STUBS * self.k
+                    b.vx += random.uniform(-3, 3) * self.k
+                    b.dv += random.uniform(-6, 6)
+                    b.liegt = False
+                else:
+                    b.loslassen(now, self.k)
+                    self._begrenzen(now, True, WIRBEL_HAUFEN_MAX)
+                return
+
+    def draw(self, now):
+        self.buchstaben = [b for b in self.buchstaben if not b.fertig(now)]
+        koerper = [b for b in self.buchstaben if b.faellt]
+        breite, hoehe = self.screen.get_size()
+        _schubsen(koerper, self.maus, *self.maus_weg, FALL_MAUS_RADIUS * self.groesse)
+        self.maus_weg = [0.0, 0.0]
+        _physik(koerper, breite, hoehe - FALL_BODEN_ABSTAND * self.groesse, self.k)
+        for b in self.buchstaben:
+            b.draw(self.screen, now)
+        self.screen.blit(self.zeiger, (int(self.maus[0]) - 2, int(self.maus[1]) - 2))

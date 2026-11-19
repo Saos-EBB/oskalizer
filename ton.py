@@ -3,7 +3,6 @@ Piper oder die Stimme fehlt. Familien-Aufnahmen (FAMILIE/<wort>/name|laut/) erse
 den Satz "A wie Affe" bzw. den Laut, bei mehreren zufaellig eine. Ohne Familien-Laut
 kommt der echte Tierlaut (CC0, TIERE/<wort>/laut/), erst danach die Lautmalerei.
 Solange etwas klingt, meldet spricht() True - der Modus Tiere sperrt dann die Tasten.
-Ein neuer Ton (Enter im Tippen-Modus) bricht den laufenden ab.
 """
 
 import io
@@ -102,11 +101,6 @@ class Ton:
         """Zufaellige Familien-Aufnahme (Person, Sound) oder None."""
         liste = self.aufnahmen.get((ordner(wort), slot))
         return random.choice(liste) if liste else None
-
-    def sage(self, text):
-        """Tippen-Modus: den ganzen Text vorlesen."""
-        self.stop()
-        self.reihe = [text]
 
     def _sprich(self, text):
         if not text.strip():

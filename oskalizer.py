@@ -38,6 +38,7 @@ BACKGROUND = (10, 10, 18)
 LICHT_SOCKET = os.path.join(os.environ.get("XDG_RUNTIME_DIR", "/tmp"), "kb-rgb-ozk.sock")
 CTRL_KEYS = (ecodes.KEY_LEFTCTRL, ecodes.KEY_RIGHTCTRL)
 SHIFT_KEYS = (ecodes.KEY_LEFTSHIFT, ecodes.KEY_RIGHTSHIFT)
+MAUSTASTEN = (ecodes.BTN_LEFT, ecodes.BTN_RIGHT, ecodes.BTN_MIDDLE)
 
 
 # --- Geraete ---------------------------------------------------------------
@@ -126,9 +127,18 @@ def release_all(devices):
 # --- Loop ------------------------------------------------------------------
 
 
-def handle_input(device, tafel, schreib, ton, state, now):
+MODI = ("tiere", "tippen", "wirbel")     # Strg+Umschalt+D schaltet der Reihe nach
+
+
+def handle_input(device, tafel, schreib, wirbel, ton, state, now):
     """Verarbeitet die anstehenden Events eines Geraets."""
     for event in device.read():
+        if event.type == ecodes.EV_REL:           # Maus: Zeiger fuer den Modus Wirbel
+            if event.code == ecodes.REL_X:
+                wirbel.bewege(event.value, 0)
+            elif event.code == ecodes.REL_Y:
+                wirbel.bewege(0, event.value)
+            continue
         if event.type != ecodes.EV_KEY:
             continue
         if event.code == ecodes.KEY_ESC:
@@ -145,7 +155,7 @@ def handle_input(device, tafel, schreib, ton, state, now):
         licht(state["licht"], event.code)
 
         if event.code == ecodes.KEY_D and state["ctrl"] and state["shift"]:
-            state["modus"] = "tippen" if state["modus"] == "tiere" else "tiere"
+            state["modus"] = MODI[(MODI.index(state["modus"]) + 1) % len(MODI)]
             ton.stop()
             tafel.stop()
             continue
@@ -155,9 +165,11 @@ def handle_input(device, tafel, schreib, ton, state, now):
                 wort = tiere.naechstes(zeichen)
                 personen = ton.play(zeichen, wort)
                 tafel.show(zeichen, wort, personen, now)
-        elif event.code in (ecodes.KEY_ENTER, ecodes.KEY_KPENTER):
-            ton.sage(schreib.text)
-            schreib.vorgelesen = True
+        elif state["modus"] == "wirbel":
+            if zeichen:
+                wirbel.tippe(zeichen, now)
+            elif event.code in MAUSTASTEN:
+                wirbel.klick(now)
         else:
             if event.code == ecodes.KEY_SPACE:
                 zeichen = " "
@@ -191,6 +203,7 @@ def run(devices):
 
     tafel = tiere.Tafel(screen)
     schreib = tiere.Schreibtafel(screen)
+    wirbel = tiere.Wirbeltafel(screen)
     ton = Ton()
     clock = pygame.time.Clock()
     fds = {device.fd: device for device in devices}
@@ -199,14 +212,14 @@ def run(devices):
     state["licht"].setblocking(False)
 
     try:
-        loop(screen, tafel, schreib, ton, fds, state, clock)
+        loop(screen, tafel, schreib, wirbel, ton, fds, state, clock)
     finally:
         ton.stop()                  # sonst spricht espeak nach dem Beenden weiter
         tafel.stop()                # sonst dekodiert ffmpeg weiter
         state["licht"].close()
 
 
-def loop(screen, tafel, schreib, ton, fds, state, clock):
+def loop(screen, tafel, schreib, wirbel, ton, fds, state, clock):
     while True:
         clock.tick(FPS)
         now = pygame.time.get_ticks() / 1000.0
@@ -215,7 +228,7 @@ def loop(screen, tafel, schreib, ton, fds, state, clock):
         ready, _, _ = select.select(list(fds), [], [], 0)
         for fd in ready:
             try:
-                handle_input(fds[fd], tafel, schreib, ton, state, now)
+                handle_input(fds[fd], tafel, schreib, wirbel, ton, state, now)
             except (BlockingIOError, OSError):
                 pass
 
@@ -226,7 +239,7 @@ def loop(screen, tafel, schreib, ton, fds, state, clock):
 
         screen.fill(BACKGROUND)
         ton.update()
-        (tafel if state["modus"] == "tiere" else schreib).draw(now)
+        {"tiere": tafel, "tippen": schreib, "wirbel": wirbel}[state["modus"]].draw(now)
         if esc_since is not None:
             draw_exit_hint(screen, held / EXIT_HOLD_SECONDS)
         pygame.display.flip()

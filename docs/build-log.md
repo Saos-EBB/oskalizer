@@ -1,5 +1,13 @@
 # Build-Log
 
+## 2026-11-19 — feat(wirbel): Buchstaben per Mausklick fallen lassen
+**Was:** Im Modus Wirbel gibt es einen selbst gezeichneten Mauszeiger (pygame sieht die gegrabbte Maus nicht, darum aus `EV_REL`). Klick auf einen schwebenden Buchstaben: er fällt mit der Physik von kev.dev (`contact-physics.ts`), unten wächst ein Haufen (bis 60), die Maus schubst darin herum, Klick auf einen gefallenen lässt ihn hüpfen. Anders als auf kev.dev: Stoß mit richtigem Vorzeichen, Boden/Wände nach dem gedrehten Ausmaß, und Einschlafen nach 30 Frames fast ohne Weg, sonst zitterte der Haufen ewig. Headless geprüft: 60 Buchstaben liegen nach 5 s alle still, keiner unter dem Boden, nach Schubsen wieder still; ~9 ms pro Frame bei 1080p.
+**Nicht gebaut:** keine echte Form (Kreise statt Buchstabenumriss, darum überlappen sie etwas), kein Ziehen mit gedrückter Taste, kein Ton beim Aufprall, Mausempfindlichkeit ungeregelt (rohe evdev-Werte).
+
+## 2026-11-19 — feat(modus): Modus Wirbel, Enter liest nicht mehr vor
+**Was:** Strg+Umschalt+D schaltet jetzt durch drei Modi: Tiere → Tippen → Wirbel. Im Wirbel landet jedes Zeichen an einem zufälligen freien Platz auf dem Schirm, mit der Animation von „Let's talk now“ auf kev.dev (`src/contact/contact.ts`): von oben einfallen, ±12° verdreht, durchsichtig, `back.out(2.4)` in 1 s, danach eigenes Schweben (±0,05 em, ±3°, 0,9–1,6 s, bis 1 s versetzt). Ab 30 blendet der älteste aus. Enter im Tippen-Modus liest nicht mehr vor, `Ton.sage` ist raus.
+**Nicht gebaut:** kein Ton im Wirbel, kein Zerspringen per Klick wie auf kev.dev (Maus ist gegrabbt), keine Leertaste im Wirbel, kein Leeren der Buchstaben beim Moduswechsel.
+
 ## 2026-11-14 — feat(tiere): freie Videos und Fotos für Affen und Katzen
 **Was:** Neben CC0 jetzt auch CC BY / CC BY-SA / gemeinfrei von Commons (nie NC/ND), Lizenz und Urheber pro Datei in `tierquellen.json` und `QUELLEN.md`. Pro Lieblingstier Videos und Fotos gesucht, Zoo/Gehege/Labor/Jagd per Stichwort raus, Rest von Hand auf Kontaktbögen gesichtet, vom fertigen Video vier Bilder geprüft (6 Videos und 4 missratene Freistellungen danach wieder raus). Jetzt haben 26 der 48 Lieblingstiere ein Video aus der Natur oder von zu Hause, 20 ein Foto, 2 nur das Emoji. D und R bekommen statt Devon Rex und Ragdoll (kein Video zu finden) Dschungelkatze und Rotluchs als Lieblingskatze. 112 Dateien, alle durch ClamAV.
 **Nicht gebaut:** keine Laute aus den neuen Videos (viele haben Ton, z.B. schnurrender Gepard), kein Video für 22 Lieblingstiere (Rassekatzen, seltene Affen: auf Commons nur aus dem Zoo oder gar nicht), kein Foto für York Chocolate und Zwergtigerkatze.

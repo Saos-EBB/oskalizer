@@ -53,7 +53,7 @@ zufällig eine gewählt. Ton nur als OGG/WAV. Andere Formate vorher umwandeln:
 auf 40 % der Bildschirmhöhe skaliert. PNG mit transparentem Hintergrund sieht
 auf dem dunklen Schirm am besten aus. Geladen wird alles beim Start.
 
-Leertaste, Enter, F-Tasten, Shift, Esc und die Maus zeigen nichts. Shift wird
+Leertaste, Enter, F-Tasten, Shift, Esc und die Maus zeigen nichts (die Maus nur im Modus Wirbel). Shift wird
 nicht ausgewertet — es gibt nur Großbuchstaben und die ungeshifteten Zeichen.
 Die Tastenbelegung ist auf ein deutsches QWERTZ-Layout festgelegt.
 
@@ -147,16 +147,34 @@ nichts an. Darum schickt er jeden Tastendruck als Datagramm an
 
 ## Modus Tippen
 
-**Strg+Umschalt+D** schaltet zwischen den Modi „Tiere“ (Start) und „Tippen“ um.
+**Strg+Umschalt+D** schaltet der Reihe nach durch die Modi „Tiere“ (Start),
+„Tippen“ und „Wirbel“.
 Im Tippen-Modus erscheint jedes getippte Zeichen als Text in der Mitte, die
 Leertaste macht Wortabstände. Keine Tiere, kein Ton pro Taste. Zu langer Text
 wird umgebrochen; was oben aus dem Bildschirm läuft, ist weg. Es gibt keine
 Rücktaste und weiterhin nur Großbuchstaben. Beim Wechsel bleibt der Text des
 Tippen-Modus stehen.
 
-**Enter** (auch auf dem Nummernblock) lässt den Text vorlesen. Der
-Text bleibt danach stehen; die nächste Taste fängt einen neuen an. Enter
-während des Vorlesens fängt von vorn an.
+Enter tut nichts (früher las es den Text vor).
+
+## Modus Wirbel
+
+Jedes Zeichen landet an einem zufälligen freien Platz irgendwo auf dem Schirm, in
+einer zufälligen Farbe, und bleibt dort stehen. Die Animation ist die von
+„Let's talk now“ auf kev.dev: Der Buchstabe fällt leicht verdreht und durchsichtig
+von etwas weiter oben ein, schwingt beim Landen kurz über und schwebt danach für
+sich auf und ab, jeder mit eigenem Takt. Kein Ton, keine Tiere. Ab 30 Buchstaben
+blendet der älteste aus. Beim Wechsel bleiben die Buchstaben stehen.
+
+In diesem Modus gibt es einen **Mauszeiger**. Ein Klick (jede Maustaste) auf einen
+schwebenden Buchstaben lässt ihn fallen: Schwerkraft, Abprallen an Boden und Rand,
+Stöße mit den anderen. Unten wächst so ein Haufen. Fährt die Maus durch den Haufen,
+schubst sie die Buchstaben weg, je schneller, desto weiter. Ein Klick auf einen
+gefallenen Buchstaben lässt ihn hochhüpfen. Ab 60 gefallenen blendet der älteste aus.
+Die Physik ist die von kev.dev (`src/contact/contact-physics.ts`), mit zwei
+Änderungen: Der Stoß zwischen zwei Buchstaben bremst das Aufeinanderprallen (auf
+kev.dev hat er das Vorzeichen falsch herum), und Buchstaben, die sich eine halbe
+Sekunde kaum bewegen, schlafen ein, damit der Haufen nicht ewig zittert.
 
 Drei Dateien: `oskalizer.py` (Geräte, Schleife, Beenden), `tiere.py` (lädt
 `woerter.json`, Tastenbelegung, Anzeige), `ton.py` (Sprechen und Tondateien).

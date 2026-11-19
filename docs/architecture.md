@@ -10,9 +10,9 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
 ## Module
 - `oskalizer.py` — CONFIG-Block, Geräte finden/grabben/freigeben, Hauptschleife
   (evdev per `select` lesen, Esc-Timer, zeichnen). Hält den Modus (`state["modus"]`,
-  „tiere“ | „tippen“, Wechsel mit Strg+Umschalt+D). Pro Key-Down mit Zeichen: im
+  `MODI` = „tiere“ | „tippen“ | „wirbel“, Strg+Umschalt+D schaltet der Reihe nach). Pro Key-Down mit Zeichen: im
   Modus Tiere `tiere.naechstes()` → `Tafel.show()` + `Ton.play()` mit demselben Wort, im Modus Tippen `Schreibtafel.tippe()`,
-  bei Enter `Ton.sage(schreib.text)`.
+  im Modus Wirbel `Wirbeltafel.tippe()`.
 - Licht — `oskalizer.licht()` schickt jeden Key-Down (Tastencode als Text) per
   Unix-Datagramm an `$XDG_RUNTIME_DIR/kb-rgb-ozk.sock`. Dort hört `kb-rgb ozk`
   (`~/.local/bin`, nicht im Repo), das wegen des Grabs per evdev nichts bekommt.
@@ -30,6 +30,15 @@ Passwort ein und schickt Aufnahmen per Mail; einsortiert wird von Hand.
   ein Daemon-Thread liest die Bilder, `draw()` setzt jedes Frame neu zusammen.
   `Tafel.stop()` beendet den Prozess (neue Taste, Moduswechsel, Programmende).
   `Schreibtafel` zeigt im Modus Tippen den getippten Text, wortweise umgebrochen.
+  `Wirbeltafel` legt im Modus Wirbel jedes Zeichen als `Wirbelbuchstabe` an einen
+  freien Zufallsplatz; jeder rechnet Einfallen (`back_out`, 1 s) und Schweben (Sinus,
+  eigene Dauer/Phase) pro Frame selbst aus, gezeichnet per `rotozoom` + Alpha.
+  Die Maus kommt als evdev `EV_REL` (`Wirbeltafel.bewege`, eigener Zeiger, weil pygame
+  wegen des Grabs nichts sieht) und Maustaste (`Wirbeltafel.klick`). Ein geklickter
+  Buchstabe wechselt in die Physik (`_physik`: Schwerkraft, Wände/Boden mit dem
+  gedrehten Ausmaß, Kreis-Stöße; `_schubsen`: Mausgeschwindigkeit). Fast stille
+  Buchstaben schlafen (`liegt`), bis ein kräftiger Stoß, die Maus oder fehlende
+  Unterlage sie weckt.
   Kennt keine Geräte. `oskalizer.py` ruft `Tafel.show(zeichen, wort, personen)` pro Key-Down und
   `Tafel.draw()` pro Frame.
 - `ton.py` — `Ton`: spricht mit Piper (Modell einmal beim Start geladen, Synthese
@@ -79,7 +88,9 @@ Modus Tiere: evdev-Keycode → `tiere.ZEICHEN` → Zeichen → `tiere.naechstes`
 Personen → `Tafel.show` (Foto oder Emoji, „[von X]“). Solange `Ton.spricht()` True ist, ignoriert der Modus Tiere
 weitere Zeichentasten.
 Modus Tippen: Keycode → `ZEICHEN` (+ Leertaste) → `Schreibtafel.tippe`; Enter →
-`Ton.sage(text)`, die nächste Taste leert den Text.
+nichts (kein Vorlesen mehr).
+Modus Wirbel: Keycode → `ZEICHEN` → `Wirbeltafel.tippe`, kein Ton. `EV_REL` →
+`Wirbeltafel.bewege` (in jedem Modus), Maustaste → `Wirbeltafel.klick`.
 
 ## Entscheidungen
 - 2026-11-14 — Neben CC0 auch CC BY und CC BY-SA (nie NC/ND), weil es unter CC0 für
